@@ -1,0 +1,4 @@
+{
+	"skill.refm.rapierskill" : "Voltereta Mortal",
+	"skill.refm.rapierskill.tooltip" : "Avanza rapidamente contra enemigo para patearle y tras eso realizar una voltereta hacia atras.\nDespues de hacer la voltereta, te avalanzarás contra el enemigo para darle una estocada mortal"
+}
