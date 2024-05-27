@@ -1,0 +1,4 @@
+{
+	"skill.refm.rapierskill" : "Deadly Backflip",
+	"skill.refm.rapierskill.tooltip" : "Rush in to your enemy kicking him to do a backflip.\nAfter the backflip rush into your enemy a second time to stab him with force"
+}
