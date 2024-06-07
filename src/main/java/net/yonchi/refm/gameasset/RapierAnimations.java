@@ -1,30 +1,16 @@
-
-import java.util.Random;
-import java.util.Set;
-
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-
 import yesman.epicfight.api.animation.types.*;
 import yesman.epicfight.api.animation.types.AttackAnimation.Phase;
-import yesman.epicfight.api.animation.LivingMotion;
-import yesman.epicfight.api.animation.LivingMotions;
-import yesman.epicfight.api.animation.property.AnimationProperty.ActionAnimationProperty;
 import yesman.epicfight.api.animation.property.AnimationProperty.AttackAnimationProperty;
-import yesman.epicfight.api.animation.property.AnimationProperty.AttackPhaseProperty;
 import yesman.epicfight.api.animation.property.AnimationProperty.StaticAnimationProperty;
 import yesman.epicfight.model.armature.HumanoidArmature;
 import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.gameasset.Animations;
 
-
 private static void build() {
     HumanoidArmature biped = Armatures.BIPED;
 }
 
-public class RapierAnimations {
+public static class RapierAnimations {
     public static StaticAnimation RAPIER_AIR_SLASH = new AirSlashAnimation(0.1F, 0.15F, 0.26F, 0.5F, null, biped.toolR, "biped/combat/rapier_airslash", biped);
 
     public static StaticAnimation RAPIER_AUTO1 = new BasicAttackAnimation(0.1F, 0.0F, 0.1F, 0.4F, null, biped.toolR, "biped/combat/rapier_auto1", biped)
@@ -41,8 +27,7 @@ public class RapierAnimations {
     public static StaticAnimation BIPED_RUN_RAPIER = new MovementAnimation(true, "biped/living/run_rapier", biped);
 
 
-
-    public static StaticAnimation DEADLYBACKFLIPSKILL = new AttackAnimation(0.11F, "biped/skill/rapier_deadly_backflip", biped,
+    public static StaticAnimation DEADLYBACKFLIP = new AttackAnimation(0.11F, "biped/skill/rapier_deadly_backflip", biped,
 				new Phase(0.0F, 0.3F, 0.36F, 0.5F, 0.5F, biped.toolR, null), new Phase(0.5F, 0.5F, 0.56F, 0.75F, 0.75F, biped.toolR, null),
 				new Phase(0.75F, 0.75F, 0.81F, 1.05F, Float.MAX_VALUE, biped.toolR, null))
             .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
