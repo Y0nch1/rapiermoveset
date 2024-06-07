@@ -34,6 +34,9 @@ public class RapierSkills {
     }
 
     private static class ModRegistryWorker {
+        public WeaponInnateSkill build(String deadlybackflip, Object aNew, SimpleWeaponInnateSkill.Builder builder) {
+            return null;
+        }
     }
 
 }

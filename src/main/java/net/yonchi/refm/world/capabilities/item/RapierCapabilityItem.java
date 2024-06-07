@@ -17,6 +17,9 @@ public class RapierCapabilityItem {
             return this.id;
         }
     }
+
+    public static class Builder {
+    }
 }
 
 //https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/world/capabilities/item/CapabilityItem.java#L348

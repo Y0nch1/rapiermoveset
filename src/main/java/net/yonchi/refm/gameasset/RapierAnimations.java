@@ -2,12 +2,11 @@ import yesman.epicfight.api.animation.types.*;
 import yesman.epicfight.api.animation.types.AttackAnimation.Phase;
 import yesman.epicfight.api.animation.property.AnimationProperty.AttackAnimationProperty;
 import yesman.epicfight.api.animation.property.AnimationProperty.StaticAnimationProperty;
-import yesman.epicfight.model.armature.HumanoidArmature;
-import yesman.epicfight.gameasset.Armatures;
+import yesman.epicfight.api.model.Armature;
 import yesman.epicfight.gameasset.Animations;
 
-private static void build() {
-    HumanoidArmature biped = Armatures.BIPED;
+public static void setBiped(Armature biped) {
+    RapierAnimations.biped = biped;
 }
 
 public static class RapierAnimations {
@@ -22,7 +21,7 @@ public static class RapierAnimations {
     public static StaticAnimation RAPIER_DASH = new DashAttackAnimation(0.1F, 0.1F, 0.1F, 0.2F, 0.65F, null, biped.toolR, "biped/combat/rapier_dash", biped)
 				.addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.6F);
 
-    public static ActionAnimation BIPED_HOLD_RAPIER = new StaticAnimation(true, "biped/living/hold_rapier", biped);
+    public static StaticAnimation BIPED_HOLD_RAPIER = new StaticAnimation(true, "biped/living/hold_rapier", biped);
     public static StaticAnimation BIPED_WALK_RAPIER = new MovementAnimation(true, "biped/living/walk_rapier", biped);
     public static StaticAnimation BIPED_RUN_RAPIER = new MovementAnimation(true, "biped/living/run_rapier", biped);
 
@@ -32,6 +31,7 @@ public static class RapierAnimations {
 				new Phase(0.75F, 0.75F, 0.81F, 1.05F, Float.MAX_VALUE, biped.toolR, null))
             .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
 				.addProperty(StaticAnimationProperty.POSE_MODIFIER, Animations.ReusableSources.COMBO_ATTACK_DIRECTION_MODIFIER);
+    protected static Armature biped;
 }
 
 public void main() {
