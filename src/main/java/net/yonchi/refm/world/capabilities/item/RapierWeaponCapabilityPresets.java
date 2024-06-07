@@ -3,10 +3,15 @@ package net.yonchi.refm.world.capabilities.item;
 import java.util.function.Function;
 
 import net.minecraft.world.item.Item;
-import net.yonchi.refm.gameasset.RapierAnimations;
+import yesman.epicfight.api.animation.LivingMotions;
+import yesman.epicfight.gameasset.ColliderPreset;
+import yesman.epicfight.gameasset.EpicFightSkills;
+import yesman.epicfight.gameasset.EpicFightSounds;
+import yesman.epicfight.world.capabilities.item.CapabilityItem.Styles;
+import yesman.epicfight.world.capabilities.item.CapabilityItem.WeaponCategories;
 
-
-public class WeaponCapabilityPresets {
+public class RapierWeaponCapabilityPresets {
+    private static Object RapierAnimations;
     public static final Function<Item, RapierCapabilityItem.Builder> RAPIER = (item) ->
             RapierWeaponCapability.builder()
                     .category(WeaponCategories.RAPIER)
