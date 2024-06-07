@@ -37,3 +37,5 @@ public class RapierSkills {
     }
 
 }
+
+//https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/gameasset/EpicFightSkills.java#L108

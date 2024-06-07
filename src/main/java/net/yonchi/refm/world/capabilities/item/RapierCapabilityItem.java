@@ -1,16 +1,14 @@
 package net.yonchi.refm.world.capabilities.item;
 
-import yesman.epicfight.api.animation.AnimationProvider;
-import yesman.epicfight.world.capabilities.item.WeaponCategory;
 import yesman.epicfight.world.capabilities.item.WeaponCategory;
 
 public class RapierCapabilityItem {
-    public enum WeaponCategories implements WeaponCategory {
+    public enum RapierWeaponCategories implements WeaponCategory {
         RAPIER;
 
         final int id;
 
-        WeaponCategories() {
+        RapierWeaponCategories() {
             this.id = WeaponCategory.ENUM_MANAGER.assign(this);
         }
 
@@ -20,3 +18,5 @@ public class RapierCapabilityItem {
         }
     }
 }
+
+//https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/world/capabilities/item/CapabilityItem.java#L348
