@@ -7,23 +7,20 @@ import yesman.epicfight.api.animation.types.*;
 import yesman.epicfight.api.animation.property.AnimationProperty.AttackPhaseProperty;
 import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
-import yesman.epicfight.main.EpicFightMod;
+import yesman.epicfight.skill.Skill;
 import yesman.epicfight.skill.weaponinnate.*;
 import yesman.epicfight.world.damagesource.EpicFightDamageType;
 import yesman.epicfight.world.damagesource.ExtraDamageInstance;
 import yesman.epicfight.world.damagesource.StunType;
 
 
-import static net.yonchi.refm.world.capabilities.item.RapierWeaponCapabilityPresets.RapierAnimations;
-
-
 public class RapierSkills {
-    public static WeaponInnateSkill DEADLYBACKFLIP;
+    public static Skill DEADLYBACKFLIP;
 
     public static void buildSkillEvent(SkillBuildEvent build) {
         ModRegistryWorker modRegistry = build.createRegistryWorker(RapierForEpicfight.MOD_ID);
-
-        WeaponInnateSkill deadlybackflip = modRegistry.build("deadlybackflip", SimpleWeaponInnateSkill::new, SimpleWeaponInnateSkill.createSimpleWeaponInnateBuilder().setAnimations(() -> (AttackAnimation)RapierAnimations.DEADLYBACKFLIP));
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        WeaponInnateSkill deadlybackflip = modRegistry.build("deadlybackflip", SimpleWeaponInnateSkill.createSimpleWeaponInnateBuilder().setAnimations(() -> (AttackAnimation)RapierAnimations.DEADLYBACKFLIP));
         deadlybackflip.newProperty()
                 .addProperty(AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.adder(10.0F))
                 .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
@@ -41,4 +38,4 @@ public class RapierSkills {
 
 }
 
-//https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/gameasset/EpicFightSkills.java#L108
+    //https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/gameasset/EpicFightSkills.java#L108
