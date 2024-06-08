@@ -1,22 +1,35 @@
-package net.yonchi.refm.world.capabilities.item;
 
+import java.util.Map;
 import java.util.function.Function;
 
+import com.google.common.collect.Maps;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.yonchi.refm.RapierForEpicfight;
 import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.gameasset.RapierColliderPreset;
 import net.yonchi.refm.gameasset.RapierSkills;
+import net.yonchi.refm.world.capabilities.item.RapierWeaponCapability;
+import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
 import yesman.epicfight.api.animation.LivingMotions;
-import yesman.epicfight.gameasset.EpicFightSkills;
+import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
 import yesman.epicfight.gameasset.EpicFightSounds;
+import yesman.epicfight.main.EpicFightMod;
+import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
+import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.item.CapabilityItem.Styles;
-import yesman.epicfight.world.capabilities.item.CapabilityItem.WeaponCategories;
 
 
-public class RapierWeaponCapabilityPresets {
-    public static final Function<Item, RapierCapabilityItem.Builder> RAPIER = (item) ->
+import static net.yonchi.refm.world.capabilities.item.RapierWeaponCategories.RAPIER;
+import static yesman.epicfight.world.capabilities.item.WeaponCapabilityPresets.SWORD;
+
+
+public static class RapierWeaponCapabilityPresets {
+    public static final Function<Item, RapierWeaponCategories.Builder> RAPIER = (item) ->
             RapierWeaponCapability.builder()
-                    .category(RapierCapabilityItem.RapierWeaponCategories.RAPIER)
+                    .category(RapierWeaponCategories.RAPIER) // Updated to use custom category
                     .styleProvider((playerpatch) -> Styles.ONE_HAND)
                     .collider(RapierColliderPreset.RAPIER)
                     .swingSound(EpicFightSounds.WHOOSH_BIG.get())
@@ -33,6 +46,27 @@ public class RapierWeaponCapabilityPresets {
                     .livingMotionModifier(Styles.ONE_HAND, LivingMotions.SNEAK, RapierAnimations.BIPED_HOLD_RAPIER)
                     .livingMotionModifier(Styles.ONE_HAND, LivingMotions.SWIM, RapierAnimations.BIPED_HOLD_RAPIER)
                     .livingMotionModifier(Styles.ONE_HAND, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
+
+    return builder;
 }
+
+
+private static boolean CheckPlayer (LivingEntityPatch<?> playerpatch) {
+    return playerpatch.getOriginal().getType() != EntityType.PLAYER;
+}
+
+private static final Map<String, Function<Item, CapabilityItem.Builder>> PRESETS = Maps.newHashMap();
+
+
+// Register The Capabilities
+@SubscribeEvent
+public static void register (WeaponCapabilityPresetRegistryEvent event) {
+    event.getTypeEntry().put(new ResourceLocation(EpicFightMod.MODID, "sword"), SWORD);
+    event.getTypeEntry().put(new ResourceLocation (RapierForEpicfight.MOD_ID, ""), RAPIER);
+}
+
+public void main() {
+}
+
 
 //https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/world/capabilities/item/WeaponCapabilityPresets.java

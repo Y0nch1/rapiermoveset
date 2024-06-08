@@ -18,7 +18,7 @@ public class RapierSkills {
     public static Skill DEADLYBACKFLIP;
 
     public static void buildSkillEvent(SkillBuildEvent build) {
-        ModRegistryWorker modRegistry = build.createRegistryWorker(RapierForEpicfight.MOD_ID);
+        ModRegistryWorker modRegistry = null;
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         WeaponInnateSkill deadlybackflip = modRegistry.build("deadlybackflip", SimpleWeaponInnateSkill.createSimpleWeaponInnateBuilder().setAnimations(() -> (AttackAnimation)RapierAnimations.DEADLYBACKFLIP));
         deadlybackflip.newProperty()
