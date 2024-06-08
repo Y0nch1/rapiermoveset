@@ -2,7 +2,10 @@ package net.yonchi.refm.gameasset;
 
 import java.util.Set;
 
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
 import net.yonchi.refm.RapierForEpicfight;
+import net.yonchi.refm.skill.weaponinnate.DeadlyBackflipSkill;
 import yesman.epicfight.api.animation.types.*;
 import yesman.epicfight.api.animation.property.AnimationProperty.AttackPhaseProperty;
 import yesman.epicfight.api.utils.math.ValueModifier;
@@ -13,14 +16,17 @@ import yesman.epicfight.world.damagesource.EpicFightDamageType;
 import yesman.epicfight.world.damagesource.ExtraDamageInstance;
 import yesman.epicfight.world.damagesource.StunType;
 
-
+@Mod.EventBusSubscriber(modid = RapierForEpicfight.MOD_ID, bus= Mod.EventBusSubscriber.Bus.MOD)
 public class RapierSkills {
+
     public static Skill DEADLYBACKFLIP;
 
-    public static void buildSkillEvent(SkillBuildEvent build) {
-        ModRegistryWorker modRegistry = null;
+    @SubscribeEvent
+    public static void buildSkillEvent(SkillBuildEvent onBuild) {
+        ModRegistryWorker registryWorker = onBuild.createRegistryWorker(RapierForEpicfight.MOD_ID);
+
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        WeaponInnateSkill deadlybackflip = modRegistry.build("deadlybackflip", SimpleWeaponInnateSkill.createSimpleWeaponInnateBuilder().setAnimations(() -> (AttackAnimation)RapierAnimations.DEADLYBACKFLIP));
+        WeaponInnateSkill deadlybackflip = registryWorker.build("deadlybackflip", SimpleWeaponInnateSkill.createSimpleWeaponInnateBuilder().setAnimations(() -> (AttackAnimation)RapierAnimations.DEADLYBACKFLIP.get()));
         deadlybackflip.newProperty()
                 .addProperty(AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.adder(10.0F))
                 .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
