@@ -29,8 +29,6 @@ public class RapierForEpicfight
         MinecraftForge.EVENT_BUS.register(this);
 
         RapierAddonItems.ITEMS.register(bus);
-
-        bus.addListener(RapierAnimations::registerAnimations);
         SkillDataKeys.DATA_KEYS.register(bus);
 
         bus.addListener(this::commonSetup);

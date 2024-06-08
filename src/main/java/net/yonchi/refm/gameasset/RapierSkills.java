@@ -6,12 +6,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.yonchi.refm.RapierForEpicfight;
 import net.yonchi.refm.skill.weaponinnate.DeadlyBackflipSkill;
-import yesman.epicfight.api.animation.types.*;
 import yesman.epicfight.api.animation.property.AnimationProperty.AttackPhaseProperty;
-import yesman.epicfight.api.utils.math.ValueModifier;
+import yesman.epicfight.api.data.reloader.SkillManager;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
+import yesman.epicfight.api.utils.math.ValueModifier;
+import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.skill.Skill;
-import yesman.epicfight.skill.weaponinnate.*;
 import yesman.epicfight.world.damagesource.EpicFightDamageType;
 import yesman.epicfight.world.damagesource.ExtraDamageInstance;
 import yesman.epicfight.world.damagesource.StunType;
@@ -23,23 +23,23 @@ public class RapierSkills {
 
     @SubscribeEvent
     public static void buildSkillEvent(SkillBuildEvent onBuild) {
-        ModRegistryWorker registryWorker = onBuild.createRegistryWorker(RapierForEpicfight.MOD_ID);
+        SkillManager.register(DeadlyBackflipSkill::new, WeaponInnateSkill.createWeaponInnateBuilder().setActivateType(Skill.ActivateType.DURATION_INFINITE), "refm", "deadlybackflip");
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-        WeaponInnateSkill deadlybackflip = registryWorker.build("deadlybackflip", SimpleWeaponInnateSkill.createSimpleWeaponInnateBuilder().setAnimations(() -> (AttackAnimation)RapierAnimations.DEADLYBACKFLIP.get()));
+        WeaponInnateSkill deadlybackflip = onBuild.build(RapierForEpicfight.MOD_ID, "deadlybackflip");
         deadlybackflip.newProperty()
-                .addProperty(AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.adder(10.0F))
+                .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
+                .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.setter(2.0F))
                 .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
-                .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE));
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
+                .newProperty()
+                .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(2))
+                .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create(), ExtraDamageInstance.TARGET_LOST_HEALTH.create(0.5F)))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
+                .addProperty(AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.adder(40.0F))
+                .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.FALL);
         DEADLYBACKFLIP = deadlybackflip;
 
-    }
-
-    private static class ModRegistryWorker {
-        public WeaponInnateSkill build(String deadlybackflip, Object aNew, SimpleWeaponInnateSkill.Builder builder) {
-            return null;
-        }
     }
 
 }
