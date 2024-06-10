@@ -12,7 +12,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.world.item.RapierAddonItems;
 import org.slf4j.Logger;
 import yesman.epicfight.skill.SkillDataKeys;

@@ -19,7 +19,8 @@ public class RapierAnimations {
     public static StaticAnimation BIPED_HOLD_RAPIER;
     public static StaticAnimation BIPED_WALK_RAPIER;
     public static StaticAnimation BIPED_RUN_RAPIER;
-    public static StaticAnimation DEADLYBACKFLIP;
+    public static StaticAnimation DEADLYBACKFLIP_FIRST;
+    public static StaticAnimation DEADLYBACKFLIP_SECOND;
 
     private static void build() {
         HumanoidArmature biped = Armatures.BIPED;
@@ -43,7 +44,12 @@ public class RapierAnimations {
         BIPED_RUN_RAPIER = new MovementAnimation(true, "biped/living/run_rapier", biped);
 
 
-        DEADLYBACKFLIP = new AttackAnimation(0.11F, "biped/skill/rapier_deadly_backflip", biped,
+        DEADLYBACKFLIP_FIRST = new AttackAnimation(0.11F, "biped/skill/rapier_backflip_first", biped,
+                new Phase(0.0F, 0.3F, 0.36F, 0.5F, 0.5F, biped.toolR, null), new Phase(0.5F, 0.5F, 0.56F, 0.75F, 0.75F, biped.toolR, null),
+                new Phase(0.75F, 0.75F, 0.81F, 1.05F, Float.MAX_VALUE, biped.toolR, null))
+                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
+                .addProperty(StaticAnimationProperty.POSE_MODIFIER, Animations.ReusableSources.COMBO_ATTACK_DIRECTION_MODIFIER);
+        DEADLYBACKFLIP_SECOND = new AttackAnimation(0.11F, "biped/skill/rapier_backflip_second", biped,
                 new Phase(0.0F, 0.3F, 0.36F, 0.5F, 0.5F, biped.toolR, null), new Phase(0.5F, 0.5F, 0.56F, 0.75F, 0.75F, biped.toolR, null),
                 new Phase(0.75F, 0.75F, 0.81F, 1.05F, Float.MAX_VALUE, biped.toolR, null))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
