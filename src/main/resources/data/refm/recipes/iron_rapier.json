@@ -1,0 +1,20 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        "N  ",
+        "SBB",
+        "   "
+    ],
+    "key":
+    {
+	"N": { "item" : "minecraft:iron_nugget" },
+	"B": { "item" : "minecraft:iron_ingot" },
+        "S": { "tag" : "minecraft:stick" }
+    },
+    "result":
+    {
+        "item" : "refm:iron_rapier",
+        "count" : 1
+    }
+}

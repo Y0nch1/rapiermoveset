@@ -1,0 +1,8 @@
+{
+    "item.refm.iron_rapier" : "Iron Rapier",
+    "item.refm.gold_rapier" : "Gold Rapier",
+    "item.refm.diamond_rapier" : "Diamond Rapier",
+    "item.refm.netherite_rapier" : "Netherite Rapier",
+	"skill.refm.rapierskills": "Deadly Backflip",
+	"skill.refm.rapierskills.tooltip": "Rush in to your enemy kicking him to do a backflip.\nAfter the backflip rush into your enemy a second time to stab him with force"
+}

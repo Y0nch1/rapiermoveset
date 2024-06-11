@@ -7,8 +7,7 @@ import yesman.epicfight.world.capabilities.item.WeaponCategory;
 import java.util.function.Function;
 
 public enum RapierWeaponCategories implements WeaponCategory, Function<Item, CapabilityItem.Builder> {
-
-        RAPIER;
+    RAPIER;
 
         final int id;
 
@@ -16,7 +15,7 @@ public enum RapierWeaponCategories implements WeaponCategory, Function<Item, Cap
             this.id = WeaponCategory.ENUM_MANAGER.assign(this);
         }
 
-        @Override
+    @Override
         public int universalOrdinal() {
             return this.id;
         }

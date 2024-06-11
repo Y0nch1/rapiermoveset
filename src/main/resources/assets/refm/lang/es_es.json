@@ -1,0 +1,8 @@
+{
+	    "item.refm.iron_rapier": "Rapier de hierro",
+    	"item.refm.gold_rapier": "Rapier de oro",
+    	"item.refm.diamond_rapier": "Rapier de diamante",
+    	"item.refm.netherite_rapier": "Rapier de netherite",
+	"skill.refm.rapierskill": "Voltereta Mortal",
+	"skill.refm.rapierskill.tooltip": "Avanza rapidamente contra enemigo para patearle y tras eso realizar una voltereta hacia atras.\nDespues de hacer la voltereta, te avalanzarás contra el enemigo para darle una estocada mortal"
+}

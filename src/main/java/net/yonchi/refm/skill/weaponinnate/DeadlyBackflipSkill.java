@@ -9,7 +9,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import yesman.epicfight.api.animation.AnimationProvider;
 import yesman.epicfight.api.animation.types.AttackAnimation;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.skill.SkillContainer;
 import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
@@ -20,7 +19,7 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
 import net.yonchi.refm.gameasset.RapierAnimations;
 
 public class DeadlyBackflipSkill extends WeaponInnateSkill {
-    private static final UUID EVENT_UUID = UUID.fromString("f082557a-b2f9-11eb-8529-0242ac130003");
+    private static final UUID EVENT_UUID = UUID.fromString("1f6aea85-2194-4761-af8e-1a5c99c4f414");
     private AnimationProvider first;
     private AnimationProvider second;
 
@@ -34,14 +33,14 @@ public class DeadlyBackflipSkill extends WeaponInnateSkill {
     public void onInitiate(SkillContainer container) {
         super.onInitiate(container);
         container.getExecuter().getEventListener().addEventListener(EventType.ATTACK_ANIMATION_END_EVENT, EVENT_UUID, (event) -> {
-            if (Animations.EVISCERATE_FIRST.equals(event.getAnimation())) {
-                List<LivingEntity> hurtEntities = event.getPlayerPatch().getCurrenltyHurtEntities();
+            if (RapierAnimations.DEADLYBACKFLIP_FIRST.equals(event.getAnimation())) {
+                    List<LivingEntity> hurtEntities = event.getPlayerPatch().getCurrenltyHurtEntities();
 
-                if (!hurtEntities.isEmpty() && hurtEntities.get(0).isAlive()) {
-                    event.getPlayerPatch().reserveAnimation(this.second.get());
-                    event.getPlayerPatch().getServerAnimator().getPlayerFor(null).reset();
-                    event.getPlayerPatch().getCurrenltyHurtEntities().clear();
-                }
+                    if (!hurtEntities.isEmpty() && hurtEntities.get(0).isAlive()) {
+                       event.getPlayerPatch().reserveAnimation(this.second.get());
+                       event.getPlayerPatch().getServerAnimator().getPlayerFor(null).reset();
+                       event.getPlayerPatch().getCurrenltyHurtEntities().clear();
+                    }
             }
         });
     }
@@ -63,13 +62,5 @@ public class DeadlyBackflipSkill extends WeaponInnateSkill {
         this.generateTooltipforPhase(list, itemStack, cap, playerCap, this.properties.get(0), "Front Kick:");
         this.generateTooltipforPhase(list, itemStack, cap, playerCap, this.properties.get(1), "Backflip Stab:");
         return list;
-    }
-
-    @Override
-    public WeaponInnateSkill registerPropertiesToAnimation() {
-        this.first.get().phases[0].addProperties(this.properties.get(0).entrySet());
-        this.second.get().phases[0].addProperties(this.properties.get(1).entrySet());
-
-        return this;
     }
 }
