@@ -4,14 +4,14 @@
   "base": {
     "parent": "refm:item/template_large_rapier",
     "textures": {
-      "layer0": "refm:item/golden_rapier"
+      "layer0": "refm:item/gold_rapier"
     }
   },
   "perspectives": {
     "gui": {
       "parent": "minecraft:item/handheld",
       "textures": {
-        "layer0": "refm:item/golden_rapier_gui"
+        "layer0": "refm:item/gold_rapier_gui"
       }
     }
   }

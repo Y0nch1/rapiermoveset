@@ -17,23 +17,25 @@ import yesman.epicfight.world.damagesource.ExtraDamageInstance;
 import yesman.epicfight.world.damagesource.StunType;
 
 @Mod.EventBusSubscriber(modid = RapierForEpicfight.MOD_ID, bus= Mod.EventBusSubscriber.Bus.MOD)
-public class RapierSkills {
 
+public class RapierSkills {
     public static Skill DEADLYBACKFLIP;
 
+    public RapierSkills(){
+    }
+
     public static void registerSkills(){
-        SkillManager.register(DeadlyBackflipSkill::new, WeaponInnateSkill.createWeaponInnateBuilder().setActivateType(Skill.ActivateType.DURATION_INFINITE), "refm", "deadlybackflip");
+        SkillManager.register(DeadlyBackflipSkill::new, WeaponInnateSkill.createWeaponInnateBuilder(), "refm", "deadlybackflip");
     }
 
     public static void buildSkillEvent(SkillBuildEvent onBuild) {
-        //DeadlyBackflip Skill Properties
-        WeaponInnateSkill deadlybackflip = onBuild.build(RapierForEpicfight.MOD_ID, "deadlybackflip");
+
+        WeaponInnateSkill deadlybackflip = (WeaponInnateSkill) onBuild.build(RapierForEpicfight.MOD_ID, "deadlybackflip");
         deadlybackflip.newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.setter(2.0F))
                 .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
                 .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
-
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(2))
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create(), ExtraDamageInstance.TARGET_LOST_HEALTH.create(0.5F)))

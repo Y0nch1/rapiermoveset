@@ -18,6 +18,7 @@ import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType;
 import net.yonchi.refm.gameasset.RapierAnimations;
 
+
 public class DeadlyBackflipSkill extends WeaponInnateSkill {
     private static final UUID EVENT_UUID = UUID.fromString("1f6aea85-2194-4761-af8e-1a5c99c4f414");
     private AnimationProvider first;

@@ -53,13 +53,11 @@ public class RapierAnimations {
         RAPIER_DASH = new DashAttackAnimation(0.1F, 3.8F, 0.1F, 0.8F, 1.6F, null, biped.toolR, "biped/combat/rapier_dash", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.6F);
         RAPIER_GUARD = new StaticAnimation(true, "biped/skill/guard_rapier", biped);
-
-
+//
         BIPED_HOLD_RAPIER = new StaticAnimation(true, "biped/living/hold_rapier", biped);
         BIPED_WALK_RAPIER = new MovementAnimation(true, "biped/living/walk_rapier", biped);
         BIPED_RUN_RAPIER = new MovementAnimation(true, "biped/living/run_rapier", biped);
-
-
+//
         DEADLYBACKFLIP_FIRST = new AttackAnimation(0.08F, 0.0F, 0.05F, 0.15F, 0.45F, null, biped.toolR, "biped/skill/rapier_backflip_first", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.4F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_BEGIN, MoveCoordFunctions.TRACE_LOCROT_TARGET)
