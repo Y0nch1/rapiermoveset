@@ -1,6 +1,5 @@
 package net.yonchi.refm.gameasset;
 
-import net.minecraft.world.InteractionHand;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.yonchi.refm.RapierForEpicfight;
 import yesman.epicfight.api.animation.property.AnimationProperty;
@@ -9,6 +8,9 @@ import yesman.epicfight.api.animation.types.*;
 import yesman.epicfight.api.animation.types.AttackAnimation;
 import yesman.epicfight.api.animation.property.AnimationProperty.AttackAnimationProperty;
 import yesman.epicfight.api.forgeevent.AnimationRegistryEvent;
+import yesman.epicfight.api.utils.HitEntityList;
+import yesman.epicfight.api.utils.TimePairList;
+import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.model.armature.HumanoidArmature;
@@ -25,6 +27,7 @@ public class RapierAnimations {
     public static StaticAnimation BIPED_HOLD_RAPIER;
     public static StaticAnimation BIPED_WALK_RAPIER;
     public static StaticAnimation BIPED_RUN_RAPIER;
+    public static StaticAnimation DEADLYBACKFLIP;
     public static StaticAnimation DEADLYBACKFLIP_FIRST;
     public static StaticAnimation DEADLYBACKFLIP_SECOND;
 
@@ -58,13 +61,14 @@ public class RapierAnimations {
         BIPED_WALK_RAPIER = new MovementAnimation(true, "biped/living/walk_rapier", biped);
         BIPED_RUN_RAPIER = new MovementAnimation(true, "biped/living/run_rapier", biped);
 //
-        DEADLYBACKFLIP_FIRST = new AttackAnimation(0.08F, 0.0F, 0.05F, 0.15F, 0.45F, null, biped.toolR, "biped/skill/rapier_backflip_first", biped)
+        DEADLYBACKFLIP_FIRST = new AttackAnimation(0.1F, 0.25F, 0.3F, 0.4F, 0.8F, null, biped.toolR, "biped/skill/rapier_backflip_first", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.4F)
+                .addProperty(AnimationProperty.AttackPhaseProperty.HIT_PRIORITY, HitEntityList.Priority.TARGET)
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_BEGIN, MoveCoordFunctions.TRACE_LOCROT_TARGET)
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_TICK, MoveCoordFunctions.TRACE_LOCROT_TARGET);
-        DEADLYBACKFLIP_SECOND = new AttackAnimation(0.08F, 0.0F, 0.05F, 0.15F, 0.45F, null, biped.toolR, "biped/skill/rapier_backflip_second", biped)
+        DEADLYBACKFLIP_SECOND = new AttackAnimation(0.1F, 0.0F, 0.5F, 0.6F, 0.95F, null, biped.toolR, "biped/skill/rapier_backflip_second", biped)
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, EpicFightSounds.EVISCERATE.get())
                 .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, EpicFightParticles.EVISCERATE)
-                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.4F);
+                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F);
     }
 }

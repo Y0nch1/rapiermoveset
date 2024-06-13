@@ -8,8 +8,8 @@
     ],
     "key":
     {
-	"B": { "item" : "minecraft:diamond" },
-        "S": { "tag" : "minecraft:stick" }
+        "B": { "item" : "minecraft:diamond" },
+        "S": { "item" : "minecraft:stick" }
     },
     "result":
     {

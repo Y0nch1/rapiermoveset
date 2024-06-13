@@ -1,6 +1,7 @@
 package net.yonchi.refm;
 
 import com.mojang.logging.LogUtils;
+import org.slf4j.Logger;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -13,12 +14,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.yonchi.refm.skill.RapierSkillDataKeys;
 import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
-import org.slf4j.Logger;
 import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.gameasset.RapierSkills;
 import net.yonchi.refm.world.item.RapierAddonItems;
-import yesman.epicfight.skill.SkillDataKeys;
 import yesman.epicfight.world.capabilities.item.WeaponCategory;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -37,13 +37,12 @@ public class RapierForEpicfight
 
         RapierAddonItems.ITEMS.register(bus);
 
-        SkillDataKeys.DATA_KEYS.register(bus);
+        RapierSkillDataKeys.DATA_KEYS.register(bus);
 
         bus.addListener(RapierAnimations::registerAnimations);
         bus.addListener(this::addCreative);
 
     }
-
 
 
     private void commonSetup(final FMLCommonSetupEvent event) {

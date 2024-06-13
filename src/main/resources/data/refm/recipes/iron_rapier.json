@@ -8,9 +8,9 @@
     ],
     "key":
     {
-	"N": { "item" : "minecraft:iron_nugget" },
-	"B": { "item" : "minecraft:iron_ingot" },
-        "S": { "tag" : "minecraft:stick" }
+        "N": { "item" : "minecraft:iron_nugget" },
+        "B": { "item" : "minecraft:iron_ingot" },
+        "S": { "item" : "minecraft:stick" }
     },
     "result":
     {

@@ -8,9 +8,9 @@
     ],
     "key":
     {
-	"N": { "item" : "minecraft:gold_nugget" },
-	"B": { "item" : "minecraft:gold_ingot" },
-        "S": { "tag" : "minecraft:stick" }
+        "N": { "item" : "minecraft:gold_nugget" },
+        "B": { "item" : "minecraft:gold_ingot" },
+        "S": { "item" : "minecraft:stick" }
     },
     "result":
     {
