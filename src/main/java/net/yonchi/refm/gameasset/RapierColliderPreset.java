@@ -21,7 +21,7 @@ public class RapierColliderPreset {
         return collider;
     }
 
-        public static final Collider RAPIER = registerCollider(new ResourceLocation(RapierForEpicfight.MOD_ID, "rapier"), new MultiOBBCollider(3, 0.2D, 0.2D, 1.3D, 0D, 0D, -1.0D));
+        public static final Collider RAPIER = registerCollider(new ResourceLocation(RapierForEpicfight.MOD_ID, "rapier"), new MultiOBBCollider(3, 0.2D, 0.2D, 1.4D, 0D, 0D, -1.0D));
     }
 
 //https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/gameasset/ColliderPreset.java#L74
