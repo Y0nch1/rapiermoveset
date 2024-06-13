@@ -4,25 +4,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import com.google.common.collect.Maps;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.yonchi.refm.skill.RapierSkillDataKeys;
 import yesman.epicfight.api.animation.AnimationProvider;
 import yesman.epicfight.api.animation.types.AttackAnimation;
-import yesman.epicfight.api.animation.types.StaticAnimation;
-import yesman.epicfight.client.world.capabilites.entitypatch.player.LocalPlayerPatch;
+import yesman.epicfight.api.animation.types.DynamicAnimation;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.skill.Skill;
-import yesman.epicfight.skill.SkillCategories;
 import yesman.epicfight.skill.SkillContainer;
-import yesman.epicfight.skill.SkillDataKey;
-import yesman.epicfight.skill.weaponinnate.BladeRushSkill;
 import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
 import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
@@ -45,22 +36,24 @@ public class DeadlyBackflipSkill extends WeaponInnateSkill {
     public void onInitiate(SkillContainer container) {
         super.onInitiate(container);
         container.getExecuter().getEventListener().addEventListener(EventType.ATTACK_ANIMATION_END_EVENT, EVENT_UUID, (event) -> {
-            if (this.first.get().equals(event.getAnimation())) {
-                container.getDataManager().setDataSync((SkillDataKey) RapierSkillDataKeys.LAST_HIT_COUNT.get(), ((ServerPlayerPatch) event.getPlayerPatch()).getCurrenltyHurtEntities().size(), (ServerPlayer) ((ServerPlayerPatch) event.getPlayerPatch()).getOriginal());
+            if (RapierAnimations.DEADLYBACKFLIP_FIRST.equals(event.getAnimation())) {
+                List<LivingEntity> hurtEntities = ((ServerPlayerPatch)event.getPlayerPatch()).getCurrenltyHurtEntities();
+                if (hurtEntities.size() > 0 && ((LivingEntity)hurtEntities.get(0)).isAlive()) {
+                    ((ServerPlayerPatch)event.getPlayerPatch()).reserveAnimation(this.second.get());
+                    ((ServerPlayerPatch)event.getPlayerPatch()).getServerAnimator().getPlayerFor((DynamicAnimation)null).reset();
+                    ((ServerPlayerPatch)event.getPlayerPatch()).getCurrenltyHurtEntities().clear();
+                    this.second.get().tick(event.getPlayerPatch());
+                }
             }
-
-        });
-        container.getExecuter().getEventListener().addEventListener(EventType.DEALT_DAMAGE_EVENT_PRE, EVENT_UUID, (event) -> {
-            if (this.second.get().equals(event.getDamageSource().getAnimation())) {
-                float impact = event.getDamageSource().getImpact();
-                event.getDamageSource().setImpact(impact + (float) (Integer) container.getDataManager().getDataValue((SkillDataKey) RapierSkillDataKeys.LAST_HIT_COUNT.get()) * 0.4F);
-            }
-
         });
     }
 
     public void onRemoved(SkillContainer container) {
-        container.getExecuter().getEventListener().removeListener(EventType.DEALT_DAMAGE_EVENT_PRE, EVENT_UUID);
+        container.getExecuter().getEventListener().removeListener(EventType.ATTACK_ANIMATION_END_EVENT, EVENT_UUID);
+    }
+
+    public boolean checkExecuteCondition(PlayerPatch<?> executer) {
+        return executer.getTarget() != null && executer.getTarget().isAlive();
     }
 
     public void executeOnServer(ServerPlayerPatch executer, FriendlyByteBuf args) {
