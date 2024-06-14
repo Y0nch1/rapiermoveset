@@ -26,6 +26,7 @@ public class RapierAnimations {
     public static StaticAnimation RAPIER_GUARD;
     public static StaticAnimation RAPIER_GUARD_HIT;
     public static StaticAnimation BIPED_HOLD_RAPIER;
+//  public static StaticAnimation BIPED_SNEAK_RAPIER;
     public static StaticAnimation BIPED_WALK_RAPIER;
     public static StaticAnimation BIPED_RUN_RAPIER;
     public static StaticAnimation DEADLYBACKFLIP_FIRST;
@@ -41,7 +42,7 @@ public class RapierAnimations {
 
 
         RAPIER_AIR_SLASH = new AirSlashAnimation(0.1F, 0.2F, 0.5F, 0.8F, null, biped.toolR, "biped/combat/rapier_airslash", biped);
-//
+
         RAPIER_AUTO1 = new BasicAttackAnimation(0.1F, 0.4F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_auto1", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.5F);
         RAPIER_AUTO2 = new BasicAttackAnimation(0.15F,"biped/combat/rapier_auto2", biped,
@@ -50,17 +51,18 @@ public class RapierAnimations {
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.6F);
         RAPIER_AUTO3 = new BasicAttackAnimation(0.1F, 0.6F, 0.4F, 0.8F, null, biped.toolR, "biped/combat/rapier_auto3", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2F);
-//
+
         RAPIER_DASH = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash", biped, new AttackAnimation.Phase(0.0F, 0.3F, 0.8F, 0.5F, 0.7F, biped.toolR,null))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.6F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false);
         RAPIER_GUARD = new StaticAnimation(true, "biped/skill/guard_rapier", biped);
         RAPIER_GUARD_HIT = new GuardAnimation(0.05F, "biped/skill/guard_rapier_hit", biped);
-//
+
         BIPED_HOLD_RAPIER = new StaticAnimation(true, "biped/living/hold_rapier", biped);
+//      BIPED_SNEAK_RAPIER = new StaticAnimation(true, "biped/living/sneak_rapier", biped);
         BIPED_WALK_RAPIER = new MovementAnimation(true, "biped/living/walk_rapier", biped);
         BIPED_RUN_RAPIER = new MovementAnimation(true, "biped/living/run_rapier", biped);
-//
+
         DEADLYBACKFLIP_FIRST = new AttackAnimation(0.1F, 0.25F, 0.3F, 0.4F, 0.8F, null, biped.torso, "biped/skill/rapier_backflip_first", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.4F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
