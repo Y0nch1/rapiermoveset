@@ -1,0 +1,19 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern":
+    [
+        "B  ",
+        "SBB",
+        "   "
+    ],
+    "key":
+    {
+        "B": { "item" : "minecraft:diamond" },
+        "S": { "item" : "minecraft:stick" }
+    },
+    "result":
+    {
+        "item" : "refm:diamond_rapier",
+        "count" : 1
+    }
+}
