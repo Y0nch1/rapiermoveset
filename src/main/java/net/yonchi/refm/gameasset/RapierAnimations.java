@@ -9,6 +9,7 @@ import yesman.epicfight.api.animation.types.AttackAnimation;
 import yesman.epicfight.api.animation.property.AnimationProperty.AttackAnimationProperty;
 import yesman.epicfight.api.forgeevent.AnimationRegistryEvent;
 import yesman.epicfight.api.utils.HitEntityList;
+import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.model.armature.HumanoidArmature;
@@ -23,6 +24,7 @@ public class RapierAnimations {
     public static StaticAnimation RAPIER_AUTO3;
     public static StaticAnimation RAPIER_DASH;
     public static StaticAnimation RAPIER_GUARD;
+    public static StaticAnimation RAPIER_GUARD_HIT;
     public static StaticAnimation BIPED_HOLD_RAPIER;
     public static StaticAnimation BIPED_WALK_RAPIER;
     public static StaticAnimation BIPED_RUN_RAPIER;
@@ -40,18 +42,20 @@ public class RapierAnimations {
 
         RAPIER_AIR_SLASH = new AirSlashAnimation(0.1F, 0.2F, 0.5F, 0.8F, null, biped.toolR, "biped/combat/rapier_airslash", biped);
 //
-        RAPIER_AUTO1 = new BasicAttackAnimation(0.1F, 0.4F, 0.5F, 0.8F, null, biped.toolR, "biped/combat/rapier_auto1", biped)
+        RAPIER_AUTO1 = new BasicAttackAnimation(0.1F, 0.4F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_auto1", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.5F);
         RAPIER_AUTO2 = new BasicAttackAnimation(0.15F,"biped/combat/rapier_auto2", biped,
-                new AttackAnimation.Phase(0.0F, 0.7F, 0.1F, 0.1F, 0.8F, 0.2F, biped.toolR, null)
-                ,new AttackAnimation.Phase(0.2F, 0.4F, 0.5F, 0.8F, 0.8F, biped.toolR, null))
+                new AttackAnimation.Phase(0.0F, 0.7F, 0.1F, 0.1F, 0.4F, 0.2F, biped.toolR, null)
+                ,new AttackAnimation.Phase(0.2F, 0.4F, 0.5F, 0.4F, 0.8F, biped.toolR, null))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.6F);
         RAPIER_AUTO3 = new BasicAttackAnimation(0.1F, 0.6F, 0.4F, 0.8F, null, biped.toolR, "biped/combat/rapier_auto3", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2F);
 //
-        RAPIER_DASH = new DashAttackAnimation(0.1F, 3.8F, 0.1F, 0.8F, 1.6F, null, biped.toolR, "biped/combat/rapier_dash", biped)
-                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.6F);
+        RAPIER_DASH = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash", biped, new AttackAnimation.Phase(0.0F, 0.3F, 0.8F, 0.5F, 0.7F, biped.toolR,null))
+                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.6F)
+                .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false);
         RAPIER_GUARD = new StaticAnimation(true, "biped/skill/guard_rapier", biped);
+        RAPIER_GUARD_HIT = new GuardAnimation(0.05F, "biped/skill/guard_rapier_hit", biped);
 //
         BIPED_HOLD_RAPIER = new StaticAnimation(true, "biped/living/hold_rapier", biped);
         BIPED_WALK_RAPIER = new MovementAnimation(true, "biped/living/walk_rapier", biped);
