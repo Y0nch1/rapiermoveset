@@ -28,7 +28,7 @@ public class RapierAnimations {
     public static StaticAnimation RAPIER_GUARD_ACTIVE_HIT1;
     public static StaticAnimation RAPIER_GUARD_ACTIVE_HIT2;
     public static StaticAnimation BIPED_HOLD_RAPIER;
-//  public static StaticAnimation BIPED_SNEAK_RAPIER;
+    public static StaticAnimation BIPED_SNEAK_RAPIER;
     public static StaticAnimation BIPED_WALK_RAPIER;
     public static StaticAnimation BIPED_RUN_RAPIER;
     public static StaticAnimation DEADLYBACKFLIP_FIRST;
@@ -63,7 +63,7 @@ public class RapierAnimations {
         RAPIER_GUARD_ACTIVE_HIT2 = new GuardAnimation(0.05F, 0.2F, "biped/skill/guard_rapier_hit_active2", biped);
 
         BIPED_HOLD_RAPIER = new StaticAnimation(true, "biped/living/hold_rapier", biped);
-//      BIPED_SNEAK_RAPIER = new StaticAnimation(true, "biped/living/sneak_rapier", biped);
+        BIPED_SNEAK_RAPIER = new StaticAnimation(true, "biped/living/sneak_rapier", biped);
         BIPED_WALK_RAPIER = new MovementAnimation(true, "biped/living/walk_rapier", biped);
         BIPED_RUN_RAPIER = new MovementAnimation(true, "biped/living/run_rapier", biped);
 

@@ -1,0 +1,108 @@
+[15jun2024 10:34:25.781] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher running: args [--launchTarget, forgedatauserdev, --assetIndex, 5, --assetsDir, C:\Users\Usuario\.gradle\caches\forge_gradle\assets, --gameDir, ., --fml.forgeVersion, 47.2.20, --fml.mcVersion, 1.20.1, --fml.forgeGroup, net.minecraftforge, --fml.mcpVersion, 20230612.114412, --mod, refm, --all, --output, C:\Users\Usuario\Documents\Blender\minecra\forge-1.20.1-RapierMod\src\generated\resources, --existing, C:\Users\Usuario\Documents\Blender\minecra\forge-1.20.1-RapierMod\src\main\resources]
+[15jun2024 10:34:25.785] [main/INFO] [cpw.mods.modlauncher.Launcher/MODLAUNCHER]: ModLauncher 10.0.9+10.0.9+main.dcd20f30 starting: java version 17.0.11 by Eclipse Adoptium; OS Windows 10 arch amd64 version 10.0
+[15jun2024 10:34:25.883] [main/WARN] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Configuration file C:\Users\Usuario\Documents\Blender\minecra\forge-1.20.1-RapierMod\run-data\config\fml.toml is not correct. Correcting
+[15jun2024 10:34:25.884] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSkipGLVersions] was corrected from null to []
+[15jun2024 10:34:25.884] [main/INFO] [net.minecraftforge.fml.loading.FMLConfig/CORE]: Incorrect key [earlyWindowSquir] was corrected from null to false
+[15jun2024 10:34:25.899] [main/INFO] [net.minecraftforge.fml.loading.ImmediateWindowHandler/]: ImmediateWindowProvider not loading because launch target is forgedatauserdev
+[15jun2024 10:34:25.946] [main/INFO] [mixin/]: SpongePowered MIXIN Subsystem Version=0.8.5 Source=union:/C:/Users/Usuario/.gradle/caches/modules-2/files-2.1/org.spongepowered/mixin/0.8.5/9d1c0c3a304ae6697ecd477218fa61b850bf57fc/mixin-0.8.5.jar%23128!/ Service=ModLauncher Env=CLIENT
+[15jun2024 10:34:26.190] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Usuario\.gradle\caches\modules-2\files-2.1\net.minecraftforge\javafmllanguage\1.20.1-47.2.20\918959a037ab7191a0c45a359f4746ab76c110c3\javafmllanguage-1.20.1-47.2.20.jar is missing mods.toml file
+[15jun2024 10:34:26.193] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Usuario\.gradle\caches\modules-2\files-2.1\net.minecraftforge\lowcodelanguage\1.20.1-47.2.20\c1d1efcb98e8bfcf3dbfed0d1e81b55b648b86bf\lowcodelanguage-1.20.1-47.2.20.jar is missing mods.toml file
+[15jun2024 10:34:26.196] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Usuario\.gradle\caches\modules-2\files-2.1\net.minecraftforge\mclanguage\1.20.1-47.2.20\efca3bee89c0085192b122d47334692b921ca7d1\mclanguage-1.20.1-47.2.20.jar is missing mods.toml file
+[15jun2024 10:34:26.198] [main/WARN] [net.minecraftforge.fml.loading.moddiscovery.ModFileParser/LOADING]: Mod file C:\Users\Usuario\.gradle\caches\modules-2\files-2.1\net.minecraftforge\fmlcore\1.20.1-47.2.20\12cd436f148405b50c9b16bd8f3cc6f18db89824\fmlcore-1.20.1-47.2.20.jar is missing mods.toml file
+[15jun2024 10:34:26.264] [main/INFO] [net.minecraftforge.fml.loading.moddiscovery.JarInJarDependencyLocator/]: No dependencies to load found. Skipping!
+[15jun2024 10:34:27.674] [main/INFO] [mixin/]: Compatibility level set to JAVA_17
+[15jun2024 10:34:27.676] [main/INFO] [cpw.mods.modlauncher.LaunchServiceHandler/MODLAUNCHER]: Launching target 'forgedatauserdev' with arguments [--gameDir, ., --assetsDir, C:\Users\Usuario\.gradle\caches\forge_gradle\assets, --assetIndex, 5, --mod, refm, --all, --output, C:\Users\Usuario\Documents\Blender\minecra\forge-1.20.1-RapierMod\src\generated\resources, --existing, C:\Users\Usuario\Documents\Blender\minecra\forge-1.20.1-RapierMod\src\main\resources]
+[15jun2024 10:34:28.163] [main/INFO] [net.minecraftforge.data.loading.DatagenModLoader/]: Initializing Data Gatherer for mods [refm]
+[15jun2024 10:34:29.688] [main/WARN] [mixin/]: @Final field nextHeadUpdate:[I in epicfight.mixins.json:MixinWitherBoss should be final
+[15jun2024 10:34:29.689] [main/WARN] [mixin/]: @Final field idleHeadUpdates:[I in epicfight.mixins.json:MixinWitherBoss should be final
+[15jun2024 10:34:31.915] [modloading-worker-0/INFO] [net.minecraftforge.common.ForgeMod/FORGEMOD]: Forge mod loading, version 47.2.20, for MC 1.20.1 with MCP 20230612.114412
+[15jun2024 10:34:31.916] [modloading-worker-0/INFO] [net.minecraftforge.common.MinecraftForge/FORGE]: MinecraftForge v47.2.20 Initialized
+[15jun2024 10:34:31.944] [modloading-worker-0/INFO] [epicfight/]: Registered skill refm:refm:deadlybackflip
+[15jun2024 10:34:31.987] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:basic_attack
+[15jun2024 10:34:31.988] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:air_attack
+[15jun2024 10:34:31.989] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:roll
+[15jun2024 10:34:31.990] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:step
+[15jun2024 10:34:31.990] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:knockdown_wakeup
+[15jun2024 10:34:31.994] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:guard
+[15jun2024 10:34:31.996] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:parrying
+[15jun2024 10:34:31.997] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:impact_guard
+[15jun2024 10:34:31.999] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:berserker
+[15jun2024 10:34:32.000] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:death_harvest
+[15jun2024 10:34:32.001] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:emergency_escape
+[15jun2024 10:34:32.001] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:endurance
+[15jun2024 10:34:32.002] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:forbidden_strength
+[15jun2024 10:34:32.003] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:hypervitality
+[15jun2024 10:34:32.003] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:stamina_pillager
+[15jun2024 10:34:32.004] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:swordmaster
+[15jun2024 10:34:32.004] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:technician
+[15jun2024 10:34:32.005] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:sweeping_edge
+[15jun2024 10:34:32.006] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:dancing_edge
+[15jun2024 10:34:32.007] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:the_guillotine
+[15jun2024 10:34:32.007] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:grasping_spire
+[15jun2024 10:34:32.008] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:heartpiercer
+[15jun2024 10:34:32.009] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:steel_whirlwind
+[15jun2024 10:34:32.010] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:battojutsu
+[15jun2024 10:34:32.010] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:battojutsu_passive
+[15jun2024 10:34:32.011] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:rushing_tempo
+[15jun2024 10:34:32.011] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:relentless_combo
+[15jun2024 10:34:32.012] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:liechtenauer
+[15jun2024 10:34:32.012] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:sharp_stab
+[15jun2024 10:34:32.012] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:eviscerate
+[15jun2024 10:34:32.028] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:blade_rush
+[15jun2024 10:34:32.029] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:wrathful_lighting
+[15jun2024 10:34:32.029] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:tsunami
+[15jun2024 10:34:32.030] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:everlasting_allegiance
+[15jun2024 10:34:32.032] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:meteor_slam
+[15jun2024 10:34:32.033] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:revelation
+[15jun2024 10:34:32.034] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:demolition_leap
+[15jun2024 10:34:32.036] [modloading-worker-0/INFO] [epicfight/]: Registered skill epicfight:epicfight:phantom_ascent
+[15jun2024 10:34:32.043] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file C:\Users\Usuario\Documents\Blender\minecra\forge-1.20.1-RapierMod\run-data\config\epicfight-client.toml is not correct. Correcting
+[15jun2024 10:34:32.044] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15jun2024 10:34:32.044] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.long_press_count was corrected from null to its default, 2. 
+[15jun2024 10:34:32.044] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.health_bar_show_option was corrected from null to its default, hurt. 
+[15jun2024 10:34:32.044] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.show_target_indicator was corrected from null to its default, true. 
+[15jun2024 10:34:32.044] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.filter_animation was corrected from null to its default, false. 
+[15jun2024 10:34:32.045] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.laser_pointer_color was corrected from null to its default, 0.328125. 
+[15jun2024 10:34:32.045] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.enable_laser_pointer was corrected from null to its default, true. 
+[15jun2024 10:34:32.045] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.camera_auto_switch was corrected from null to its default, false. 
+[15jun2024 10:34:32.045] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.auto_preparation was corrected from null to its default, false. 
+[15jun2024 10:34:32.045] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.blood_effects was corrected from null to its default, true. 
+[15jun2024 10:34:32.045] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.no_mining_in_combat was corrected from null to its default, true. 
+[15jun2024 10:34:32.045] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.battle_autoswitch_items was corrected from null to its default, []. 
+[15jun2024 10:34:32.045] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.mining_autoswitch_items was corrected from null to its default, []. 
+[15jun2024 10:34:32.045] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15jun2024 10:34:32.045] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.stamina_bar_x was corrected from null to its default, 120. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.stamina_bar_y was corrected from null to its default, 10. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.stamina_bar_x_base was corrected from null to its default, RIGHT. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.stamina_bar_y_base was corrected from null to its default, BOTTOM. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.weapon_innate_x was corrected from null to its default, 42. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.weapon_innate_y was corrected from null to its default, 48. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.weapon_innate_x_base was corrected from null to its default, RIGHT. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.weapon_innate_y_base was corrected from null to its default, BOTTOM. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.passives_x was corrected from null to its default, 70. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.passives_y was corrected from null to its default, 36. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.passives_x_base was corrected from null to its default, RIGHT. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.passives_y_base was corrected from null to its default, BOTTOM. 
+[15jun2024 10:34:32.046] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.passives_align_direction was corrected from null to its default, HORIZONTAL. 
+[15jun2024 10:34:32.047] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.charging_bar_x was corrected from null to its default, -119. 
+[15jun2024 10:34:32.047] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.charging_bar_y was corrected from null to its default, 60. 
+[15jun2024 10:34:32.047] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.charging_bar_x_base was corrected from null to its default, CENTER. 
+[15jun2024 10:34:32.047] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key ingame.ui.charging_bar_y_base was corrected from null to its default, CENTER. 
+[15jun2024 10:34:32.049] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Configuration file C:\Users\Usuario\Documents\Blender\minecra\forge-1.20.1-RapierMod\run-data\config\epicfight.toml is not correct. Correcting
+[15jun2024 10:34:32.050] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key default_gamerule was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15jun2024 10:34:32.050] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.doVanillaAttack was corrected from null to its default, true. 
+[15jun2024 10:34:32.050] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.globalStun was corrected from null to its default, true. 
+[15jun2024 10:34:32.050] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.keepSkills was corrected from null to its default, true. 
+[15jun2024 10:34:32.050] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.hasFallAnimation was corrected from null to its default, true. 
+[15jun2024 10:34:32.050] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.disapleEntityUI was corrected from null to its default, false. 
+[15jun2024 10:34:32.050] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.stiffComboAttacks was corrected from null to its default, true. 
+[15jun2024 10:34:32.050] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.noMobsInBossfight was corrected from null to its default, true. 
+[15jun2024 10:34:32.051] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.weightPenalty was corrected from null to its default, 100. 
+[15jun2024 10:34:32.051] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key default_gamerule.canSwitchCombat was corrected from null to its default, true. 
+[15jun2024 10:34:32.051] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key loot was corrected from null to its default, SimpleCommentedConfig:{}. 
+[15jun2024 10:34:32.051] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key loot.skill_book_mob_drop_chance_modifier was corrected from null to its default, 0. 
+[15jun2024 10:34:32.052] [modloading-worker-0/WARN] [net.minecraftforge.common.ForgeConfigSpec/CORE]: Incorrect key loot.skill_book_chest_drop_chance_modifier was corrected from null to its default, 0. 
+[15jun2024 10:34:32.449] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Usuario/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.2.20_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.2.20_mapped_parchment_2023.09.03-1.20.1.jar%23191!/assets/.mcassetsroot' uses unexpected schema
+[15jun2024 10:34:32.449] [main/WARN] [net.minecraft.server.packs.VanillaPackResourcesBuilder/]: Assets URL 'union:/C:/Users/Usuario/.gradle/caches/forge_gradle/minecraft_user_repo/net/minecraftforge/forge/1.20.1-47.2.20_mapped_parchment_2023.09.03-1.20.1/forge-1.20.1-47.2.20_mapped_parchment_2023.09.03-1.20.1.jar%23191!/data/.mcassetsroot' uses unexpected schema
+[15jun2024 10:34:32.557] [main/INFO] [net.minecraft.data.DataGenerator/]: All providers took: 0 ms
+[15jun2024 10:34:32.559] [main/INFO] [net.minecraft.data.HashCache/]: Caching: total files: 0, old count: 0, new count: 1, removed stale: 0, written: 0
