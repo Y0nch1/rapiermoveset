@@ -2,6 +2,7 @@ package net.yonchi.refm;
 
 import com.mojang.logging.LogUtils;
 import net.yonchi.refm.gameasset.RapierSounds;
+import net.yonchi.refm.skill.guard.RapierGuard;
 import org.slf4j.Logger;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -41,6 +42,7 @@ public class RapierForEpicfight
 
         RapierSkillDataKeys.DATA_KEYS.register(bus);
 
+        bus.addListener(RapierGuard::registerGuard);
         bus.addListener(RapierAnimations::registerAnimations);
         bus.addListener(this::addCreative);
 

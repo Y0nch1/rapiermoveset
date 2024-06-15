@@ -43,8 +43,7 @@ public class WeaponCapabilityPresets {
                 .livingMotionModifier(Styles.ONE_HAND, LivingMotions.KNEEL, RapierAnimations.BIPED_SNEAK_RAPIER)
                 .livingMotionModifier(Styles.ONE_HAND, LivingMotions.SNEAK, RapierAnimations.BIPED_SNEAK_RAPIER)
                 .livingMotionModifier(Styles.ONE_HAND, LivingMotions.SWIM, RapierAnimations.BIPED_HOLD_RAPIER)
-                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
+                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
 
         return builder;
     };
