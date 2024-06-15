@@ -11,7 +11,6 @@ import net.minecraft.world.item.ItemStack;
 import yesman.epicfight.api.animation.AnimationProvider;
 import yesman.epicfight.api.animation.types.AttackAnimation;
 import yesman.epicfight.api.animation.types.DynamicAnimation;
-import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.skill.SkillContainer;
 import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;

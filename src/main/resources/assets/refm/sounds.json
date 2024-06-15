@@ -1,0 +1,32 @@
+{
+  "entity.weapon.rapier_hit":
+  {
+    "category":"entity",
+    "subtitle":"entity.weapon.hit",
+    "sounds":[{"name":"refm:entity/weapon/rapier_hit1", "stream":true}, {"name":"refm:entity/weapon/rapier_hit2", "stream":true}, {"name":"refm:entity/weapon/rapier_hit3", "stream":true}]
+  },
+  "entity.weapon.rapier_skill":
+  {
+    "category":"entity",
+    "subtitle":"entity.weapon.skill",
+    "sounds":[{"name":"refm:entity/weapon/rapier_skill1", "stream":true, "attenuation_distance":16}, {"name":"refm:entity/weapon/rapier_skill2", "stream":true, "attenuation_distance":16}, {"name":"refm:entity/weapon/rapier_skill3", "stream":true, "attenuation_distance":16}]
+  },
+  "entity.weapon.rapier_stab":
+  {
+    "category":"entity",
+    "subtitle":"entity.weapon.stab",
+    "sounds":[{"name":"refm:entity/weapon/rapier_stab1", "stream":true}, {"name":"refm:entity/weapon/rapier_stab2", "stream":true}, {"name":"refm:entity/weapon/rapier_stab3", "stream":true}, {"name":"refm:entity/weapon/rapier_stab4", "stream":true}, {"name":"refm:entity/weapon/rapier_stab5", "stream":true}]
+  },
+  "entity.weapon.rapier_swing":
+  {
+    "category":"entity",
+    "subtitle":"entity.weapon.swing",
+    "sounds":[{"name":"refm:entity/weapon/rapier_swing1", "stream":true}, {"name":"refm:entity/weapon/rapier_swing2", "stream":true}]
+  },
+  "entity.weapon.rapier_jump":
+  {
+    "category":"entity",
+    "subtitle":"entity.weapon.jump",
+    "sounds":[{"name":"refm:entity/weapon/rapier_jump1", "stream":true}, {"name":"refm:entity/weapon/rapier_jump2", "stream":true}]
+  }
+}

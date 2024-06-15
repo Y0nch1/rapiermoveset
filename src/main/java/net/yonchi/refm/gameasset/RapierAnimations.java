@@ -11,7 +11,6 @@ import yesman.epicfight.api.forgeevent.AnimationRegistryEvent;
 import yesman.epicfight.api.utils.HitEntityList;
 import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.gameasset.Armatures;
-import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.model.armature.HumanoidArmature;
 import yesman.epicfight.particle.EpicFightParticles;
 import yesman.epicfight.world.damagesource.StunType;
@@ -43,8 +42,8 @@ public class RapierAnimations {
         HumanoidArmature biped = Armatures.BIPED;
 
 
-        RAPIER_AIR_SLASH = new AirSlashAnimation(0.1F, 0.2F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_airslash", biped);
-
+        RAPIER_AIR_SLASH = new AirSlashAnimation(0.1F, 0.2F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_airslash", biped)
+                .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_JUMP.get());
         RAPIER_AUTO1 = new BasicAttackAnimation(0.1F, 0.4F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_auto1", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.5F);
         RAPIER_AUTO2 = new BasicAttackAnimation(0.15F,"biped/combat/rapier_auto2", biped,
@@ -56,6 +55,7 @@ public class RapierAnimations {
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2F);
 
         RAPIER_DASH = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash", biped, new AttackAnimation.Phase(0.0F, 0.3F, 0.8F, 0.5F, 0.7F, biped.toolR,null))
+                .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_SWING.get())
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.6F);
         RAPIER_GUARD = new StaticAnimation(true, "biped/skill/guard_rapier", biped);
         RAPIER_GUARD_HIT = new GuardAnimation(0.05F, "biped/skill/guard_rapier_hit", biped);
@@ -78,7 +78,7 @@ public class RapierAnimations {
         DEADLYBACKFLIP_SECOND = new AttackAnimation(0.1F, 0.0F, 0.5F, 1.2F, 0.95F, null, biped.toolR, "biped/skill/rapier_backflip_second", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NEUTRALIZE)
-                .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, EpicFightSounds.EVISCERATE.get())
+                .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get())
                 .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, EpicFightParticles.BLADE_RUSH_SKILL)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addState(EntityState.MOVEMENT_LOCKED, true);

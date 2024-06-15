@@ -6,7 +6,6 @@ import net.minecraftforge.registries.RegistryObject;
 import yesman.epicfight.skill.BasicAttack;
 import yesman.epicfight.skill.SkillDataKey;
 import net.yonchi.refm.skill.weaponinnate.DeadlyBackflipSkill;
-import yesman.epicfight.skill.weaponinnate.BladeRushSkill;
 
 
 public class RapierSkillDataKeys {

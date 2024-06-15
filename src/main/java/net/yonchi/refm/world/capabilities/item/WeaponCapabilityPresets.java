@@ -15,9 +15,9 @@ import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.gameasset.RapierColliderPreset;
 import net.yonchi.refm.gameasset.RapierSkills;
 
+import net.yonchi.refm.gameasset.RapierSounds;
 import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
 import yesman.epicfight.api.animation.LivingMotions;
-import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.item.CapabilityItem.Styles;
@@ -30,8 +30,8 @@ public class WeaponCapabilityPresets {
                 .category(RapierWeaponCategories.RAPIER) // Updated to use custom category
                 .styleProvider((playerpatch) -> Styles.ONE_HAND)
                 .collider(RapierColliderPreset.RAPIER)
-                .swingSound(EpicFightSounds.WHOOSH_SMALL.get())
-                .hitSound(EpicFightSounds.BLADE_HIT.get())
+                .swingSound(RapierSounds.RAPIER_STAB.get())
+                .hitSound(RapierSounds.RAPIER_HIT.get())
                 .canBePlacedOffhand(false)
                 .newStyleCombo(Styles.ONE_HAND, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3, RapierAnimations.RAPIER_DASH, RapierAnimations.RAPIER_AIR_SLASH)
                 .innateSkill(Styles.ONE_HAND, (itemstack) -> { return RapierSkills.DEADLYBACKFLIP; })
@@ -43,7 +43,8 @@ public class WeaponCapabilityPresets {
                 .livingMotionModifier(Styles.ONE_HAND, LivingMotions.KNEEL, RapierAnimations.BIPED_SNEAK_RAPIER)
                 .livingMotionModifier(Styles.ONE_HAND, LivingMotions.SNEAK, RapierAnimations.BIPED_SNEAK_RAPIER)
                 .livingMotionModifier(Styles.ONE_HAND, LivingMotions.SWIM, RapierAnimations.BIPED_HOLD_RAPIER)
-                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
+                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD)
+                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
 
         return builder;
     };
