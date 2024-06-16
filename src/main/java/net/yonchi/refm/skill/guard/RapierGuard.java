@@ -18,7 +18,7 @@ import static net.yonchi.refm.world.capabilities.item.WeaponCapabilityPresets.RA
 @Mod.EventBusSubscriber(modid = RapierForEpicfight.MOD_ID , bus = Mod.EventBusSubscriber.Bus.MOD)
 
 public class RapierGuard extends Skill {
-    protected static final UUID EVENT_UUID = UUID.fromString("b422f7a0-f378-11eb-9a03-0242ac703459");
+    public static final UUID EVENT_UUID = UUID.fromString("b422f7a0-f378-11eb-9a03-0242ac703459");
     public RapierGuard(Builder<? extends Skill> builder) {
         super(builder);
     }

@@ -9,24 +9,24 @@ import java.util.function.Function;
 public enum RapierWeaponCategories implements WeaponCategory, Function<Item, CapabilityItem.Builder> {
     RAPIER;
 
-        final int id;
+    final int id;
 
-        RapierWeaponCategories() {
-            this.id = WeaponCategory.ENUM_MANAGER.assign(this);
-        }
+    RapierWeaponCategories() {
+        this.id = WeaponCategory.ENUM_MANAGER.assign(this);
+    }
 
     @Override
-        public int universalOrdinal() {
-            return this.id;
-        }
+    public int universalOrdinal() {
+        return this.id;
+    }
 
     @Override
     public CapabilityItem.Builder apply(Item item) {
-        return null;
+        return WeaponCategoryMapper.apply(item, this);
     }
 
     public static class Builder {
-        }
     }
+}
 
 //https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/world/capabilities/item/CapabilityItem.java#L348

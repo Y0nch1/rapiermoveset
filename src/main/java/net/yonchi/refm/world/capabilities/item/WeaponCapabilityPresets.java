@@ -27,7 +27,7 @@ import yesman.epicfight.world.capabilities.item.WeaponCapability;
 public class WeaponCapabilityPresets {
     public static final Function<Item, CapabilityItem.Builder> RAPIER = (item) -> {
         WeaponCapability.Builder builder = WeaponCapability.builder()
-                .category(RapierWeaponCategories.RAPIER) // Updated to use custom category
+                .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
                 .styleProvider((playerpatch) -> Styles.ONE_HAND)
                 .collider(RapierColliderPreset.RAPIER)
                 .swingSound(RapierSounds.RAPIER_STAB.get())
