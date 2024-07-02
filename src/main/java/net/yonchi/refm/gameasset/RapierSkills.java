@@ -40,7 +40,7 @@ public class RapierSkills {
                 .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(2))
-                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(16))
+                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(24))
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
                 .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
                 .addProperty(AttackPhaseProperty.HIT_SOUND, EpicFightSounds.EVISCERATE.get());

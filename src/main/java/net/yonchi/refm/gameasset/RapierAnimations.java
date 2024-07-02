@@ -44,6 +44,10 @@ public class RapierAnimations {
 
         RAPIER_AIR_SLASH = new AirSlashAnimation(0.1F, 0.2F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_airslash", biped)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_JUMP.get());
+        RAPIER_DASH = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash", biped, new AttackAnimation.Phase(0.0F, 0.3F, 0.8F, 0.5F, 0.7F, biped.toolR,null))
+                .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_SWING.get())
+                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.6F);
+        
         RAPIER_AUTO1 = new BasicAttackAnimation(0.1F, 0.4F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_auto1", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.5F);
         RAPIER_AUTO2 = new BasicAttackAnimation(0.15F,"biped/combat/rapier_auto2", biped,
@@ -54,9 +58,6 @@ public class RapierAnimations {
         RAPIER_AUTO3 = new BasicAttackAnimation(0.1F, 0.6F, 0.4F, 0.8F, null, biped.toolR, "biped/combat/rapier_auto3", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2F);
 
-        RAPIER_DASH = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash", biped, new AttackAnimation.Phase(0.0F, 0.3F, 0.8F, 0.5F, 0.7F, biped.toolR,null))
-                .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_SWING.get())
-                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.6F);
         RAPIER_GUARD = new StaticAnimation(true, "biped/skill/guard_rapier", biped);
         RAPIER_GUARD_HIT = new GuardAnimation(0.05F, "biped/skill/guard_rapier_hit", biped);
         RAPIER_GUARD_ACTIVE_HIT1 = new GuardAnimation(0.05F, 0.2F, "biped/skill/guard_rapier_hit_active1", biped);
@@ -70,6 +71,7 @@ public class RapierAnimations {
         DEADLYBACKFLIP_FIRST = new AttackAnimation(0.1F, 0.25F, 0.3F, 0.4F, 0.8F, null, biped.torso, "biped/skill/rapier_backflip_first", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.4F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
+                .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.setter(8))
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_PRIORITY, HitEntityList.Priority.TARGET)
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_BEGIN, MoveCoordFunctions.TRACE_LOCROT_TARGET)
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_TICK, MoveCoordFunctions.TRACE_LOCROT_TARGET)
