@@ -34,7 +34,7 @@ public class WeaponCapabilityPresets {
                 .hitSound(RapierSounds.RAPIER_HIT.get())
                 .canBePlacedOffhand(false)
                 .newStyleCombo(Styles.ONE_HAND, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3, RapierAnimations.RAPIER_DASH, RapierAnimations.RAPIER_AIR_SLASH)
-                .innateSkill(Styles.ONE_HAND, (itemstack) -> { return RapierSkills.DEADLYBACKFLIP; })
+                .innateSkill(Styles.ONE_HAND, (itemstack) -> RapierSkills.DEADLYBACKFLIP)
                 .livingMotionModifier(Styles.ONE_HAND, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
                 .livingMotionModifier(Styles.ONE_HAND, LivingMotions.WALK, RapierAnimations.BIPED_WALK_RAPIER)
                 .livingMotionModifier(Styles.ONE_HAND, LivingMotions.CHASE, RapierAnimations.BIPED_WALK_RAPIER)

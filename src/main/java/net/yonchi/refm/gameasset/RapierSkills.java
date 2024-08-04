@@ -3,11 +3,12 @@ package net.yonchi.refm.gameasset;
 import java.util.Set;
 
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.RegisterEvent;
 import net.yonchi.refm.RapierForEpicfight;
 import net.yonchi.refm.skill.weaponinnate.DeadlyBackflipSkill;
 import yesman.epicfight.api.animation.property.AnimationProperty.AttackPhaseProperty;
-import yesman.epicfight.api.data.reloader.SkillManager;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
 import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.gameasset.EpicFightSounds;
@@ -16,24 +17,17 @@ import yesman.epicfight.skill.Skill;
 import yesman.epicfight.world.damagesource.EpicFightDamageType;
 import yesman.epicfight.world.damagesource.ExtraDamageInstance;
 
-@Mod.EventBusSubscriber(
-        modid = RapierForEpicfight.MOD_ID,
-        bus= Mod.EventBusSubscriber.Bus.FORGE
-)
+import static yesman.epicfight.api.data.reloader.SkillManager.SKILL_REGISTRY_KEY;
+
+@Mod.EventBusSubscriber(modid = RapierForEpicfight.MOD_ID, bus= Mod.EventBusSubscriber.Bus.MOD)
 public class RapierSkills {
     public static Skill DEADLYBACKFLIP;
 
-    public RapierSkills(){
-    }
-
-    public static void registerSkills(){
-        SkillManager.register(DeadlyBackflipSkill::new, WeaponInnateSkill.createWeaponInnateBuilder(), "refm", "deadlybackflip");
-    }
-
     @SubscribeEvent
-    public static void buildSkillEvent(SkillBuildEvent onBuild) {
+    public static void buildSkillEvent(SkillBuildEvent build) {
+        SkillBuildEvent.ModRegistryWorker modRegistry = build.createRegistryWorker(RapierForEpicfight.MOD_ID);
 
-        WeaponInnateSkill deadlybackflip = (WeaponInnateSkill) onBuild.build(RapierForEpicfight.MOD_ID, "deadlybackflip");
+        WeaponInnateSkill deadlybackflip = modRegistry.build("deadlybackflip", DeadlyBackflipSkill::new, WeaponInnateSkill.createWeaponInnateBuilder());
         deadlybackflip.newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(2))
@@ -46,6 +40,8 @@ public class RapierSkills {
                 .addProperty(AttackPhaseProperty.HIT_SOUND, EpicFightSounds.EVISCERATE.get());
         DEADLYBACKFLIP = deadlybackflip;
     }
+
+    public RapierSkills(){}
 }
 
     //https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/gameasset/EpicFightSkills.java#L108

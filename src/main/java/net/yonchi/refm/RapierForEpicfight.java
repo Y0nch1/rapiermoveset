@@ -35,13 +35,11 @@ public class RapierForEpicfight
         MinecraftForge.EVENT_BUS.register(this);
 
         WeaponCategory.ENUM_MANAGER.registerEnumCls(MOD_ID, RapierWeaponCategories.class);
-        RapierSkills.registerSkills();
 
         RapierAddonItems.ITEMS.register(bus);
         RapierSounds.SOUNDS.register(bus);
 
         RapierSkillDataKeys.DATA_KEYS.register(bus);
-
         bus.addListener(RapierGuard::registerGuard);
         bus.addListener(RapierAnimations::registerAnimations);
         bus.addListener(this::addCreative);
