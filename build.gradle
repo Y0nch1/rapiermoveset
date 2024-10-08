@@ -7,7 +7,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+' //Yesman added
 }
 
-version = '0.1.9-1.20.1'
+version = '0.2.0-1.20.1'
 group = 'net.yonchi.modid'
 archivesBaseName = 'refm'
 
@@ -136,7 +136,7 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("curse.maven:epicfightmod-405076:5639974")
+    implementation fg.deobf("curse.maven:epicfightmod-405076:5655318")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

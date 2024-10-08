@@ -62,7 +62,7 @@ import net.yonchi.refm.gameasset.RapierAnimations;
             if (target != null && target.isAlive()) {
                 //Check distance able to do the attack
                 double distance = executer.getOriginal().distanceTo(target);
-                double minDistance = 1.5;
+                double minDistance = 1.2;
                 double maxDistance = 8.0;
 
                 //Grades for innate to be able depending on the head of the player
