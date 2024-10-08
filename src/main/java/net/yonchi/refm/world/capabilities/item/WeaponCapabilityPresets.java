@@ -28,44 +28,44 @@ public class WeaponCapabilityPresets {
     public static final Function<Item, CapabilityItem.Builder> RAPIER = (item) -> {
         WeaponCapability.Builder builder = WeaponCapability.builder()
                 .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
-                .styleProvider((playerpatch) -> Styles.TWO_HAND)
+                .styleProvider((playerpatch) -> Styles.OCHS)
                 .collider(RapierColliderPreset.RAPIER)
                 .swingSound(RapierSounds.RAPIER_STAB.get())
                 .hitSound(RapierSounds.RAPIER_HIT.get())
                 .canBePlacedOffhand(false)
-                .newStyleCombo(Styles.TWO_HAND, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3, RapierAnimations.RAPIER_DASH, RapierAnimations.RAPIER_AIR_SLASH)
-                .innateSkill(Styles.TWO_HAND, (itemstack) -> RapierSkills.DEADLYBACKFLIP)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.WALK, RapierAnimations.BIPED_WALK_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.CHASE, RapierAnimations.BIPED_WALK_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.RUN, RapierAnimations.BIPED_RUN_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.JUMP, RapierAnimations.BIPED_HOLD_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.KNEEL, RapierAnimations.BIPED_SNEAK_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.SNEAK, RapierAnimations.BIPED_SNEAK_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.SWIM, RapierAnimations.BIPED_HOLD_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
+                .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3, RapierAnimations.RAPIER_DASH, RapierAnimations.RAPIER_AIR_SLASH)
+                .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.WALK, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.CHASE, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.RUN, RapierAnimations.BIPED_RUN_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.JUMP, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.KNEEL, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.SNEAK, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.SWIM, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
 
         return builder;
     };
     public static final Function<Item, CapabilityItem.Builder> ENDER_RAPIER = (item) -> {
         WeaponCapability.Builder builder = WeaponCapability.builder()
                 .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
-                .styleProvider((playerpatch) -> Styles.TWO_HAND)
+                .styleProvider((playerpatch) -> Styles.OCHS)
                 .collider(RapierColliderPreset.RAPIER)
                 .swingSound(RapierSounds.RAPIER_STAB.get())
                 .hitSound(RapierSounds.RAPIER_HIT.get())
                 .canBePlacedOffhand(false)
-                .newStyleCombo(Styles.TWO_HAND, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3, RapierAnimations.RAPIER_DASH_ENDER, RapierAnimations.RAPIER_AIR_SLASH_ENDER)
-                .innateSkill(Styles.TWO_HAND, (itemstack) -> RapierSkills.DEADLYBACKFLIP_ENDER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.WALK, RapierAnimations.BIPED_WALK_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.CHASE, RapierAnimations.BIPED_WALK_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.RUN, RapierAnimations.BIPED_RUN_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.JUMP, RapierAnimations.BIPED_HOLD_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.KNEEL, RapierAnimations.BIPED_SNEAK_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.SNEAK, RapierAnimations.BIPED_SNEAK_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.SWIM, RapierAnimations.BIPED_HOLD_RAPIER)
-                .livingMotionModifier(Styles.TWO_HAND, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
+                .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3, RapierAnimations.RAPIER_DASH_ENDER, RapierAnimations.RAPIER_AIR_SLASH_ENDER)
+                .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP_ENDER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.WALK, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.CHASE, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.RUN, RapierAnimations.BIPED_RUN_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.JUMP, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.KNEEL, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.SNEAK, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.SWIM, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
 
         return builder;
     };
