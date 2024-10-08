@@ -8,6 +8,8 @@ import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.phys.Vec3;
@@ -211,6 +213,16 @@ public class RapierAnimations {
             //Third particle wave at the second sound
                 scheduler.schedule(() -> {
                     entity.playSound(SoundEvents.FOX_TELEPORT, 1F, 1.2F);
+                    //Reset the fall distance to not take fall dmg, and grants fall dmg inmunity 0.5 seconds after
+                    scheduler.schedule(() -> {
+                        if (entity instanceof LivingEntity livingEntity) {
+                            float originalFallDistance = livingEntity.fallDistance;
+                            livingEntity.fallDistance = 0;
+                            scheduler.schedule(() -> {
+                                livingEntity.fallDistance = originalFallDistance;
+                            }, 500, TimeUnit.MILLISECONDS);
+                        }
+                    }, 45, TimeUnit.MILLISECONDS);
                 }, 380 + 120, TimeUnit.MILLISECONDS);//Third sound delay
 
             }, 356, TimeUnit.MILLISECONDS); //Second sound delay
