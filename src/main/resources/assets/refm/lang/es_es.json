@@ -1,8 +1,15 @@
 {
-	    "item.refm.iron_rapier": "Rapier de hierro",
-    	"item.refm.gold_rapier": "Rapier de oro",
-    	"item.refm.diamond_rapier": "Rapier de diamante",
-    	"item.refm.netherite_rapier": "Rapier de netherite",
+	"item.refm.iron_rapier": "Rapier de hierro",
+	"item.refm.gold_rapier": "Rapier de oro",
+	"item.refm.diamond_rapier": "Rapier de diamante",
+	"item.refm.netherite_rapier": "Rapier de netherite",
+	"item.refm.enderite_rapier": "Rapier de enderita",
+	"item.refm.end_upgrade": "Mejora de Enderita",
+
+	"creativetab.rapiers_tab": "Rapier Mod",
+
 	"skill.refm.deadlybackflip": "Voltereta Mortal",
-	"skill.refm.deadlybackflip.tooltip": "Avanza rápidamente contra enemigo para impulsarte con el y realizar una voltereta hacia atras.\nDespues de hacer la voltereta arremeterás contra el enemigo para darle una estocada mortal"
+	"skill.refm.deadlybackflip.tooltip": "Avanza rápidamente contra enemigo para impulsarte con el y realizar una voltereta hacia atras.\nDespues de hacer la voltereta arremeterás contra el enemigo para darle una estocada mortal",
+	"skill.refm.deadlybackflip_ender": "Baile del Enderman",
+	"skill.refm.deadlybackflip_ender.tooltip": "Avanza rápidamente contra enemigo para impulsarte con el y entrar en un portal del end.\nTras entrar en el portal usarás la energia perdida del end para destrozar a tu enemigo en pedazos."
 }

@@ -1,0 +1,18 @@
+{
+  "parent": "minecraft:item/handheld",
+  "loader": "forge:separate_transforms",
+  "base": {
+    "parent": "refm:item/template_large_rapier",
+    "textures": {
+      "layer0": "refm:item/enderite_rapier"
+    }
+  },
+  "perspectives": {
+    "gui": {
+      "parent": "minecraft:item/handheld",
+      "textures": {
+        "layer0": "refm:item/enderite_rapier_gui"
+      }
+    }
+  }
+}

@@ -1,8 +1,15 @@
 {
-    "item.refm.iron_rapier" : "Iron Rapier",
-    "item.refm.gold_rapier" : "Gold Rapier",
-    "item.refm.diamond_rapier" : "Diamond Rapier",
-    "item.refm.netherite_rapier" : "Netherite Rapier",
+    "item.refm.iron_rapier": "Iron Rapier",
+    "item.refm.gold_rapier": "Gold Rapier",
+    "item.refm.diamond_rapier": "Diamond Rapier",
+    "item.refm.netherite_rapier": "Netherite Rapier",
+    "item.refm.enderite_rapier": "Enderite Rapier",
+    "item.refm.end_upgrade": "Enderite Upgrade",
+
+    "creativetab.rapiers_tab": "Rapier Mod",
+
 	"skill.refm.deadlybackflip": "Deadly Backflip",
-	"skill.refm.deadlybackflip.tooltip": "Rush in to your enemy kicking him to do a backflip.\nAfter the backflip rush into your enemy a second time to give him a lethal stab"
+	"skill.refm.deadlybackflip.tooltip": "Rush in to your enemy kicking him to do a backflip.\nAfter the backflip rush into your enemy a second time to give him a lethal stab",
+    "skill.refm.deadlybackflip_ender": "The Ender Dance",
+    "skill.refm.deadlybackflip_ender.tooltip": "Rush in to your enemy kicking him to go into a end portal.\nAfter entering the portal you will use the end lost energy to shatter your enemy in pieces"
 }

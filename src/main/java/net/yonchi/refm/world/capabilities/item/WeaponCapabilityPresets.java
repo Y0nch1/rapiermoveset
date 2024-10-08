@@ -47,6 +47,28 @@ public class WeaponCapabilityPresets {
 
         return builder;
     };
+    public static final Function<Item, CapabilityItem.Builder> ENDER_RAPIER = (item) -> {
+        WeaponCapability.Builder builder = WeaponCapability.builder()
+                .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
+                .styleProvider((playerpatch) -> Styles.ONE_HAND)
+                .collider(RapierColliderPreset.RAPIER)
+                .swingSound(RapierSounds.RAPIER_STAB.get())
+                .hitSound(RapierSounds.RAPIER_HIT.get())
+                .canBePlacedOffhand(false)
+                .newStyleCombo(Styles.ONE_HAND, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3, RapierAnimations.RAPIER_DASH_ENDER, RapierAnimations.RAPIER_AIR_SLASH_ENDER)
+                .innateSkill(Styles.ONE_HAND, (itemstack) -> RapierSkills.DEADLYBACKFLIP_ENDER)
+                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.WALK, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.CHASE, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.RUN, RapierAnimations.BIPED_RUN_RAPIER)
+                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.JUMP, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.KNEEL, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.SNEAK, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.SWIM, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.ONE_HAND, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
+
+        return builder;
+    };
 
     public WeaponCapabilityPresets() {
     }
@@ -60,6 +82,7 @@ public class WeaponCapabilityPresets {
     @SubscribeEvent
     public static void register(WeaponCapabilityPresetRegistryEvent event) {
         event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"rapier"), RAPIER);
+        event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"ender_rapier"), ENDER_RAPIER);
     }
 }
 

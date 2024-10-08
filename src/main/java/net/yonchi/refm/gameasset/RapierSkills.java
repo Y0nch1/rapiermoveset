@@ -3,25 +3,22 @@ package net.yonchi.refm.gameasset;
 import java.util.Set;
 
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.RegisterEvent;
 import net.yonchi.refm.RapierForEpicfight;
 import net.yonchi.refm.skill.weaponinnate.DeadlyBackflipSkill;
+import net.yonchi.refm.skill.weaponinnate.DeadlyBackflip_EnderSkill;
 import yesman.epicfight.api.animation.property.AnimationProperty.AttackPhaseProperty;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
 import yesman.epicfight.api.utils.math.ValueModifier;
-import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.world.damagesource.EpicFightDamageType;
 import yesman.epicfight.world.damagesource.ExtraDamageInstance;
 
-import static yesman.epicfight.api.data.reloader.SkillManager.SKILL_REGISTRY_KEY;
-
 @Mod.EventBusSubscriber(modid = RapierForEpicfight.MOD_ID, bus= Mod.EventBusSubscriber.Bus.MOD)
 public class RapierSkills {
     public static Skill DEADLYBACKFLIP;
+    public static Skill DEADLYBACKFLIP_ENDER;
 
     @SubscribeEvent
     public static void buildSkillEvent(SkillBuildEvent build) {
@@ -30,15 +27,32 @@ public class RapierSkills {
         WeaponInnateSkill deadlybackflip = modRegistry.build("deadlybackflip", DeadlyBackflipSkill::new, WeaponInnateSkill.createWeaponInnateBuilder());
         deadlybackflip.newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
-                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(2))
+                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.GUARD_PUNCTURE))
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(2))
-                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(24))
+                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(21))
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
                 .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
-                .addProperty(AttackPhaseProperty.HIT_SOUND, EpicFightSounds.EVISCERATE.get());
+                .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
         DEADLYBACKFLIP = deadlybackflip;
+
+        WeaponInnateSkill deadlybackflip_ender = modRegistry.build("deadlybackflip_ender", DeadlyBackflip_EnderSkill::new, WeaponInnateSkill.createWeaponInnateBuilder());
+        deadlybackflip_ender.newProperty()
+                .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
+                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(1))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.GUARD_PUNCTURE))
+                .newProperty()
+                .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(5))
+                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(9))
+                .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.BYPASS_DODGE))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER))
+                .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
+        DEADLYBACKFLIP_ENDER = deadlybackflip_ender;
     }
 
     public RapierSkills(){}

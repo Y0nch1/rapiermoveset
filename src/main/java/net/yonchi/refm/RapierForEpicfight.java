@@ -3,8 +3,8 @@ package net.yonchi.refm;
 import com.mojang.logging.LogUtils;
 import net.yonchi.refm.gameasset.RapierSounds;
 import net.yonchi.refm.skill.guard.RapierGuard;
+import net.yonchi.refm.world.item.RapierTab;
 import org.slf4j.Logger;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -19,7 +19,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.yonchi.refm.skill.RapierSkillDataKeys;
 import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
 import net.yonchi.refm.gameasset.RapierAnimations;
-import net.yonchi.refm.gameasset.RapierSkills;
 import net.yonchi.refm.world.item.RapierAddonItems;
 import yesman.epicfight.world.capabilities.item.WeaponCategory;
 
@@ -35,6 +34,7 @@ public class RapierForEpicfight
         MinecraftForge.EVENT_BUS.register(this);
 
         WeaponCategory.ENUM_MANAGER.registerEnumCls(MOD_ID, RapierWeaponCategories.class);
+        RapierTab.register(bus);
 
         RapierAddonItems.ITEMS.register(bus);
         RapierSounds.SOUNDS.register(bus);
@@ -46,7 +46,6 @@ public class RapierForEpicfight
 
     }
 
-
     private void commonSetup(final FMLCommonSetupEvent event) {
     }
 
@@ -55,12 +54,6 @@ public class RapierForEpicfight
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.COMBAT){
-            event.accept(RapierAddonItems.IRON_RAPIER);
-            event.accept(RapierAddonItems.GOLD_RAPIER);
-            event.accept(RapierAddonItems.DIAMOND_RAPIER);
-            event.accept(RapierAddonItems.NETHERITE_RAPIER);
-        }
     }
 
     @SubscribeEvent

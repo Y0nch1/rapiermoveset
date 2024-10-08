@@ -4,11 +4,16 @@ plugins {
     id 'maven-publish'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'org.spongepowered.mixin' version '0.7.+' //Yesman added
 }
 
-version = '0.1.8-1.20.1'
+version = '0.1.9-1.20.1'
 group = 'net.yonchi.modid'
 archivesBaseName = 'refm'
+
+base {
+    archivesName = mod_id
+}
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
@@ -72,6 +77,9 @@ minecraft {
             // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
             property 'forge.logging.console.level', 'debug'
 
+            property 'mixin.env.remapRefMap', 'true' // Yesman added
+            property 'mixin.env.refMapRemappingFile', "${buildDir}/createSrgToMcp/output.srg" // Yesman added
+
             mods {
                 "${mod_id}" {
                     source sourceSets.main
@@ -128,7 +136,7 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("curse.maven:epicfightmod-405076:5593336")
+    implementation fg.deobf("curse.maven:epicfightmod-405076:5639974")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
@@ -144,6 +152,7 @@ dependencies {
     // For more info:
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor' // Yesman added
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
