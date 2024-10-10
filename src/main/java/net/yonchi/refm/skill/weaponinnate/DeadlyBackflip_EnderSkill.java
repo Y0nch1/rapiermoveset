@@ -109,6 +109,8 @@ public class DeadlyBackflip_EnderSkill extends WeaponInnateSkill {
     public WeaponInnateSkill registerPropertiesToAnimation() {
         this.first.get().phases[0].addProperties(this.properties.get(0).entrySet());
         this.second.get().phases[0].addProperties(this.properties.get(1).entrySet());
+        this.second.get().phases[1].addProperties(this.properties.get(1).entrySet());
+        this.second.get().phases[2].addProperties(this.properties.get(1).entrySet());
 
         return this;
     }

@@ -1,5 +1,6 @@
 package net.yonchi.refm.gameasset;
 
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +29,7 @@ import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.model.armature.HumanoidArmature;
 import yesman.epicfight.particle.EpicFightParticles;
+import yesman.epicfight.world.damagesource.EpicFightDamageType;
 import yesman.epicfight.world.damagesource.StunType;
 
 public class RapierAnimations {
@@ -62,6 +64,8 @@ public class RapierAnimations {
         //Every animation defined with his own hitbox timers and Properties
         RAPIER_AIR_SLASH = new AirSlashAnimation(0.1F, 0.2F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_airslash", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.4F)
+                .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NONE)
+                .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_JUMP.get());
         RAPIER_DASH = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash", biped, new AttackAnimation.Phase(0.0F, 0.42F, 0.69F, 0.8F, 1F, biped.toolR, null))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_SWING.get())
@@ -128,7 +132,8 @@ public class RapierAnimations {
                         .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NONE)
                 , new AttackAnimation.Phase(1.12F, 0.2F, 1.12F, 1.46F, 1.5F, 1.5F, biped.toolR, null)
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.LONG)
-                , new AttackAnimation.Phase(1.5F, 0.2F, 1.8F, 2.18F, 2.2F, 2.2F, biped.toolR, null))
+                , new AttackAnimation.Phase(1.5F, 0.2F, 1.8F, 2.18F, 2.2F, 2.2F, biped.toolR, null)
+                .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN))
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get())
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.1F)
                 .addProperty(AttackAnimationProperty.FIXED_MOVE_DISTANCE, true)

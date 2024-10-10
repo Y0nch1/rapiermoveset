@@ -31,14 +31,13 @@ public class RapierSkills {
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.GUARD_PUNCTURE))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE))
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(2))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(21))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN)
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE))
                 .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
         DEADLYBACKFLIP = deadlybackflip;
 
@@ -47,15 +46,12 @@ public class RapierSkills {
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.GUARD_PUNCTURE))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE))
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(5))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(9))
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.BYPASS_DODGE))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.BYPASS_DODGE, EpicFightDamageType.FINISHER))
                 .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
         DEADLYBACKFLIP_ENDER = deadlybackflip_ender;
     }
