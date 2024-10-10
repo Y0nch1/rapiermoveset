@@ -40,7 +40,6 @@ public class RapierForEpicfight
         RapierSounds.SOUNDS.register(bus);
 
         RapierSkillDataKeys.DATA_KEYS.register(bus);
-        bus.addListener(RapierGuard::registerGuard);
         bus.addListener(RapierAnimations::registerAnimations);
         bus.addListener(this::addCreative);
 
