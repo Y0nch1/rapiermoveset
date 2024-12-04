@@ -1,8 +1,26 @@
 {
+  "entity.weapon.rapier_ocean_jump":
+  {
+    "category":"entity",
+    "subtitle":"entity.weapon.jump",
+    "sounds":[{"name":"refm:entity/weapon/rapier_ocean_jump", "stream":true}]
+  },
+  "entity.weapon.rapier_ocean_wave":
+  {
+    "category":"entity",
+    "subtitle":"entity.weapon.stab",
+    "sounds":[{"name":"refm:entity/weapon/rapier_ocean_wave1", "stream":true}, {"name":"refm:entity/weapon/rapier_ocean_wave2", "stream":true}, {"name":"refm:entity/weapon/rapier_ocean_wave3", "stream":true}, {"name":"refm:entity/weapon/rapier_ocean_wave4", "stream":true}]
+  },
+  "entity.weapon.rapier_wither_hit":
+  {
+    "category":"entity",
+    "subtitle":"entity.weapon.stab",
+    "sounds":[{"name":"refm:entity/weapon/rapier_wither_hit1", "stream":true}, {"name":"refm:entity/weapon/rapier_wither_hit2", "stream":true}, {"name":"refm:entity/weapon/rapier_wither_hit3", "stream":true}, {"name":"refm:entity/weapon/rapier_wither_hit4", "stream":true}]
+  },
   "entity.weapon.rapier_hit":
   {
     "category":"entity",
-    "subtitle":"entity.weapon.hit",
+    "subtitle":"entity.weapon.stab",
     "sounds":[{"name":"refm:entity/weapon/rapier_hit1", "stream":true}, {"name":"refm:entity/weapon/rapier_hit2", "stream":true}, {"name":"refm:entity/weapon/rapier_hit3", "stream":true}]
   },
   "entity.weapon.rapier_skill":

@@ -1,15 +1,24 @@
 {
-	"item.refm.iron_rapier": "Rapier de hierro",
-	"item.refm.gold_rapier": "Rapier de oro",
-	"item.refm.diamond_rapier": "Rapier de diamante",
-	"item.refm.netherite_rapier": "Rapier de netherite",
-	"item.refm.enderite_rapier": "Rapier de enderita",
-	"item.refm.end_upgrade": "Mejora de Enderita",
+	"item.refm.iron_rapier": "Estoque de hierro",
+	"item.refm.gold_rapier": "Estoque de oro",
+	"item.refm.diamond_rapier": "Estoque de diamante",
+	"item.refm.netherite_rapier": "Estoque de netherite",
+	"item.refm.enderite_rapier": "Estoque de enderita",
+	"item.refm.witherite_rapier": "Estoque de witherita",
+	"item.refm.oceanite_rapier": "Estoque de oceanita",
+	"item.refm.end_upgrade": "Mejora de enderita",
+	"item.refm.wither_upgrade": "Mejora de witherita",
+	"item.refm.ocean_upgrade": "Mejora de oceanita",
 
 	"creativetab.rapiers_tab": "Rapier Mod",
+	"damage_source.epicfight.stun_fall": "§cDESESTABILIZAR §8targets",
 
 	"skill.refm.deadlybackflip": "Voltereta Mortal",
-	"skill.refm.deadlybackflip.tooltip": "Avanza rápidamente contra enemigo para impulsarte con el y realizar una voltereta hacia atras.\nDespues de hacer la voltereta arremeterás contra el enemigo para darle una estocada mortal",
+	"skill.refm.deadlybackflip.tooltip": "Avanza rápidamente contra enemigo para impulsarte con el y realizar una voltereta hacia atras.\nDespues de hacer la voltereta arremeterás contra el enemigo para darle una estocada mortal.",
 	"skill.refm.deadlybackflip_ender": "Baile del Enderman",
-	"skill.refm.deadlybackflip_ender.tooltip": "Avanza rápidamente contra enemigo para impulsarte con el y entrar en un portal del end.\nTras entrar en el portal usarás la energia perdida del end para destrozar a tu enemigo en pedazos."
+	"skill.refm.deadlybackflip_ender.tooltip": "Avanza rápidamente contra enemigo para impulsarte con el y entrar en un portal del end.\nTras entrar en el portal usarás la energia perdida del end para destrozar a tu enemigo en pedazos.",
+	"skill.refm.deadlybackflip_ocean": "Fluir del Oceano",
+	"skill.refm.deadlybackflip_ocean.tooltip": "Avanza rápidamente contra tu enemigo pateandolo y impulsandote hacia la lluvia.\nTras alcanzar el cielo te asegurarás de que la lluvia en tu espada penetrará en la armadura de tu enemigo.",
+	"skill.refm.deadlybackflip_wither": "Rabia del Wither",
+	"skill.refm.deadlybackflip_wither.tooltip": "Avanza rápidamente contra tu enemigo pateandolo, oliendo sus deseos de muerte.\nTras escuchar a tu victima, complacerás sus deseos de la forma mas diabolicá y brutal posible."
 }

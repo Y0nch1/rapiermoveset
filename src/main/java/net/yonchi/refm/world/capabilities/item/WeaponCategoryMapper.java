@@ -1,6 +1,7 @@
 package net.yonchi.refm.world.capabilities.item;
 
 import net.minecraft.world.item.Item;
+
 import yesman.epicfight.world.capabilities.item.WeaponCategory;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 

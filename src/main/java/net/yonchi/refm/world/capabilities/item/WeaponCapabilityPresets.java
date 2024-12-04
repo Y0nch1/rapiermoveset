@@ -5,19 +5,21 @@ import java.util.Map;
 import java.util.function.Function;
 
 import com.google.common.collect.Maps;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.yonchi.refm.RapierForEpicfight;
-import net.yonchi.refm.gameasset.RapierAnimations;
-import net.yonchi.refm.gameasset.RapierColliderPreset;
-import net.yonchi.refm.gameasset.RapierSkills;
 
-import net.yonchi.refm.gameasset.RapierSounds;
+import net.yonchi.refm.RapierForEpicfight;
+import net.yonchi.refm.gameasset.*;
+
 import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
 import yesman.epicfight.api.animation.LivingMotions;
+import yesman.epicfight.particle.EpicFightParticles;
+import yesman.epicfight.particle.HitParticleType;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.item.CapabilityItem.Styles;
@@ -55,8 +57,54 @@ public class WeaponCapabilityPresets {
                 .swingSound(RapierSounds.RAPIER_STAB.get())
                 .hitSound(RapierSounds.RAPIER_HIT.get())
                 .canBePlacedOffhand(false)
-                .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3, RapierAnimations.RAPIER_DASH_ENDER, RapierAnimations.RAPIER_AIR_SLASH_ENDER)
+                .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3_ENDER, RapierAnimations.RAPIER_DASH_ENDER, RapierAnimations.RAPIER_AIR_SLASH_ENDER)
                 .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP_ENDER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.WALK, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.CHASE, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.RUN, RapierAnimations.BIPED_RUN_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.JUMP, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.KNEEL, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.SNEAK, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.SWIM, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
+
+        return builder;
+    };
+    public static final Function<Item, CapabilityItem.Builder> OCEAN_RAPIER = (item) -> {
+        WeaponCapability.Builder builder = WeaponCapability.builder()
+                .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
+                .styleProvider((playerpatch) -> Styles.OCHS)
+                .collider(RapierColliderPreset.RAPIER)
+                .swingSound(RapierSounds.RAPIER_STAB.get())
+                .hitSound(SoundEvents.FISH_SWIM)
+                .canBePlacedOffhand(false)
+                .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3_OCEAN, RapierAnimations.RAPIER_DASH_OCEAN, RapierAnimations.RAPIER_AIR_SLASH_OCEAN)
+                .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP_OCEAN)
+                .passiveSkill(RapierSkills.OCEAN_PASSIVE)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.WALK, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.CHASE, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.RUN, RapierAnimations.BIPED_RUN_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.JUMP, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.KNEEL, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.SNEAK, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.SWIM, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
+
+        return builder;
+    };
+    public static final Function<Item, CapabilityItem.Builder> WITHER_RAPIER = (item) -> {
+        WeaponCapability.Builder builder = WeaponCapability.builder()
+                .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
+                .styleProvider((playerpatch) -> Styles.OCHS)
+                .collider(RapierColliderPreset.RAPIER)
+                .swingSound(RapierSounds.RAPIER_STAB.get())
+                .hitSound(RapierSounds.RAPIER_WITHER_HIT.get())
+                .canBePlacedOffhand(false)
+                .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3_WITHER, RapierAnimations.RAPIER_DASH_WITHER, RapierAnimations.RAPIER_AIR_SLASH_WITHER)
+                .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP_WITHER)
+                .passiveSkill(RapierSkills.WITHER_PASSIVE)
                 .livingMotionModifier(Styles.OCHS, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
                 .livingMotionModifier(Styles.OCHS, LivingMotions.WALK, RapierAnimations.BIPED_WALK_RAPIER)
                 .livingMotionModifier(Styles.OCHS, LivingMotions.CHASE, RapierAnimations.BIPED_WALK_RAPIER)
@@ -83,6 +131,8 @@ public class WeaponCapabilityPresets {
     public static void register(WeaponCapabilityPresetRegistryEvent event) {
         event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"rapier"), RAPIER);
         event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"ender_rapier"), ENDER_RAPIER);
+        event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"ocean_rapier"), OCEAN_RAPIER);
+        event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"wither_rapier"), WITHER_RAPIER);
     }
 }
 

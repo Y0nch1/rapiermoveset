@@ -4,12 +4,21 @@
     "item.refm.diamond_rapier": "Diamond Rapier",
     "item.refm.netherite_rapier": "Netherite Rapier",
     "item.refm.enderite_rapier": "Enderite Rapier",
+    "item.refm.witherite_rapier": "Witherite Rapier",
+    "item.refm.oceanite_rapier": "Oceanite Rapier",
     "item.refm.end_upgrade": "Enderite Upgrade",
+    "item.refm.wither_upgrade": "Witherite Upgrade",
+    "item.refm.ocean_upgrade": "Oceanite Upgrade",
 
     "creativetab.rapiers_tab": "Rapier Mod",
+    "damage_source.epicfight.stun_fall": "§cFALL §8targets",
 
 	"skill.refm.deadlybackflip": "Deadly Backflip",
-	"skill.refm.deadlybackflip.tooltip": "Rush in to your enemy kicking him to do a backflip.\nAfter the backflip rush into your enemy a second time to give him a lethal stab",
+	"skill.refm.deadlybackflip.tooltip": "Rush in to your enemy kicking him to do a backflip.\nAfter the backflip rush into your enemy a second time to give him a lethal stab.",
     "skill.refm.deadlybackflip_ender": "The Ender Dance",
-    "skill.refm.deadlybackflip_ender.tooltip": "Rush in to your enemy kicking him to go into a end portal.\nAfter entering the portal you will use the end lost energy to shatter your enemy in pieces"
+    "skill.refm.deadlybackflip_ender.tooltip": "Rush in to your enemy kicking him to go into a end portal.\nAfter entering the portal you will use the end lost energy to shatter your enemy in pieces.",
+    "skill.refm.deadlybackflip_ocean": "The Ocean Flow",
+    "skill.refm.deadlybackflip_ocean.tooltip": "Rush in to your enemy kicking him and gaining the height of the rain.\nAfter you reach the sky you will make sure that the rain on your blade will puncture into your enemy's armor.",
+    "skill.refm.deadlybackflip_wither": "The Wither Rage",
+    "skill.refm.deadlybackflip_wither.tooltip": "Rush in to your enemy kicking him and smelling his death wishes.\nAfter listening to your victim, you will please his wishes in the most demonic and brutal way."
 }

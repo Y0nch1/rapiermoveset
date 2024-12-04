@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern":
+  [
+    "BEB",
+    "BUB",
+    "BBB"
+  ],
+  "key":
+  {
+    "E": { "item" : "minecraft:nautilus_shell" },
+    "U" : {"item" : "minecraft:netherite_upgrade_smithing_template"},
+    "B": { "item" : "minecraft:prismarine_bricks" }
+  },
+  "result":
+  {
+    "item" : "refm:ocean_upgrade",
+    "count" : 1
+  }
+}

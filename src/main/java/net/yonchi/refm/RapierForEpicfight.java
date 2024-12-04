@@ -2,7 +2,6 @@ package net.yonchi.refm;
 
 import com.mojang.logging.LogUtils;
 import net.yonchi.refm.gameasset.RapierSounds;
-import net.yonchi.refm.skill.guard.RapierGuard;
 import net.yonchi.refm.world.item.RapierTab;
 import org.slf4j.Logger;
 import net.minecraftforge.api.distmarker.Dist;

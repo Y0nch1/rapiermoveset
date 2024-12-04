@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": {
+        "item": "refm:diamond_rapier"
+    },
+    "addition": {
+        "item" : "minecraft:heart_of_the_sea"
+    },
+    "result": {
+        "item": "refm:oceanite_rapier"
+    },
+    "template": {
+        "item": "refm:ocean_upgrade"
+    }
+}

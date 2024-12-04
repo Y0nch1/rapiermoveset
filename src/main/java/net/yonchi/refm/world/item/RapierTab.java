@@ -7,6 +7,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
+
 import net.yonchi.refm.RapierForEpicfight;
 
 public class RapierTab {
@@ -22,7 +23,11 @@ public class RapierTab {
                         output.accept(RapierAddonItems.DIAMOND_RAPIER.get());
                         output.accept(RapierAddonItems.NETHERITE_RAPIER.get());
                         output.accept(RapierAddonItems.ENDERITE_RAPIER.get());
+                        output.accept(RapierAddonItems.WITHERITE_RAPIER.get());
+                        output.accept(RapierAddonItems.OCEANITE_RAPIER.get());
                         output.accept(RapierAddonItems.END_UPGRADE.get());
+                        output.accept(RapierAddonItems.WITHER_UPGRADE.get());
+                        output.accept(RapierAddonItems.OCEAN_UPGRADE.get());
                     })
                     .build());
 

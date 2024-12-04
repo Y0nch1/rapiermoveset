@@ -1,0 +1,15 @@
+{
+    "type": "minecraft:smithing_transform",
+    "base": {
+        "item": "refm:netherite_rapier"
+    },
+    "addition": {
+        "item" : "minecraft:nether_star"
+    },
+    "result": {
+        "item": "refm:witherite_rapier"
+    },
+    "template": {
+        "item": "refm:wither_upgrade"
+    }
+}

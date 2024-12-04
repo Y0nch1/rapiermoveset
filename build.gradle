@@ -121,6 +121,7 @@ repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
     google()
+    mavenCentral()
     maven {
         url "https://cursemaven.com"
         content {
@@ -136,7 +137,9 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("curse.maven:epicfightmod-405076:5655318")
+    implementation fg.deobf("curse.maven:epicfightmod-405076:5811659")
+    //implementation fg.deobf("curse.maven:wom-918614:5889471")
+    //implementation fg.deobf("curse.maven:epicfightwukongmoveset-1114622:5821196")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime

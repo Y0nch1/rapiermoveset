@@ -1,7 +1,7 @@
 {
 	"multilayer": {
 		"base": {
-			"priority":"LOWEST",
+			"priority":"MIDDLE",
 			"masks":
 			[
 				{
@@ -11,12 +11,12 @@
 			]
 		},
 		"composite": {
-			"priority":"MIDDLE",
+			"priority":"HIGHEST",
 			"masks":
 			[
 				{
-					"livingmotion":"ALL",
-					"type":"arms"
+					"livingmotion":"JUMP",
+					"type":"upper_joints"
 				}
 			]
 		}
