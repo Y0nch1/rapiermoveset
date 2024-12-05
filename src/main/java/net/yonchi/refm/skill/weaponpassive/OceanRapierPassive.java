@@ -21,19 +21,29 @@ public class OceanRapierPassive extends PassiveSkill {
     @Override
     public void onInitiate(SkillContainer container) {
         super.onInitiate(container);
-        container.getExecuter().getEventListener().addEventListener(PlayerEventListener.EventType.CLIENT_ITEM_USE_EVENT, EVENT_UUID, (event) -> {
+        container.getExecuter().getEventListener().addEventListener(PlayerEventListener.EventType.DEALT_DAMAGE_EVENT_DAMAGE, EVENT_UUID, (event) -> {
             LivingEntity target = event.getPlayerPatch().getOriginal();
             if (target == null || target.getCommandSenderWorld().isClientSide){
                 return;
             }
-            MobEffectInstance waterSpeed = new MobEffectInstance (MobEffects.DOLPHINS_GRACE, 200, 1 );
-            target.addEffect(waterSpeed);
+            if (event.getAttackDamage() < 1.5) {
+                return;
+            }
+            if (!target.isInWater()) {
+                return;
+            }
+            int duration = 146;
+            int amplifier = 0;
+            MobEffectInstance dolphinEffect = new MobEffectInstance(MobEffects.DOLPHINS_GRACE, duration, amplifier, true, false);
+            MobEffectInstance breathingEffect = new MobEffectInstance(MobEffects.WATER_BREATHING, duration, amplifier, true, false);
+            target.addEffect(dolphinEffect);
+            target.addEffect(breathingEffect);
         });
     }
 
     @Override
     public void onRemoved(SkillContainer container) {
         PlayerEventListener listener = container.getExecuter().getEventListener();
-        listener.removeListener(PlayerEventListener.EventType.CLIENT_ITEM_USE_EVENT, EVENT_UUID);
+        listener.removeListener(PlayerEventListener.EventType.ACTION_EVENT_CLIENT, EVENT_UUID);
     }
 }

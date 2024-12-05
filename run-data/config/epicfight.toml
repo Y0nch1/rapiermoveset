@@ -9,8 +9,11 @@
 	hasFallAnimation = true
 	globalStun = true
 	canSwitchCombat = true
+	#Allowed Values: MINING, BATTLE
+	initialPlayerMode = "MINING"
 	#Range: 0 ~ 100
 	weightPenalty = 100
+	epicDrop = true
 	stiffComboAttacks = true
 	noMobsInBossfight = true
 	disapleEntityUI = false

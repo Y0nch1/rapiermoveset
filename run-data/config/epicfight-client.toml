@@ -1,5 +1,7 @@
 
 [ingame]
+	use_animation_shader = false
+	show_epicfight_attributes = true
 	#Range: 1 ~ 10
 	long_press_count = 2
 	auto_preparation = false
@@ -13,8 +15,12 @@
 	health_bar_show_option = "HURT"
 	camera_auto_switch = false
 	filter_animation = false
+	aiming_correction = true
+	first_person_model = true
 	no_mining_in_combat = true
 	battle_autoswitch_items = []
+	#Range: 0 ~ 30
+	max_hit_projectiles = 30
 
 	[ingame.ui]
 		#Allowed Values: LEFT, RIGHT, CENTER

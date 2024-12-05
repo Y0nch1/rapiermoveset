@@ -98,12 +98,11 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_JUMP.get())
-                .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, SoundEvents.FISH_SWIM)
                 .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, false)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.1F, ReusableEvents.OCEAN_PARTICLES_STABS, AnimationEvent.Side.CLIENT));
         RAPIER_AIR_SLASH_WITHER = new AirSlashAnimation(0.1F, 0.3F, 0.49F, 0.51F, null, biped.toolR, "biped/combat/rapier_airslash_wither", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.8F)
-                .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.FALL)
+                .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_JUMP.get())
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_SHOOT)
@@ -120,9 +119,8 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.25F, ReusableEvents.ENDER_PARTICLES_DASH, AnimationEvent.Side.CLIENT))
                 .addState(EntityState.MOVEMENT_LOCKED, true);
-        RAPIER_DASH_OCEAN = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_ocean", biped, new AttackAnimation.Phase(0.0F, 0.69F, 1.28F, 1.32F, 1.4F, biped.toolR, null))
+        RAPIER_DASH_OCEAN = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_ocean", biped, new AttackAnimation.Phase(0.0F, 0.69F, 1.2F, 1.24F, 1.24F, biped.toolR, null))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_STAB.get())
-                .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, SoundEvents.FISH_SWIM)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.32F, ReusableEvents.OCEAN_PARTICLES_STABS, AnimationEvent.Side.CLIENT));
         RAPIER_DASH_WITHER = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_wither", biped, new AttackAnimation.Phase(0.0F, 0.36F, 0.68F, 0.74F, 0.8F, biped.toolR, null))
@@ -158,11 +156,14 @@ public class RapierAnimations {
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.75F)))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.1F);
         RAPIER_AUTO3_WITHER = new BasicAttackAnimation(0.18F, "biped/combat/rapier_auto3_wither", biped,
-                new AttackAnimation.Phase(0.0F, 0.3F, 0.25F, 0.5F, 0.5F, 0.5F, biped.toolR, null)
+                new AttackAnimation.Phase(0.0F, 0.3F, 0.33F, 0.46F, 0.48F, 0.5F, biped.toolR, null)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.33F))
+                        .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_SHOOT)
                         .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NONE),
-                new AttackAnimation.Phase(0.5F, 0.6F, 0.8F, 0.8F, 1F, biped.toolR, null)
-                        .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.66F)))
+                new AttackAnimation.Phase(0.5F, 0.6F, 0.66F, 0.72F, 0.72F, 1F, biped.toolR, null)
+                        .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.66F))
+                        .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_SHOOT)
+                        .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.1F)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.32F, ReusableEvents.WITHER_PARTICLES_AUTO3, AnimationEvent.Side.CLIENT));
 
@@ -182,6 +183,7 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.setter(8))
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_PRIORITY, HitEntityList.Priority.TARGET)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, EpicFightSounds.WHOOSH_BIG.get())
+                .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, EpicFightSounds.BLUNT_HIT.get())
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_BEGIN, RapierMoveCoordFunctions.TRACE_LOCROT_TARGET)
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_TICK, RapierMoveCoordFunctions.TRACE_LOCROT_TARGET)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false);

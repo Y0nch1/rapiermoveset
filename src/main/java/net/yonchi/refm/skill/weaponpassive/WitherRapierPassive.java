@@ -34,7 +34,7 @@ public class WitherRapierPassive extends PassiveSkill {
             int duration = 33;
             int amplifier = target instanceof Player ? 0 : 2;
             // Add wither effect
-            MobEffectInstance witherEffect = new MobEffectInstance(MobEffects.WITHER, duration, amplifier);
+            MobEffectInstance witherEffect = new MobEffectInstance(MobEffects.WITHER, duration, amplifier, false, false);
             target.addEffect(witherEffect);
         });
     }

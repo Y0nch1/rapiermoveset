@@ -50,7 +50,7 @@ public class RapierSkills {
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN)
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.adder(8))
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE, EpicFightDamageType.FINISHER))
                 .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
         DEADLYBACKFLIP = deadlybackflip;
 
@@ -82,7 +82,7 @@ public class RapierSkills {
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.FALL)
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.adder(42))
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE, EpicFightDamageType.FINISHER))
                 .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
         DEADLYBACKFLIP_OCEAN = deadlybackflip_ocean;
 
@@ -98,12 +98,12 @@ public class RapierSkills {
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(3))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.BYPASS_DODGE))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.BYPASS_DODGE, EpicFightDamageType.FINISHER))
                 .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
         DEADLYBACKFLIP_WITHER = deadlybackflip_wither;
                 ;
         WITHER_PASSIVE = modRegistry.build("wither_passive", WitherRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.ONE_SHOT));
-        OCEAN_PASSIVE = modRegistry.build("ocean_passive", OceanRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE));
+        OCEAN_PASSIVE = modRegistry.build("ocean_passive", OceanRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.DURATION_INFINITE));
     }
 
     public RapierSkills(){}
