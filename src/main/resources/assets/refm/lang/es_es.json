@@ -20,5 +20,7 @@
 	"skill.refm.deadlybackflip_ocean": "Fluir del Oceano",
 	"skill.refm.deadlybackflip_ocean.tooltip": "Avanza rápidamente contra tu enemigo pateandolo y impulsandote hacia la lluvia.\nTras alcanzar el cielo te asegurarás de que la lluvia en tu espada penetrará en la armadura de tu enemigo.",
 	"skill.refm.deadlybackflip_wither": "Rabia del Wither",
-	"skill.refm.deadlybackflip_wither.tooltip": "Avanza rápidamente contra tu enemigo pateandolo, oliendo sus deseos de muerte.\nTras escuchar a tu victima, complacerás sus deseos de la forma mas diabolicá y brutal posible."
+	"skill.refm.deadlybackflip_wither.tooltip": "Avanza rápidamente contra tu enemigo pateandolo, oliendo sus deseos de muerte.\nTras escuchar a tu victima, complacerás sus deseos de la forma mas diabolicá y brutal posible.",
+	"skill.refm.deadlybackflip_amethyst": "Estallido de Amatista",
+	"skill.refm.deadlybackflip_amethyst.tooltip": "Avanza rápidamente contra tu enemigo pateandolo y elevandote alto con magia.\nDespues arremeterás contra ellos usando el mana antiguo guardado dentro de la amatista, penetrando en la armadura de tus enemigos."
 }

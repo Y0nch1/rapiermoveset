@@ -8,9 +8,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
-
 import net.yonchi.refm.gameasset.RapierAnimations;
-
 import yesman.epicfight.api.animation.AnimationProvider;
 import yesman.epicfight.api.animation.types.AttackAnimation;
 import yesman.epicfight.skill.Skill;
@@ -25,15 +23,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-public class DeadlyBackflipSkill_WitherSkill extends WeaponInnateSkill {
-    private static final UUID EVENT_UUID = UUID.fromString("1f6aea85-2194-4761-af8e-1a5c99c4f345");
+public class DeadlyBackflipSkill_AmethystSkill extends WeaponInnateSkill {
+    private static final UUID EVENT_UUID = UUID.fromString("1f6aea85-2194-4761-af8e-1a5c99c4f192");
     private final AnimationProvider<AttackAnimation> first;
     private final AnimationProvider<AttackAnimation> second;
 
-    public DeadlyBackflipSkill_WitherSkill(Builder<? extends Skill> builder) {
+    public DeadlyBackflipSkill_AmethystSkill(Builder<? extends Skill> builder) {
         super(builder);
         this.first = () -> (AttackAnimation)RapierAnimations.DEADLYBACKFLIP_FIRST;
-        this.second = () -> (AttackAnimation)RapierAnimations.DEADLYBACKFLIP_SECOND_WITHER;
+        this.second = () -> (AttackAnimation)RapierAnimations.DEADLYBACKFLIP_SECOND_AMETHYST;
     }
 
     @Override
@@ -103,7 +101,7 @@ public class DeadlyBackflipSkill_WitherSkill extends WeaponInnateSkill {
     public List<Component> getTooltipOnItem(ItemStack itemStack, CapabilityItem cap, PlayerPatch<?> playerCap) {
         List<Component> list = super.getTooltipOnItem(itemStack, cap, playerCap);
         this.generateTooltipforPhase(list, itemStack, cap, playerCap, (Map) this.properties.get(0), "Kick:");
-        this.generateTooltipforPhase(list, itemStack, cap, playerCap, (Map) this.properties.get(1), "Rage:");
+        this.generateTooltipforPhase(list, itemStack, cap, playerCap, (Map) this.properties.get(1), "Crystal:");
         return list;
     }
 

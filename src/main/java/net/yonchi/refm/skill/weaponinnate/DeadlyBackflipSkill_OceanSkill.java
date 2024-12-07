@@ -26,7 +26,7 @@ import java.util.Map;
 import java.util.UUID;
 
 public class DeadlyBackflipSkill_OceanSkill extends WeaponInnateSkill {
-    private static final UUID EVENT_UUID = UUID.fromString("1f6aea85-2194-4761-af8e-1a5c99c4f414");
+    private static final UUID EVENT_UUID = UUID.fromString("1f6aea85-2194-4761-af8e-1a5c99c4f789");
     private final AnimationProvider<AttackAnimation> first;
     private final AnimationProvider<AttackAnimation> second;
 

@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.function.Function;
 
 import com.google.common.collect.Maps;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
@@ -18,8 +17,6 @@ import net.yonchi.refm.gameasset.*;
 
 import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
 import yesman.epicfight.api.animation.LivingMotions;
-import yesman.epicfight.particle.EpicFightParticles;
-import yesman.epicfight.particle.HitParticleType;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.item.CapabilityItem.Styles;
@@ -117,6 +114,28 @@ public class WeaponCapabilityPresets {
 
         return builder;
     };
+    public static final Function<Item, CapabilityItem.Builder> AMETHYST_RAPIER = (item) -> {
+        WeaponCapability.Builder builder = WeaponCapability.builder()
+                .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
+                .styleProvider((playerpatch) -> Styles.OCHS)
+                .collider(RapierColliderPreset.RAPIER)
+                .swingSound(SoundEvents.AMETHYST_BLOCK_RESONATE)
+                .hitSound(SoundEvents.AMETHYST_BLOCK_HIT)
+                .canBePlacedOffhand(false)
+                .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2_AMETHYST, RapierAnimations.RAPIER_AUTO3_AMETHYST, RapierAnimations.RAPIER_DASH_AMETHYST, RapierAnimations.RAPIER_AIR_SLASH_AMETHYST)
+                .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP_AMETHYST)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.WALK, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.CHASE, RapierAnimations.BIPED_WALK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.RUN, RapierAnimations.BIPED_RUN_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.JUMP, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.KNEEL, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.SNEAK, RapierAnimations.BIPED_SNEAK_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.SWIM, RapierAnimations.BIPED_HOLD_RAPIER)
+                .livingMotionModifier(Styles.OCHS, LivingMotions.BLOCK, RapierAnimations.RAPIER_GUARD);
+
+        return builder;
+    };
 
     public WeaponCapabilityPresets() {
     }
@@ -133,6 +152,7 @@ public class WeaponCapabilityPresets {
         event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"ender_rapier"), ENDER_RAPIER);
         event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"ocean_rapier"), OCEAN_RAPIER);
         event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"wither_rapier"), WITHER_RAPIER);
+        event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"amethyst_rapier"), AMETHYST_RAPIER);
     }
 }
 
