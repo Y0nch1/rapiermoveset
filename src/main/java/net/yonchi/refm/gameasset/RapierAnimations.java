@@ -10,11 +10,12 @@ import java.util.concurrent.TimeUnit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import net.yonchi.refm.RapierForEpicfight;
@@ -36,6 +37,8 @@ import yesman.epicfight.model.armature.HumanoidArmature;
 import yesman.epicfight.particle.EpicFightParticles;
 import yesman.epicfight.world.damagesource.EpicFightDamageType;
 import yesman.epicfight.world.damagesource.StunType;
+
+import javax.annotation.Nullable;
 
 public class RapierAnimations {
 
@@ -313,6 +316,22 @@ public class RapierAnimations {
                 .addState(EntityState.MOVEMENT_LOCKED, true);
     }
 
+    public interface IProxy {
+        @Nullable
+        Entity getClientPlayer();
+    }
+    public static class ClientProxy implements IProxy {
+        @Override
+        public Entity getClientPlayer() {
+            return Minecraft.getInstance().player;
+        }
+    }
+    public static class ServerProxy implements IProxy {
+        @Override
+        public Entity getClientPlayer() {
+            return null;
+        }
+    }
     // Particles and stuff
     public static class ReusableEvents {
         private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
@@ -478,91 +497,91 @@ public class RapierAnimations {
         //OCEAN
         private static final AnimationEvent.AnimationEventConsumer OCEAN_PARTICLES_STABS = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
-            Entity playerEntity = Minecraft.getInstance().player;
-            RandomSource random = entitypatch.getOriginal().getRandom();
-            spawnOceanParticlesFollowingPlayer_Tiny(playerEntity);
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                spawnOceanParticlesFollowingPlayer_Tiny(playerEntity);
+            }
         };
         private static final AnimationEvent.AnimationEventConsumer OCEAN_PARTICLES_DEADLYBACKFLIP = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
-            Entity playerEntity = Minecraft.getInstance().player;
-            RandomSource random = entitypatch.getOriginal().getRandom();
-            entity.playSound(RapierSounds.RAPIER_OCEAN_JUMP.get()); // First Sound
-            spawnOceanParticlesFollowingPlayer(playerEntity);
-            scheduler.schedule(() -> {
-                entity.playSound(RapierSounds.RAPIER_OCEAN_WAVE.get(), 1F, 1.2F); // Second Sound
-                spawnOceanParticlesFollowingPlayer_Tiny(playerEntity);
-                if (entity instanceof LivingEntity livingEntity) {
-                    float originalFallDistance = livingEntity.fallDistance;
-                    livingEntity.fallDistance = 0;
-                    scheduler.schedule(() -> livingEntity.fallDistance = originalFallDistance, 500,TimeUnit.MILLISECONDS);
-                }
-            }, 468, TimeUnit.MILLISECONDS); //Second Sound Delay
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                entity.playSound(RapierSounds.RAPIER_OCEAN_JUMP.get()); // First Sound
+                spawnOceanParticlesFollowingPlayer(playerEntity);
+                scheduler.schedule(() -> {
+                    entity.playSound(RapierSounds.RAPIER_OCEAN_WAVE.get(), 1F, 1.2F); // Second Sound
+                    spawnOceanParticlesFollowingPlayer_Tiny(playerEntity);
+                    if (entity instanceof LivingEntity livingEntity) {
+                        float originalFallDistance = livingEntity.fallDistance;
+                        livingEntity.fallDistance = 0;
+                        scheduler.schedule(() -> livingEntity.fallDistance = originalFallDistance, 500, TimeUnit.MILLISECONDS);
+                    }
+                }, 468, TimeUnit.MILLISECONDS); //Second Sound Delay
+            }
         };
 
         //WITHER
         private static final AnimationEvent.AnimationEventConsumer WITHER_PARTICLES_AUTO3 = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
-            Entity playerEntity = Minecraft.getInstance().player;
-            RandomSource random = entitypatch.getOriginal().getRandom();
-            spawnWitherParticlesFollowingPlayer_Tiny(playerEntity);
-            scheduler.schedule(() -> {
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                RandomSource random = entitypatch.getOriginal().getRandom();
                 spawnWitherParticlesFollowingPlayer_Tiny(playerEntity);
-            }, 50, TimeUnit.MILLISECONDS);
+                scheduler.schedule(() -> {
+                    spawnWitherParticlesFollowingPlayer_Tiny(playerEntity);
+                }, 50, TimeUnit.MILLISECONDS);
+            }
         };
         private static final AnimationEvent.AnimationEventConsumer WITHER_PARTICLES_AIRSLASH = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
-            Entity playerEntity = Minecraft.getInstance().player;
-            RandomSource random = entitypatch.getOriginal().getRandom();
-            spawnWitherParticlesFollowingPlayer_Tiny(playerEntity);
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                RandomSource random = entitypatch.getOriginal().getRandom();
+                spawnWitherParticlesFollowingPlayer_Tiny(playerEntity);
+            }
         };
         private static final AnimationEvent.AnimationEventConsumer WITHER_PARTICLES_DASH = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
-            Entity playerEntity = Minecraft.getInstance().player;
-            RandomSource random = entitypatch.getOriginal().getRandom();
-            spawnWitherParticlesFollowingPlayer_Tiny(playerEntity);
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                RandomSource random = entitypatch.getOriginal().getRandom();
+                spawnWitherParticlesFollowingPlayer_Tiny(playerEntity);
+            }
         };
         private static final AnimationEvent.AnimationEventConsumer WITHER_PARTICLES_DEADLYBACKFLIP = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
-            Entity playerEntity = Minecraft.getInstance().player;
-            RandomSource random = entitypatch.getOriginal().getRandom();
-            entity.playSound(SoundEvents.WITHER_AMBIENT); // First Sound
-            spawnWitherParticlesFollowingPlayer(playerEntity);
-            spawnWitherParticlesFollowingPlayer(playerEntity);
-            scheduler.schedule(() -> {
-                entity.playSound(SoundEvents.WITHER_HURT, 1F, 1.2F); // Second Sound
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                RandomSource random = entitypatch.getOriginal().getRandom();
+                entity.playSound(SoundEvents.WITHER_AMBIENT); // First Sound
                 spawnWitherParticlesFollowingPlayer(playerEntity);
-            }, 320, TimeUnit.MILLISECONDS); //Second Sound Delay
+                spawnWitherParticlesFollowingPlayer(playerEntity);
+                scheduler.schedule(() -> {
+                    entity.playSound(SoundEvents.WITHER_HURT, 1F, 1.2F); // Second Sound
+                    spawnWitherParticlesFollowingPlayer(playerEntity);
+                }, 320, TimeUnit.MILLISECONDS); //Second Sound Delay
+            }
         };
 
         //AMETHYST
         private static final AnimationEvent.AnimationEventConsumer AMETHYST_PARTICLES_AUTO2 = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
-            Entity playerEntity = Minecraft.getInstance().player;
-            RandomSource random = entitypatch.getOriginal().getRandom();
-            spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
-            scheduler.schedule(() -> {
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                RandomSource random = entitypatch.getOriginal().getRandom();
                 spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
-            }, 50, TimeUnit.MILLISECONDS);
+                scheduler.schedule(() -> {
+                    spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
+                }, 50, TimeUnit.MILLISECONDS);
+            }
         };
         private static final AnimationEvent.AnimationEventConsumer AMETHYST_PARTICLES_AUTO3 = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
-            Entity playerEntity = Minecraft.getInstance().player;
-            RandomSource random = entitypatch.getOriginal().getRandom();
-            entity.playSound(EpicFightSounds.WHOOSH_ROD.get(), 1F, 1.2F);
-            spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
-            scheduler.schedule(() -> {
-                entity.level().addParticle(
-                        EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
-                        entity.getX(),
-                        entity.getY(),
-                        entity.getZ(),
-                        Double.longBitsToDouble(entity.getId()),
-                        0,
-                        0
-                );
-            }, 52, TimeUnit.MILLISECONDS);
-            scheduler.schedule(() -> {
-                entity.playSound(EpicFightSounds.WHOOSH_ROD.get(), 1F, 1.2F); // Second Sound
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                RandomSource random = entitypatch.getOriginal().getRandom();
+                entity.playSound(EpicFightSounds.WHOOSH_ROD.get(), 1F, 1.2F);
+                spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
                 scheduler.schedule(() -> {
                     entity.level().addParticle(
                             EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
@@ -573,48 +592,68 @@ public class RapierAnimations {
                             0,
                             0
                     );
-                }, 120, TimeUnit.MILLISECONDS);
-            }, 169, TimeUnit.MILLISECONDS); //Second Sound Delay
+                }, 52, TimeUnit.MILLISECONDS);
+                scheduler.schedule(() -> {
+                    entity.playSound(EpicFightSounds.WHOOSH_ROD.get(), 1F, 1.2F); // Second Sound
+                    scheduler.schedule(() -> {
+                        entity.level().addParticle(
+                                EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
+                                entity.getX(),
+                                entity.getY(),
+                                entity.getZ(),
+                                Double.longBitsToDouble(entity.getId()),
+                                0,
+                                0
+                        );
+                    }, 120, TimeUnit.MILLISECONDS);
+                }, 169, TimeUnit.MILLISECONDS); //Second Sound Delay
+            }
         };
         private static final AnimationEvent.AnimationEventConsumer AMETHYST_PARTICLES_AIRSLASH = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
-            Entity playerEntity = Minecraft.getInstance().player;
-            RandomSource random = entitypatch.getOriginal().getRandom();
-            spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                RandomSource random = entitypatch.getOriginal().getRandom();
+                spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
+            }
         };
         private static final AnimationEvent.AnimationEventConsumer AMETHYST_PARTICLES_DASH = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
-            Entity playerEntity = Minecraft.getInstance().player;
-            RandomSource random = entitypatch.getOriginal().getRandom();
-            entity.playSound(EpicFightSounds.WHOOSH_ROD.get(), 1F, 1.2F); // First Sound
-            scheduler.schedule(() -> {
-                entity.level().addParticle(
-                        EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
-                        entity.getX(),
-                        entity.getY(),
-                        entity.getZ(),
-                        Double.longBitsToDouble(entity.getId()),
-                        0,
-                        0
-                );
-            }, 56, TimeUnit.MILLISECONDS);
-            spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                RandomSource random = entitypatch.getOriginal().getRandom();
+                entity.playSound(EpicFightSounds.WHOOSH_ROD.get(), 1F, 1.2F); // First Sound
+                scheduler.schedule(() -> {
+                    entity.level().addParticle(
+                            EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
+                            entity.getX(),
+                            entity.getY(),
+                            entity.getZ(),
+                            Double.longBitsToDouble(entity.getId()),
+                            0,
+                            0
+                    );
+                }, 56, TimeUnit.MILLISECONDS);
+                spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
+            }
         };
         private static final AnimationEvent.AnimationEventConsumer AMETHYST_PARTICLES_DEADLYBACKFLIP = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
-            Entity playerEntity = Minecraft.getInstance().player;
-            RandomSource random = entitypatch.getOriginal().getRandom();
-            entity.playSound(RapierSounds.RAPIER_OCEAN_JUMP.get()); // First Sound
-            spawnAmethystParticlesFollowingPlayer(playerEntity);
-            scheduler.schedule(() -> {
-                entity.playSound(SoundEvents.AMETHYST_BLOCK_PLACE, 1F, 1.2F); // Second Sound
-                spawnOceanParticlesFollowingPlayer_Tiny(playerEntity);
-                if (entity instanceof LivingEntity livingEntity) {
-                    float originalFallDistance = livingEntity.fallDistance;
-                    livingEntity.fallDistance = 0;
-                    scheduler.schedule(() -> livingEntity.fallDistance = originalFallDistance, 500,TimeUnit.MILLISECONDS);
-                }
-            }, 472, TimeUnit.MILLISECONDS); //Second Sound Delay
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                RandomSource random = entitypatch.getOriginal().getRandom();
+                entity.playSound(RapierSounds.RAPIER_OCEAN_JUMP.get()); // First Sound
+                spawnAmethystParticlesFollowingPlayer(playerEntity);
+                scheduler.schedule(() -> {
+                    entity.playSound(SoundEvents.AMETHYST_BLOCK_PLACE, 1F, 1.2F); // Second Sound
+                    spawnOceanParticlesFollowingPlayer_Tiny(playerEntity);
+                    if (entity instanceof LivingEntity livingEntity) {
+                        float originalFallDistance = livingEntity.fallDistance;
+                        livingEntity.fallDistance = 0;
+                        scheduler.schedule(() -> livingEntity.fallDistance = originalFallDistance, 500, TimeUnit.MILLISECONDS);
+                    }
+                }, 472, TimeUnit.MILLISECONDS); //Second Sound Delay
+            }
         };
 
         private static void spawnParticlesEnder(Entity entity, RandomSource random) {
@@ -641,197 +680,202 @@ public class RapierAnimations {
 
         public static void spawnParticlesOcean() {
             ClientLevel clientLevel = Minecraft.getInstance().level;
-            if (clientLevel == null) return;
+            if (clientLevel != null) {
 
-            RandomSource random = RandomSource.create();
-            tickCounter++;
+                RandomSource random = RandomSource.create();
+                tickCounter++;
 
-            activeParticles.entrySet().removeIf(entry -> {
-                Entity entity = entry.getKey();
-                int ticksRemaining = entry.getValue();
+                activeParticles.entrySet().removeIf(entry -> {
+                    Entity entity = entry.getKey();
+                    int ticksRemaining = entry.getValue();
 
-                if (ticksRemaining <= 0 || !entity.isAlive()) {
-                    return true;
-                }
-
-                // Generate Particles
-                if (tickCounter % SPAWN_INTERVAL == 0) {
-                    double horizontalRadius = 1.2;
-                    for (int i = 0; i < PARTICLE_COUNT; i++) {
-                        double xOffset = (random.nextDouble() - 0.5) * horizontalRadius;
-                        double yOffset = (random.nextDouble() - random.nextDouble()) * 1.5D;
-                        double zOffset = (random.nextDouble() - 0.5) * horizontalRadius;
-
-                        clientLevel.addParticle(ParticleTypes.FISHING,
-                                entity.getX() + xOffset,
-                                entity.getY() + yOffset,
-                                entity.getZ() + zOffset,
-                                0,
-                                0,
-                                0
-                        );
+                    if (ticksRemaining <= 0 || !entity.isAlive()) {
+                        return true;
                     }
-                }
-                entry.setValue(ticksRemaining - 1);
-                return false;
-            });
+
+                    // Generate Particles
+                    if (tickCounter % SPAWN_INTERVAL == 0) {
+                        double horizontalRadius = 1.2;
+                        for (int i = 0; i < PARTICLE_COUNT; i++) {
+                            double xOffset = (random.nextDouble() - 0.5) * horizontalRadius;
+                            double yOffset = (random.nextDouble() - random.nextDouble()) * 1.5D;
+                            double zOffset = (random.nextDouble() - 0.5) * horizontalRadius;
+
+                            clientLevel.addParticle(ParticleTypes.FISHING,
+                                    entity.getX() + xOffset,
+                                    entity.getY() + yOffset,
+                                    entity.getZ() + zOffset,
+                                    0,
+                                    0,
+                                    0
+                            );
+                        }
+                    }
+                    entry.setValue(ticksRemaining - 1);
+                    return false;
+                });
+            }
         }
         public static void spawnParticlesOceanTiny() {
             ClientLevel clientLevel = Minecraft.getInstance().level;
-            if (clientLevel == null) return;
+            if (clientLevel != null) {
 
-            RandomSource random = RandomSource.create();
-            tickCounter++;
+                RandomSource random = RandomSource.create();
+                tickCounter++;
 
-            activeParticles.entrySet().removeIf(entry -> {
-                Entity entity = entry.getKey();
-                int ticksRemaining = entry.getValue();
+                activeParticles.entrySet().removeIf(entry -> {
+                    Entity entity = entry.getKey();
+                    int ticksRemaining = entry.getValue();
 
-                if (ticksRemaining <= 0 || !entity.isAlive()) {
-                    return true;
-                }
-
-                // Generate Particles
-                if (tickCounter % SPAWN_INTERVAL == 0) {
-                    double horizontalRadius = 1.2;
-                    for (int i = 0; i < PARTICLE_COUNT_TINY; i++) {
-                        double xOffset = (random.nextDouble() - 0.5) * horizontalRadius;
-                        double yOffset = (random.nextDouble() - random.nextDouble()) * 1.5D;
-                        double zOffset = (random.nextDouble() - 0.5) * horizontalRadius;
-
-                        clientLevel.addParticle(ParticleTypes.FALLING_WATER,
-                                entity.getX() + xOffset,
-                                entity.getY() + yOffset,
-                                entity.getZ() + zOffset,
-                                0,
-                                0.5,
-                                0
-                        );
+                    if (ticksRemaining <= 0 || !entity.isAlive()) {
+                        return true;
                     }
-                }
-                entry.setValue(ticksRemaining - 1);
-                return false;
-            });
+
+                    // Generate Particles
+                    if (tickCounter % SPAWN_INTERVAL == 0) {
+                        double horizontalRadius = 1.2;
+                        for (int i = 0; i < PARTICLE_COUNT_TINY; i++) {
+                            double xOffset = (random.nextDouble() - 0.5) * horizontalRadius;
+                            double yOffset = (random.nextDouble() - random.nextDouble()) * 1.5D;
+                            double zOffset = (random.nextDouble() - 0.5) * horizontalRadius;
+
+                            clientLevel.addParticle(ParticleTypes.FALLING_WATER,
+                                    entity.getX() + xOffset,
+                                    entity.getY() + yOffset,
+                                    entity.getZ() + zOffset,
+                                    0,
+                                    0.5,
+                                    0
+                            );
+                        }
+                    }
+                    entry.setValue(ticksRemaining - 1);
+                    return false;
+                });
+            }
         }
         public static void spawnParticlesWither() {
             ClientLevel clientLevel = Minecraft.getInstance().level;
-            if (clientLevel == null) return;
+            if (clientLevel != null) {
 
-            RandomSource random = RandomSource.create();
-            tickCounter++;
+                RandomSource random = RandomSource.create();
+                tickCounter++;
 
-            activeParticlesWither.entrySet().removeIf(entry -> {
-                Entity entity = entry.getKey();
-                int ticksRemaining = entry.getValue();
+                activeParticlesWither.entrySet().removeIf(entry -> {
+                    Entity entity = entry.getKey();
+                    int ticksRemaining = entry.getValue();
 
-                if (ticksRemaining <= 0 || !entity.isAlive()) {
-                    return true;
-                }
-
-                // Generate Particles
-                if (tickCounter % 1 == 0) {
-                    double horizontalRadius = 1.2;
-                    for (int i = 0; i < PARTICLE_COUNT_TINY; i++) {
-                        double xOffset = (random.nextDouble() - 0.2) * horizontalRadius;
-                        double yOffset = (random.nextDouble() - random.nextDouble()) * 1.8D;
-                        double zOffset = (random.nextDouble() - 0.2) * horizontalRadius;
-                        double vxOffset = random.nextDouble() * (0.03 - (-0.03)) - 0.03;
-                        double vyOffset = 0.066;
-                        double vzOffset = random.nextDouble() * (0.03 - (-0.03)) - 0.03;
-
-                        clientLevel.addParticle(ParticleTypes.LARGE_SMOKE,
-                                entity.getX() + xOffset,
-                                entity.getY() + yOffset,
-                                entity.getZ() + zOffset,
-                                vxOffset,
-                                vyOffset,
-                                vzOffset
-                        );
+                    if (ticksRemaining <= 0 || !entity.isAlive()) {
+                        return true;
                     }
-                }
-                entry.setValue(ticksRemaining - 1);
-                return false;
-            });
+
+                    // Generate Particles
+                    if (tickCounter % 1 == 0) {
+                        double horizontalRadius = 1.2;
+                        for (int i = 0; i < PARTICLE_COUNT_TINY; i++) {
+                            double xOffset = (random.nextDouble() - 0.2) * horizontalRadius;
+                            double yOffset = (random.nextDouble() - random.nextDouble()) * 1.8D;
+                            double zOffset = (random.nextDouble() - 0.2) * horizontalRadius;
+                            double vxOffset = random.nextDouble() * (0.03 - (-0.03)) - 0.03;
+                            double vyOffset = 0.066;
+                            double vzOffset = random.nextDouble() * (0.03 - (-0.03)) - 0.03;
+
+                            clientLevel.addParticle(ParticleTypes.LARGE_SMOKE,
+                                    entity.getX() + xOffset,
+                                    entity.getY() + yOffset,
+                                    entity.getZ() + zOffset,
+                                    vxOffset,
+                                    vyOffset,
+                                    vzOffset
+                            );
+                        }
+                    }
+                    entry.setValue(ticksRemaining - 1);
+                    return false;
+                });
+            }
         }
         public static void spawnParticlesWitherTiny() {
             ClientLevel clientLevel = Minecraft.getInstance().level;
-            if (clientLevel == null) return;
+            if (clientLevel != null) {
 
-            RandomSource random = RandomSource.create();
-            tickCounter++;
+                RandomSource random = RandomSource.create();
+                tickCounter++;
 
-            activeParticlesWitherTiny.entrySet().removeIf(entry -> {
-                Entity entity = entry.getKey();
-                int ticksRemaining = entry.getValue();
+                activeParticlesWitherTiny.entrySet().removeIf(entry -> {
+                    Entity entity = entry.getKey();
+                    int ticksRemaining = entry.getValue();
 
-                if (ticksRemaining <= 0 || !entity.isAlive()) {
-                    return true;
-                }
-
-                // Generate Particles
-                if (tickCounter % 1 == 0) {
-                    double horizontalRadius = 1.2;
-                    for (int i = 0; i < PARTICLE_COUNT; i++) {
-                        double hxOffset = (random.nextDouble() - 0.2) * horizontalRadius;
-                        double hyOffset = (random.nextDouble() - random.nextDouble()) * 1.8D;
-                        double hzOffset = (random.nextDouble() - 0.2) * horizontalRadius;
-                        double vxOffset = random.nextDouble() * (0.06 - (-0.06)) - 0.06;
-                        double vyOffset = 0.066;
-                        double vzOffset = random.nextDouble() * (0.06 - (-0.06)) - 0.06;
-
-                        clientLevel.addParticle(ParticleTypes.SMOKE,
-                                entity.getX() + hxOffset,
-                                entity.getY() + hyOffset,
-                                entity.getZ() + hzOffset,
-                                vxOffset,
-                                vyOffset,
-                                vzOffset
-                        );
+                    if (ticksRemaining <= 0 || !entity.isAlive()) {
+                        return true;
                     }
-                }
-                entry.setValue(ticksRemaining - 1);
-                return false;
-            });
+
+                    // Generate Particles
+                    if (tickCounter % 1 == 0) {
+                        double horizontalRadius = 1.2;
+                        for (int i = 0; i < PARTICLE_COUNT; i++) {
+                            double hxOffset = (random.nextDouble() - 0.2) * horizontalRadius;
+                            double hyOffset = (random.nextDouble() - random.nextDouble()) * 1.8D;
+                            double hzOffset = (random.nextDouble() - 0.2) * horizontalRadius;
+                            double vxOffset = random.nextDouble() * (0.06 - (-0.06)) - 0.06;
+                            double vyOffset = 0.066;
+                            double vzOffset = random.nextDouble() * (0.06 - (-0.06)) - 0.06;
+
+                            clientLevel.addParticle(ParticleTypes.SMOKE,
+                                    entity.getX() + hxOffset,
+                                    entity.getY() + hyOffset,
+                                    entity.getZ() + hzOffset,
+                                    vxOffset,
+                                    vyOffset,
+                                    vzOffset
+                            );
+                        }
+                    }
+                    entry.setValue(ticksRemaining - 1);
+                    return false;
+                });
+            }
         }
         public static void spawnParticlesAmethyst() {
             ClientLevel clientLevel = Minecraft.getInstance().level;
-            if (clientLevel == null) return;
+            if (clientLevel != null) {
 
-            RandomSource random = RandomSource.create();
-            tickCounter++;
+                RandomSource random = RandomSource.create();
+                tickCounter++;
 
-            activeParticlesAmethyst.entrySet().removeIf(entry -> {
-                Entity entity = entry.getKey();
-                int ticksRemaining = entry.getValue();
+                activeParticlesAmethyst.entrySet().removeIf(entry -> {
+                    Entity entity = entry.getKey();
+                    int ticksRemaining = entry.getValue();
 
-                if (ticksRemaining <= 0 || !entity.isAlive()) {
-                    return true;
-                }
-
-                // Generate Particles
-                if (tickCounter % 1 == 0) {
-                    double horizontalRadius = 1.2;
-                    for (int i = 0; i < PARTICLE_COUNT; i++) {
-                        double hxOffset = (random.nextDouble() - 0.2) * horizontalRadius;
-                        double hyOffset = (random.nextDouble() - random.nextDouble()) * 1.8D;
-                        double hzOffset = (random.nextDouble() - 0.2) * horizontalRadius;
-                        double vxOffset = random.nextDouble() * (0.06 - (-0.06)) - 0.06;
-                        double vyOffset = 0.066;
-                        double vzOffset = random.nextDouble() * (0.06 - (-0.06)) - 0.06;
-
-                        clientLevel.addParticle(ParticleTypes.ENCHANT,
-                                entity.getX() + hxOffset,
-                                entity.getY() + hyOffset,
-                                entity.getZ() + hzOffset,
-                                vxOffset,
-                                vyOffset,
-                                vzOffset
-                        );
+                    if (ticksRemaining <= 0 || !entity.isAlive()) {
+                        return true;
                     }
-                }
-                entry.setValue(ticksRemaining - 1);
-                return false;
-            });
+
+                    // Generate Particles
+                    if (tickCounter % 1 == 0) {
+                        double horizontalRadius = 1.2;
+                        for (int i = 0; i < PARTICLE_COUNT; i++) {
+                            double hxOffset = (random.nextDouble() - 0.2) * horizontalRadius;
+                            double hyOffset = (random.nextDouble() - random.nextDouble()) * 1.8D;
+                            double hzOffset = (random.nextDouble() - 0.2) * horizontalRadius;
+                            double vxOffset = random.nextDouble() * (0.06 - (-0.06)) - 0.06;
+                            double vyOffset = 0.066;
+                            double vzOffset = random.nextDouble() * (0.06 - (-0.06)) - 0.06;
+
+                            clientLevel.addParticle(ParticleTypes.ENCHANT,
+                                    entity.getX() + hxOffset,
+                                    entity.getY() + hyOffset,
+                                    entity.getZ() + hzOffset,
+                                    vxOffset,
+                                    vyOffset,
+                                    vzOffset
+                            );
+                        }
+                    }
+                    entry.setValue(ticksRemaining - 1);
+                    return false;
+                });
+            }
         }
 
         private static void scheduleParticleSpawn(Entity entity, RandomSource random, long delay) {

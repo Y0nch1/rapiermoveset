@@ -1,6 +1,7 @@
 package net.yonchi.refm;
 
 import com.mojang.logging.LogUtils;
+import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.yonchi.refm.gameasset.RapierSounds;
 import net.yonchi.refm.world.item.RapierTab;
 import org.slf4j.Logger;
@@ -25,6 +26,7 @@ import yesman.epicfight.world.capabilities.item.WeaponCategory;
 @Mod(RapierForEpicfight.MOD_ID)
 public class RapierForEpicfight
 {
+    public static RapierAnimations.IProxy proxy;
     public static final String MOD_ID = "refm";
     public static final Logger LOGGER = LogUtils.getLogger();
 
@@ -42,6 +44,11 @@ public class RapierForEpicfight
         bus.addListener(RapierAnimations::registerAnimations);
         bus.addListener(this::addCreative);
 
+        if (FMLEnvironment.dist == Dist.CLIENT) {
+            proxy = new RapierAnimations.ClientProxy();
+        } else {
+            proxy = new RapierAnimations.ServerProxy();
+        }
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {

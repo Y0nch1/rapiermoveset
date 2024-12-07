@@ -24,9 +24,7 @@ public class WitherRapierPassive extends PassiveSkill {
         super.onInitiate(container);
         container.getExecuter().getEventListener().addEventListener(PlayerEventListener.EventType.DEALT_DAMAGE_EVENT_DAMAGE, EVENT_UUID, (event) -> {
             LivingEntity target = event.getTarget();
-            if (target == null || target.getCommandSenderWorld().isClientSide){
-                return;
-            }
+            if (target == null) target.getCommandSenderWorld();
             if (event.getAttackDamage() < 1.5) {
                 return;
             }
