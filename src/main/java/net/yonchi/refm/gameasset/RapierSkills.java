@@ -121,7 +121,9 @@ public class RapierSkills {
         OCEAN_PASSIVE = modRegistry.build("ocean_passive", OceanRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.DURATION_INFINITE));
     }
 
-    public RapierSkills(){}
+    private RapierSkills(){
+
+    }
 }
 
     //https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/gameasset/EpicFightSkills.java#L108

@@ -2,7 +2,9 @@ package net.yonchi.refm;
 
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.yonchi.refm.gameasset.RapierSkills;
 import net.yonchi.refm.gameasset.RapierSounds;
+import net.yonchi.refm.skill.guard.RapierGuard;
 import net.yonchi.refm.world.item.RapierTab;
 import org.slf4j.Logger;
 import net.minecraftforge.api.distmarker.Dist;
@@ -42,6 +44,9 @@ public class RapierForEpicfight
 
         RapierSkillDataKeys.DATA_KEYS.register(bus);
         bus.addListener(RapierAnimations::registerAnimations);
+
+        bus.addListener(RapierGuard::buildSkillEvent);
+        bus.addListener(RapierGuard::regIcon);
         bus.addListener(this::addCreative);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {

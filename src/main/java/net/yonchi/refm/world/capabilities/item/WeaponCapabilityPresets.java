@@ -26,12 +26,12 @@ import yesman.epicfight.world.capabilities.item.WeaponCapability;
 public class WeaponCapabilityPresets {
     public static final Function<Item, CapabilityItem.Builder> RAPIER = (item) -> {
         WeaponCapability.Builder builder = WeaponCapability.builder()
-                .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
+                .category(RapierWeaponCategories.RAPIER) // Updated to use custom category
                 .styleProvider((playerpatch) -> Styles.OCHS)
                 .collider(RapierColliderPreset.RAPIER)
                 .swingSound(RapierSounds.RAPIER_STAB.get())
                 .hitSound(RapierSounds.RAPIER_HIT.get())
-                .canBePlacedOffhand(false)
+                .canBePlacedOffhand(true)
                 .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3, RapierAnimations.RAPIER_DASH, RapierAnimations.RAPIER_AIR_SLASH)
                 .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP)
                 .livingMotionModifier(Styles.OCHS, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
@@ -48,12 +48,12 @@ public class WeaponCapabilityPresets {
     };
     public static final Function<Item, CapabilityItem.Builder> ENDER_RAPIER = (item) -> {
         WeaponCapability.Builder builder = WeaponCapability.builder()
-                .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
+                .category(RapierWeaponCategories.ENDER_RAPIER) // Updated to use custom category
                 .styleProvider((playerpatch) -> Styles.OCHS)
                 .collider(RapierColliderPreset.RAPIER)
                 .swingSound(RapierSounds.RAPIER_STAB.get())
                 .hitSound(RapierSounds.RAPIER_HIT.get())
-                .canBePlacedOffhand(false)
+                .canBePlacedOffhand(true)
                 .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3_ENDER, RapierAnimations.RAPIER_DASH_ENDER, RapierAnimations.RAPIER_AIR_SLASH_ENDER)
                 .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP_ENDER)
                 .livingMotionModifier(Styles.OCHS, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
@@ -70,12 +70,12 @@ public class WeaponCapabilityPresets {
     };
     public static final Function<Item, CapabilityItem.Builder> OCEAN_RAPIER = (item) -> {
         WeaponCapability.Builder builder = WeaponCapability.builder()
-                .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
+                .category(RapierWeaponCategories.OCEAN_RAPIER) // Updated to use custom category
                 .styleProvider((playerpatch) -> Styles.OCHS)
                 .collider(RapierColliderPreset.RAPIER)
                 .swingSound(RapierSounds.RAPIER_STAB.get())
                 .hitSound(SoundEvents.FISH_SWIM)
-                .canBePlacedOffhand(false)
+                .canBePlacedOffhand(true)
                 .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3_OCEAN, RapierAnimations.RAPIER_DASH_OCEAN, RapierAnimations.RAPIER_AIR_SLASH_OCEAN)
                 .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP_OCEAN)
                 .passiveSkill(RapierSkills.OCEAN_PASSIVE)
@@ -93,12 +93,12 @@ public class WeaponCapabilityPresets {
     };
     public static final Function<Item, CapabilityItem.Builder> WITHER_RAPIER = (item) -> {
         WeaponCapability.Builder builder = WeaponCapability.builder()
-                .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
+                .category(RapierWeaponCategories.WITHER_RAPIER) // Updated to use custom category
                 .styleProvider((playerpatch) -> Styles.OCHS)
                 .collider(RapierColliderPreset.RAPIER)
                 .swingSound(RapierSounds.RAPIER_STAB.get())
                 .hitSound(RapierSounds.RAPIER_WITHER_HIT.get())
-                .canBePlacedOffhand(false)
+                .canBePlacedOffhand(true)
                 .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3_WITHER, RapierAnimations.RAPIER_DASH_WITHER, RapierAnimations.RAPIER_AIR_SLASH_WITHER)
                 .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP_WITHER)
                 .passiveSkill(RapierSkills.WITHER_PASSIVE)
@@ -116,12 +116,12 @@ public class WeaponCapabilityPresets {
     };
     public static final Function<Item, CapabilityItem.Builder> AMETHYST_RAPIER = (item) -> {
         WeaponCapability.Builder builder = WeaponCapability.builder()
-                .category(CapabilityItem.WeaponCategories.SWORD) // Updated to use custom category
+                .category(RapierWeaponCategories.AMETHYST_RAPIER) // Updated to use custom category
                 .styleProvider((playerpatch) -> Styles.OCHS)
                 .collider(RapierColliderPreset.RAPIER)
                 .swingSound(SoundEvents.AMETHYST_BLOCK_RESONATE)
                 .hitSound(SoundEvents.AMETHYST_BLOCK_HIT)
-                .canBePlacedOffhand(false)
+                .canBePlacedOffhand(true)
                 .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2_AMETHYST, RapierAnimations.RAPIER_AUTO3_AMETHYST, RapierAnimations.RAPIER_DASH_AMETHYST, RapierAnimations.RAPIER_AIR_SLASH_AMETHYST)
                 .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP_AMETHYST)
                 .livingMotionModifier(Styles.OCHS, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)

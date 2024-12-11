@@ -7,7 +7,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+' //Yesman added
 }
 
-version = '0.2.4-1.20.1'
+version = '0.2.5-1.20.1'
 group = 'net.yonchi.modid'
 archivesBaseName = 'refm'
 
@@ -139,6 +139,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     implementation fg.deobf("curse.maven:epicfightmod-405076:5811659")
     //implementation fg.deobf("curse.maven:wom-918614:5889471")
+    //implementation fg.deobf("curse.maven:battlearts-933502:5978639")
     //implementation fg.deobf("curse.maven:epicfightwukongmoveset-1114622:5821196")
 
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings

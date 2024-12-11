@@ -8,7 +8,7 @@ import yesman.epicfight.world.capabilities.item.WeaponCategory;
 import java.util.function.Function;
 
 public enum RapierWeaponCategories implements WeaponCategory, Function<Item, CapabilityItem.Builder> {
-    RAPIER;
+    RAPIER, ENDER_RAPIER, WITHER_RAPIER, OCEAN_RAPIER, AMETHYST_RAPIER;
 
     final int id;
 

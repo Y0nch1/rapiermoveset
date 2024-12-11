@@ -15,6 +15,7 @@ public class ClientEvents {
             RapierAnimations.ReusableEvents.spawnParticlesOcean();
             RapierAnimations.ReusableEvents.spawnParticlesOceanTiny();
             RapierAnimations.ReusableEvents.spawnParticlesWither();
+            RapierAnimations.ReusableEvents.spawnParticlesWitherBig();
             RapierAnimations.ReusableEvents.spawnParticlesWitherTiny();
             RapierAnimations.ReusableEvents.spawnParticlesAmethyst();
         }

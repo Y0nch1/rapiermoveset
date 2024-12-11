@@ -1,4 +1,6 @@
 {
+	"epicfight.weapon_category.rapier": "Estoque",
+
 	"item.refm.iron_rapier": "Estoque de hierro",
 	"item.refm.gold_rapier": "Estoque de oro",
 	"item.refm.diamond_rapier": "Estoque de diamante",
