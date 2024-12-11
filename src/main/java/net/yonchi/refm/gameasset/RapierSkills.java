@@ -4,8 +4,10 @@ import java.util.Set;
 
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.RegisterEvent;
 
 import net.yonchi.refm.RapierForEpicfight;
+import net.yonchi.refm.skill.guard.RapierGuard;
 import net.yonchi.refm.skill.weaponinnate.*;
 import net.yonchi.refm.skill.weaponpassive.OceanRapierPassive;
 import net.yonchi.refm.skill.weaponpassive.WitherRapierPassive;
@@ -15,6 +17,7 @@ import yesman.epicfight.api.animation.property.AnimationProperty.AttackPhaseProp
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
 import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.skill.SkillCategories;
+import yesman.epicfight.skill.guard.GuardSkill;
 import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.world.damagesource.EpicFightDamageType;
@@ -30,6 +33,7 @@ public class RapierSkills {
     public static Skill DEADLYBACKFLIP_AMETHYST;
     public static Skill WITHER_PASSIVE;
     public static Skill OCEAN_PASSIVE;
+    public static Skill GUARD_RAPIER;
 
     @SubscribeEvent
     public static void buildSkillEvent(SkillBuildEvent build) {
@@ -121,8 +125,9 @@ public class RapierSkills {
         OCEAN_PASSIVE = modRegistry.build("ocean_passive", OceanRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.DURATION_INFINITE));
     }
 
-    private RapierSkills(){
-
+    public RapierSkills(){
+    }
+    public static void registerRapierSkills(RegisterEvent bus) {
     }
 }
 

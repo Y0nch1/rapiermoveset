@@ -12,6 +12,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.RegisterEvent;
 
 import net.yonchi.refm.RapierForEpicfight;
+import net.yonchi.refm.gameasset.RapierSkills;
 import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -41,7 +42,8 @@ public class RapierGuard {
 
     public RapierGuard() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        bus.addListener(RapierAnimations::registerAnimations);;
+        bus.addListener(RapierAnimations::registerAnimations);
+        bus.addListener(RapierSkills::registerRapierSkills);
         MinecraftForge.EVENT_BUS.register(this);
         bus.addListener(RapierGuard::buildSkillEvent);
         bus.addListener(RapierGuard::regIcon);

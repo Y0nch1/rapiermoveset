@@ -44,7 +44,7 @@ public class RapierForEpicfight
 
         RapierSkillDataKeys.DATA_KEYS.register(bus);
         bus.addListener(RapierAnimations::registerAnimations);
-
+        bus.addListener(RapierSkills::registerRapierSkills);
         bus.addListener(RapierGuard::buildSkillEvent);
         bus.addListener(RapierGuard::regIcon);
         bus.addListener(this::addCreative);
