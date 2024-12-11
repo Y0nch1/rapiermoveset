@@ -111,7 +111,7 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_JUMP.get())
                 .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, false)
-                .addEvents(AnimationEvent.TimeStampedEvent.create(0.1F, ReusableEvents.OCEAN_PARTICLES_STABS, AnimationEvent.Side.CLIENT));
+                .addEvents(AnimationEvent.TimeStampedEvent.create(0.1F, ReusableEvents.OCEAN_PARTICLES_DASHES, AnimationEvent.Side.CLIENT));
         RAPIER_AIR_SLASH_WITHER = new AirSlashAnimation(0.1F, 0.3F, 0.49F, 0.51F, null, biped.toolR, "biped/combat/rapier_airslash_wither", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.8F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
@@ -134,7 +134,7 @@ public class RapierAnimations {
         RAPIER_DASH_OCEAN = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_ocean", biped, new AttackAnimation.Phase(0.0F, 0.69F, 1.2F, 1.24F, 1.24F, biped.toolR, null))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_STAB.get())
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
-                .addEvents(AnimationEvent.TimeStampedEvent.create(0.32F, ReusableEvents.OCEAN_PARTICLES_STABS, AnimationEvent.Side.CLIENT));
+                .addEvents(AnimationEvent.TimeStampedEvent.create(0.32F, ReusableEvents.OCEAN_PARTICLES_DASHES, AnimationEvent.Side.CLIENT));
         RAPIER_DASH_WITHER = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_wither", biped, new AttackAnimation.Phase(0.0F, 0.36F, 0.68F, 0.74F, 0.8F, biped.toolR, null))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_HURT)
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_HIT.get())
@@ -142,9 +142,11 @@ public class RapierAnimations {
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.15F, ReusableEvents.WITHER_PARTICLES_DASH, AnimationEvent.Side.CLIENT));
 
         RAPIER_AUTO1 = new BasicAttackAnimation(0.12F, 0.5F, 0.8F, 0.5F, null, biped.toolR, "biped/combat/rapier_auto1", biped)
-                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F);
+                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F)
+                .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true);
         RAPIER_AUTO2 = new BasicAttackAnimation(0.12F, 0.4F, 0.4F, 0.56F, null, biped.toolR, "biped/combat/rapier_auto2", biped)
-                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F);
+                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F)
+                .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true);
         RAPIER_AUTO3 = new BasicAttackAnimation(0.18F, "biped/combat/rapier_auto3", biped,
                 new AttackAnimation.Phase(0.0F, 0.3F, 0.25F, 0.42F, 0.5F, 0.5F, biped.toolR, null)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.5F))
@@ -167,7 +169,7 @@ public class RapierAnimations {
                 new AttackAnimation.Phase(0.6F, 0.6F, 0.86F, 1.2F, 1.2F, 1.2F, biped.toolR, null)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.75F)))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.1F)
-                .addEvents(AnimationEvent.TimeStampedEvent.create(0.46F, ReusableEvents.OCEAN_PARTICLES_STABS, AnimationEvent.Side.CLIENT));
+                .addEvents(AnimationEvent.TimeStampedEvent.create(0.46F, ReusableEvents.OCEAN_PARTICLES_DASHES, AnimationEvent.Side.CLIENT));
         RAPIER_AUTO3_WITHER = new BasicAttackAnimation(0.18F, "biped/combat/rapier_auto3_wither", biped,
                 new AttackAnimation.Phase(0.0F, 0.3F, 0.33F, 0.46F, 0.48F, 0.5F, biped.toolR, null)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.33F))
@@ -188,6 +190,7 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(99))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NEUTRALIZE)
                 .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, EpicFightParticles.EVISCERATE)
+                .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addState(EntityState.MOVEMENT_LOCKED, true);
         RAPIER_GUARD_PARRY_ENDER = new BasicAttackAnimation(0.12F, 0.56F, 0.76F, 0.78F, null, biped.toolR, "biped/skill/guard_rapier_parry_ender", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2F)
@@ -196,49 +199,39 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(99))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NEUTRALIZE)
                 .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, EpicFightParticles.EVISCERATE)
+                .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addState(EntityState.MOVEMENT_LOCKED, true)
                 .addState(EntityState.TURNING_LOCKED, true)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.28F, ReusableEvents.ENDER_PARTICLES_DASH, AnimationEvent.Side.CLIENT));
-
-
-
-
-
-
-        new BasicAttackAnimation(0.18F, "biped/skill/guard_rapier_parry_ocean", biped,
-                new AttackAnimation.Phase(0.0F, 0.3F, 0.25F, 0.3F, 0.3F, 0.35F, biped.toolR, null)
+        RAPIER_GUARD_PARRY_OCEAN = new BasicAttackAnimation(0.18F, "biped/skill/guard_rapier_parry_ocean", biped,
+                new AttackAnimation.Phase(0.0F, 0.3F, 0.28F, 0.32F, 0.35F, 0.4F, biped.toolR, null)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(0.76F))
                         .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(99))
                         .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, EpicFightParticles.EVISCERATE)
                         .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NONE),
-                new AttackAnimation.Phase(0.35F, 0.3F, 0.4F, 0.45F, 0.45F, 0.5F, biped.toolR, null)
+                new AttackAnimation.Phase(0.4F, 0.3F, 0.42F, 0.48F, 0.56F, 0.6F, biped.toolR, null)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(0.76F))
                         .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(99))
                         .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT),
-                new AttackAnimation.Phase(0.5F, 0.3F, 0.55F, 0.6F, 0.6F, 0.65F, biped.toolR, null)
+                new AttackAnimation.Phase(0.6F, 0.3F, 0.66F, 0.84F, 0.92F, 1F, biped.toolR, null)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(0.76F))
                         .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(99))
                         .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, EpicFightParticles.EVISCERATE)
                         .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NONE),
-                new AttackAnimation.Phase(0.65F, 0.3F, 0.7F, 0.75F, 0.75F, 0.8F, biped.toolR, null)
+                new AttackAnimation.Phase(1F, 0.3F, 1.1F, 1.24F, 1.3F, 1.32F, biped.toolR, null)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(0.76F))
                         .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(99))
                         .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NONE),
-                new AttackAnimation.Phase(0.8F, 0.3F, 0.9F, 1F, 1.2F, 1.2F, biped.toolR, null)
+                new AttackAnimation.Phase(1.32F, 0.3F, 1.38F, 1.5F, 1.5F, 1.52F, biped.toolR, null)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(0.76F))
+                        .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, SoundEvents.PLAYER_SPLASH_HIGH_SPEED)
                         .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(99))
                         .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, EpicFightParticles.EVISCERATE)
                         .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NEUTRALIZE))
-                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2F)
+                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.56F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
-                .addEvents(AnimationEvent.TimeStampedEvent.create(0.12F, ReusableEvents.OCEAN_PARTICLES_STABS, AnimationEvent.Side.CLIENT))
+                .addEvents(AnimationEvent.TimeStampedEvent.create(0.32F, ReusableEvents.OCEAN_PARTICLES_STABS, AnimationEvent.Side.CLIENT))
                 .addState(EntityState.MOVEMENT_LOCKED, true);
-
-
-
-
-
-
         RAPIER_GUARD_PARRY_WITHER = new BasicAttackAnimation(0.18F, "biped/skill/guard_rapier_parry_wither", biped,
                 new AttackAnimation.Phase(0.0F, 0.3F, 0.25F, 0.3F, 0.35F, 0.4F, biped.rootJoint, RapierColliderPreset.SCREAM)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(0.5F))
@@ -602,6 +595,13 @@ public class RapierAnimations {
             Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
+                spawnOceanParticlesFollowingPlayer(playerEntity);
+            }
+        };
+        private static final AnimationEvent.AnimationEventConsumer OCEAN_PARTICLES_DASHES = (entitypatch, self, params) -> {
+            Entity entity = entitypatch.getOriginal();
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
                 spawnOceanParticlesFollowingPlayer_Tiny(playerEntity);
             }
         };
@@ -801,26 +801,28 @@ public class RapierAnimations {
                 activeParticles.entrySet().removeIf(entry -> {
                     Entity entity = entry.getKey();
                     int ticksRemaining = entry.getValue();
-
                     if (ticksRemaining <= 0 || !entity.isAlive()) {
                         return true;
                     }
-
-                    // Generate Particles
-                    if (tickCounter % SPAWN_INTERVAL == 0) {
-                        double horizontalRadius = 1.2;
+                    if (tickCounter % 1 == 0) {
+                        double sphereRadius = 0.69;
+                        double yStretchFactor = 1.42;
                         for (int i = 0; i < PARTICLE_COUNT; i++) {
-                            double xOffset = (random.nextDouble() - 0.5) * horizontalRadius;
-                            double yOffset = (random.nextDouble() - random.nextDouble()) * 1.5D;
-                            double zOffset = (random.nextDouble() - 0.5) * horizontalRadius;
-
-                            clientLevel.addParticle(ParticleTypes.FISHING,
+                            double theta = random.nextDouble() * 2 * Math.PI;
+                            double phi = Math.acos(2 * random.nextDouble() - 1);
+                            double xOffset = sphereRadius * Math.sin(phi) * Math.cos(theta);
+                            double yOffset = sphereRadius * Math.sin(phi) * Math.sin(theta) * yStretchFactor + 0.5;
+                            double zOffset = sphereRadius * Math.cos(phi);
+                            double vxOffset = xOffset * -0.1;
+                            double vyOffset = yOffset * -0.1;
+                            double vzOffset = zOffset * -0.1;
+                            clientLevel.addParticle(ParticleTypes.RAIN,
                                     entity.getX() + xOffset,
-                                    entity.getY() + yOffset,
+                                    entity.getY() + yOffset + 0.3,
                                     entity.getZ() + zOffset,
-                                    0,
-                                    0,
-                                    0
+                                    vxOffset,
+                                    vyOffset,
+                                    vzOffset
                             );
                         }
                     }

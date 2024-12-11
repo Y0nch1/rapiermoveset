@@ -1,12 +1,22 @@
 package net.yonchi.refm;
 
 import com.mojang.logging.LogUtils;
+
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+
 import net.yonchi.refm.gameasset.RapierSkills;
 import net.yonchi.refm.gameasset.RapierSounds;
 import net.yonchi.refm.skill.guard.RapierGuard;
+import net.yonchi.refm.world.item.AmethystRapier;
 import net.yonchi.refm.world.item.RapierTab;
+import net.yonchi.refm.skill.RapierSkillDataKeys;
+import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
+import net.yonchi.refm.gameasset.RapierAnimations;
+import net.yonchi.refm.world.item.RapierAddonItems;
+
 import org.slf4j.Logger;
+
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -18,16 +28,13 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.yonchi.refm.skill.RapierSkillDataKeys;
-import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
-import net.yonchi.refm.gameasset.RapierAnimations;
-import net.yonchi.refm.world.item.RapierAddonItems;
+
+import yesman.epicfight.compat.ICompatModule;
 import yesman.epicfight.world.capabilities.item.WeaponCategory;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(RapierForEpicfight.MOD_ID)
-public class RapierForEpicfight
-{
+public class RapierForEpicfight {
     public static RapierAnimations.IProxy proxy;
     public static final String MOD_ID = "refm";
     public static final Logger LOGGER = LogUtils.getLogger();
@@ -53,6 +60,12 @@ public class RapierForEpicfight
             proxy = new RapierAnimations.ClientProxy();
         } else {
             proxy = new RapierAnimations.ServerProxy();
+        }
+
+        if (ModList.get().isLoaded("irons_spellbooks")) {
+            ICompatModule.loadCompatModule(AmethystRapier.class);
+            bus.addListener(AmethystRapier::buildSkillEvent);
+            bus.addListener(AmethystRapier::regIcon);
         }
     }
 

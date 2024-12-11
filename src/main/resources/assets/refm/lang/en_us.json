@@ -1,13 +1,17 @@
 {
     "epicfight.weapon_category.rapier": "Rapier",
+    "epicfight.weapon_category.ender_rapier": "Enderite Rapier",
+    "epicfight.weapon_category.ocean_rapier": "Oceanite Rapier",
+    "epicfight.weapon_category.wither_rapier": "Witherite Rapier",
+    "epicfight.weapon_category.amethyst_rapier": "Amethyst Rapier",
 
     "item.refm.iron_rapier": "Iron Rapier",
     "item.refm.gold_rapier": "Gold Rapier",
     "item.refm.diamond_rapier": "Diamond Rapier",
     "item.refm.netherite_rapier": "Netherite Rapier",
     "item.refm.enderite_rapier": "Enderite Rapier",
-    "item.refm.witherite_rapier": "Witherite Rapier",
     "item.refm.oceanite_rapier": "Oceanite Rapier",
+    "item.refm.witherite_rapier": "Witherite Rapier",
     "item.refm.end_upgrade": "Enderite Upgrade",
     "item.refm.wither_upgrade": "Witherite Upgrade",
     "item.refm.ocean_upgrade": "Oceanite Upgrade",

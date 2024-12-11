@@ -1,13 +1,17 @@
 {
 	"epicfight.weapon_category.rapier": "Estoque",
+	"epicfight.weapon_category.ender_rapier": "Estoque de enderita",
+	"epicfight.weapon_category.ocean_rapier": "Estoque de oceanita",
+	"epicfight.weapon_category.wither_rapier": "Estoque de witherita",
+	"epicfight.weapon_category.amethyst_rapier": "Estoque de amatista",
 
 	"item.refm.iron_rapier": "Estoque de hierro",
 	"item.refm.gold_rapier": "Estoque de oro",
 	"item.refm.diamond_rapier": "Estoque de diamante",
 	"item.refm.netherite_rapier": "Estoque de netherite",
 	"item.refm.enderite_rapier": "Estoque de enderita",
-	"item.refm.witherite_rapier": "Estoque de witherita",
 	"item.refm.oceanite_rapier": "Estoque de oceanita",
+	"item.refm.witherite_rapier": "Estoque de witherita",
 	"item.refm.end_upgrade": "Mejora de enderita",
 	"item.refm.wither_upgrade": "Mejora de witherita",
 	"item.refm.ocean_upgrade": "Mejora de oceanita",
