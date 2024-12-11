@@ -7,7 +7,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegisterEvent;
 
 import net.yonchi.refm.RapierForEpicfight;
-import net.yonchi.refm.skill.guard.RapierGuard;
 import net.yonchi.refm.skill.weaponinnate.*;
 import net.yonchi.refm.skill.weaponpassive.OceanRapierPassive;
 import net.yonchi.refm.skill.weaponpassive.WitherRapierPassive;
@@ -17,7 +16,6 @@ import yesman.epicfight.api.animation.property.AnimationProperty.AttackPhaseProp
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
 import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.skill.SkillCategories;
-import yesman.epicfight.skill.guard.GuardSkill;
 import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.world.damagesource.EpicFightDamageType;
@@ -33,7 +31,6 @@ public class RapierSkills {
     public static Skill DEADLYBACKFLIP_AMETHYST;
     public static Skill WITHER_PASSIVE;
     public static Skill OCEAN_PASSIVE;
-    public static Skill GUARD_RAPIER;
 
     @SubscribeEvent
     public static void buildSkillEvent(SkillBuildEvent build) {
@@ -52,8 +49,7 @@ public class RapierSkills {
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN)
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.adder(8))
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE, EpicFightDamageType.FINISHER))
-                .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE, EpicFightDamageType.FINISHER));
         DEADLYBACKFLIP = deadlybackflip;
 
         WeaponInnateSkill deadlybackflip_ender = modRegistry.build("deadlybackflip_ender", DeadlyBackflip_EnderSkill::new, WeaponInnateSkill.createWeaponInnateBuilder());
@@ -67,8 +63,7 @@ public class RapierSkills {
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(5))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(9))
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.BYPASS_DODGE, EpicFightDamageType.FINISHER))
-                .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.BYPASS_DODGE, EpicFightDamageType.FINISHER));
         DEADLYBACKFLIP_ENDER = deadlybackflip_ender;
 
         WeaponInnateSkill deadlybackflip_ocean = modRegistry.build("deadlybackflip_ocean", DeadlyBackflipSkill_OceanSkill::new, WeaponInnateSkill.createWeaponInnateBuilder());
@@ -84,8 +79,7 @@ public class RapierSkills {
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.FALL)
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.adder(42))
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE, EpicFightDamageType.FINISHER))
-                .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE, EpicFightDamageType.FINISHER));
         DEADLYBACKFLIP_OCEAN = deadlybackflip_ocean;
 
         WeaponInnateSkill deadlybackflip_wither = modRegistry.build("deadlybackflip_wither", DeadlyBackflipSkill_WitherSkill::new, WeaponInnateSkill.createWeaponInnateBuilder());
@@ -100,8 +94,7 @@ public class RapierSkills {
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(3))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.BYPASS_DODGE, EpicFightDamageType.FINISHER))
-                .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.BYPASS_DODGE, EpicFightDamageType.FINISHER));
         DEADLYBACKFLIP_WITHER = deadlybackflip_wither;
 
         WeaponInnateSkill deadlybackflip_amethyst = modRegistry.build("deadlybackflip_amethyst", DeadlyBackflipSkill_AmethystSkill::new, WeaponInnateSkill.createWeaponInnateBuilder());
@@ -117,8 +110,7 @@ public class RapierSkills {
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.FALL)
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.adder(42))
                 .addProperty(AttackPhaseProperty.EXTRA_DAMAGE, Set.of(ExtraDamageInstance.SWEEPING_EDGE_ENCHANTMENT.create()))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE, EpicFightDamageType.FINISHER))
-                .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get());
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE, EpicFightDamageType.FINISHER));
         DEADLYBACKFLIP_AMETHYST = deadlybackflip_amethyst;
 
         WITHER_PASSIVE = modRegistry.build("wither_passive", WitherRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.ONE_SHOT));
