@@ -7,7 +7,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+' //Yesman added
 }
 
-version = '0.2.5-1.20.1'
+version = '0.2.7-1.20.1'
 group = 'net.yonchi.modid'
 archivesBaseName = 'refm'
 
