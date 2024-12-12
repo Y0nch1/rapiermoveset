@@ -53,7 +53,7 @@ public class RapierGuard {
     }
 
     public static void regGuard() throws NoSuchFieldException, IllegalAccessException {
-        LOGGER.info("buildSkillEvent");
+        LOGGER.info("buildSkillEvent1");
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardMotions = new HashMap<>();
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardBreakMotions = new HashMap<>();
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> advancedGuardMotions = new HashMap<>();

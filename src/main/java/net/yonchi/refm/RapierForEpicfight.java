@@ -9,6 +9,7 @@ import net.minecraftforge.fml.loading.FMLEnvironment;
 import net.yonchi.refm.gameasset.RapierSkills;
 import net.yonchi.refm.gameasset.RapierSounds;
 import net.yonchi.refm.skill.guard.RapierGuard;
+import net.yonchi.refm.skill.guard.RapierGuardWoM;
 import net.yonchi.refm.world.item.AmethystRapier;
 import net.yonchi.refm.world.item.RapierTab;
 import net.yonchi.refm.skill.RapierSkillDataKeys;
@@ -67,6 +68,11 @@ public class RapierForEpicfight {
             ICompatModule.loadCompatModule(AmethystRapier.class);
             bus.addListener(AmethystRapier::buildSkillEvent);
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {bus.addListener(AmethystRapier::regIcon);});
+        }
+        if (ModList.get().isLoaded("wom")) {
+            ICompatModule.loadCompatModule(RapierGuardWoM.class);
+            bus.addListener(RapierGuardWoM::buildSkillEvent);
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {bus.addListener(RapierGuardWoM::regIcon);});
         }
     }
 

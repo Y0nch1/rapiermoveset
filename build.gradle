@@ -138,8 +138,8 @@ dependencies {
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     implementation fg.deobf("curse.maven:epicfightmod-405076:5811659")
+    implementation fg.deobf("curse.maven:wom-918614:5889471")
     //implementation fg.deobf("curse.maven:ironspells-855414:5934925")
-    //implementation fg.deobf("curse.maven:wom-918614:5889471")
     //implementation fg.deobf("curse.maven:battlearts-933502:5978639")
     //implementation fg.deobf("curse.maven:epicfightwukongmoveset-1114622:5821196")
 
