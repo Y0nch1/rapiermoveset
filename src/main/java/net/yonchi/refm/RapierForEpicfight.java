@@ -2,6 +2,7 @@ package net.yonchi.refm;
 
 import com.mojang.logging.LogUtils;
 
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
@@ -53,7 +54,7 @@ public class RapierForEpicfight {
         bus.addListener(RapierAnimations::registerAnimations);
         bus.addListener(RapierSkills::registerRapierSkills);
         bus.addListener(RapierGuard::buildSkillEvent);
-        bus.addListener(RapierGuard::regIcon);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {bus.addListener(RapierGuard::regIcon);});
         bus.addListener(this::addCreative);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -65,7 +66,7 @@ public class RapierForEpicfight {
         if (ModList.get().isLoaded("irons_spellbooks")) {
             ICompatModule.loadCompatModule(AmethystRapier.class);
             bus.addListener(AmethystRapier::buildSkillEvent);
-            bus.addListener(AmethystRapier::regIcon);
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {bus.addListener(AmethystRapier::regIcon);});
         }
     }
 

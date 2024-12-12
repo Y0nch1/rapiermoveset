@@ -1,8 +1,6 @@
 package net.yonchi.refm.skill.guard;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.registries.RegisterEvent;
 
@@ -30,7 +28,6 @@ public class RapierGuard {
     public static void registerGuard(Event event) {
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static void regIcon(WeaponCategoryIconRegisterEvent event) {
         event.registerCategory(RapierWeaponCategories.RAPIER, new ItemStack(RapierAddonItems.IRON_RAPIER.get()));
         event.registerCategory(RapierWeaponCategories.ENDER_RAPIER, new ItemStack(RapierAddonItems.ENDERITE_RAPIER.get()));

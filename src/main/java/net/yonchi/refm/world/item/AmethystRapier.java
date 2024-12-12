@@ -1,8 +1,6 @@
 package net.yonchi.refm.world.item;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegisterEvent;
@@ -31,7 +29,6 @@ public class AmethystRapier implements ICompatModule {
     public static void registerGuard(Event event) {
     }
 
-    @OnlyIn(Dist.CLIENT)
     public static void regIcon(WeaponCategoryIconRegisterEvent event) {
         event.registerCategory(RapierWeaponCategories.AMETHYST_RAPIER, new ItemStack(RapierAddonItems.AMETHYST_RAPIER.get()));
     }
