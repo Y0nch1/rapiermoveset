@@ -1,8 +1,11 @@
 package net.yonchi.refm.skill.guard;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.registries.RegisterEvent;
 
 import net.yonchi.refm.gameasset.RapierAnimations;
@@ -24,8 +27,6 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
-
-import static com.mojang.text2speech.Narrator.LOGGER;
 
 public class RapierGuardWoM implements ICompatModule {
     public static void registerGuard(Event event) {
@@ -69,7 +70,6 @@ public class RapierGuardWoM implements ICompatModule {
     }
 
     public static void regGuard() throws NoSuchFieldException, IllegalAccessException {
-        LOGGER.info("buildSkillEvent1");
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardMotions = new HashMap<>();
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardBreakMotions = new HashMap<>();
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> advancedGuardMotions = new HashMap<>();

@@ -70,8 +70,7 @@ public class RapierForEpicfight {
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {bus.addListener(AmethystRapier::regIcon);});
         }
         if (ModList.get().isLoaded("wom")) {
-            ICompatModule.loadCompatModule(RapierGuardWoM.class);
-            bus.addListener(RapierGuardWoM::buildSkillEvent);
+            ICompatModule.loadCompatModule(RapierGuardWoM.class);bus.addListener(RapierGuardWoM::buildSkillEvent);
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {bus.addListener(RapierGuardWoM::regIcon);});
         }
     }

@@ -1,6 +1,8 @@
 package net.yonchi.refm.world.item;
 
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegisterEvent;
@@ -22,8 +24,6 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
-
-import static com.mojang.text2speech.Narrator.LOGGER;
 
 public class AmethystRapier implements ICompatModule {
     public static void registerGuard(Event event) {
@@ -51,7 +51,6 @@ public class AmethystRapier implements ICompatModule {
     }
 
     public static void regGuard() throws NoSuchFieldException, IllegalAccessException {
-        LOGGER.info("buildSkillEvent");
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardMotions = new HashMap<>();
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardBreakMotions = new HashMap<>();
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> advancedGuardMotions = new HashMap<>();
