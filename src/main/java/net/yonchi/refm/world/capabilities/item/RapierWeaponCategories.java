@@ -20,14 +20,8 @@ public enum RapierWeaponCategories implements WeaponCategory, Function<Item, Cap
     public int universalOrdinal() {
         return this.id;
     }
-
     @Override
     public CapabilityItem.Builder apply(Item item) {
         return WeaponCategoryMapper.apply(item, this);
     }
-
-    public static class Builder {
-    }
 }
-
-//https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/world/capabilities/item/CapabilityItem.java#L348

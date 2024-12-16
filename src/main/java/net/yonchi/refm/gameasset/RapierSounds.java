@@ -8,12 +8,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 import net.yonchi.refm.RapierForEpicfight;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
 public class RapierSounds {
-    private static final Logger LOGGER = LogManager.getLogger();
-
     public static final DeferredRegister<SoundEvent> SOUNDS =
             DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, RapierForEpicfight.MOD_ID);
 

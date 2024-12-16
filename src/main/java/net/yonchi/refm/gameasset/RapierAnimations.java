@@ -13,7 +13,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import net.yonchi.refm.RapierForEpicfight;
@@ -103,8 +102,8 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
                 .addEvents(
-                        AnimationEvent.TimeStampedEvent.create(0.21F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
-                        AnimationEvent.TimeStampedEvent.create(0.64F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT)
+                        AnimationEvent.TimeStampedEvent.create(0.24F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                        AnimationEvent.TimeStampedEvent.create(0.66F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT)
                 )
                 .addState(EntityState.MOVEMENT_LOCKED, true);
         RAPIER_AIR_SLASH_OCEAN = new AirSlashAnimation(0.1F, 0.38F, 0.56F, 0.56F, null, biped.toolR, "biped/combat/rapier_airslash_ocean", biped)
@@ -131,7 +130,7 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_SWING.get())
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_TICK, RapierMoveCoordFunctions.TRACE_LOC_TARGET)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
-                .addEvents(AnimationEvent.TimeStampedEvent.create(0.25F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT))
+                .addEvents(AnimationEvent.TimeStampedEvent.create(0.31F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT))
                 .addState(EntityState.MOVEMENT_LOCKED, true);
         RAPIER_DASH_OCEAN = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_ocean", biped, new AttackAnimation.Phase(0.0F, 0.69F, 1.2F, 1.24F, 1.24F, biped.toolR, null))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_STAB.get())
@@ -164,7 +163,7 @@ public class RapierAnimations {
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.75F)))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.1F)
                 .addEvents(
-                        AnimationEvent.TimeStampedEvent.create(0.075F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                        AnimationEvent.TimeStampedEvent.create(0.08F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
                         AnimationEvent.TimeStampedEvent.create(0.36F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT)
                 );
         RAPIER_AUTO3_OCEAN = new BasicAttackAnimation(0.18F, "biped/combat/rapier_auto3_ocean", biped,
@@ -209,6 +208,7 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NEUTRALIZE)
                 .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, EpicFightParticles.EVISCERATE)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.2F, 1F))
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.28F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT))
                 .addState(EntityState.TURNING_LOCKED, true)
                 .addState(EntityState.MOVEMENT_LOCKED, true);
@@ -317,11 +317,11 @@ public class RapierAnimations {
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.1F)
                 .addProperty(AttackAnimationProperty.FIXED_MOVE_DISTANCE, true)
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_BEGIN, RapierMoveCoordFunctions.TRACE_LOCROT_TARGET)
-                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.0F, 2.2F))
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.1F, 2.2F))
                 .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addEvents(
-                        AnimationEvent.TimeStampedEvent.create(0.35F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                        AnimationEvent.TimeStampedEvent.create(0.44F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
                         AnimationEvent.TimeStampedEvent.create(0.92F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
                         AnimationEvent.TimeStampedEvent.create(1.28F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT)
                 )
@@ -332,28 +332,29 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN)
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_OCEAN_WAVE.get())
                 .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, EpicFightParticles.BLADE_RUSH_SKILL)
-                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.0F, 1.2F))
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.1F, 1.2F))
                 .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addEvents(
                         AnimationEvent.TimeStampedEvent.create(0.24F, ReusableEvents.OCEAN_PARTICLES_SOUND, AnimationEvent.Side.CLIENT),
                         AnimationEvent.TimeStampedEvent.create(0.24F, ReusableEvents.OCEAN_PARTICLES, AnimationEvent.Side.CLIENT),
-                        AnimationEvent.TimeStampedEvent.create(0.69F, ReusableEvents.OCEAN_PARTICLES_TINY, AnimationEvent.Side.CLIENT)
+                        AnimationEvent.TimeStampedEvent.create(0.78F, ReusableEvents.OCEAN_PARTICLES_TINY, AnimationEvent.Side.CLIENT)
                 )
                 .addState(EntityState.MOVEMENT_LOCKED, true);
         DEADLYBACKFLIP_SECOND_WITHER = new BasicAttackAnimation(0.1F, "biped/skill/rapier_backflip_second_wither", biped,
                 new AttackAnimation.Phase(0.0F, 0.2F, 1.86F, 2.10F, 2.12F, 2.12F, biped.toolR, null)
-                        .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
+                        .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NONE)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(3))
                         .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
-                        .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_AMBIENT),
+                        .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_HURT)
+                        .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, SoundEvents.WITHER_SHOOT),
                 new AttackAnimation.Phase(2.12F, 0.2F, 2.12F, 2.22F, 2.24F, 2.24F, biped.toolR, null)
-                        .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NONE)
+                        .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(3))
                         .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
                         .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_SHOOT),
                 new AttackAnimation.Phase(2.24F, 0.2F, 2.24F, 2.34F, 2.36F, 2.36F, biped.toolR, null)
-                        .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
+                        .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NONE)
                         .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(3))
                         .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
                         .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_SHOOT),
@@ -376,7 +377,8 @@ public class RapierAnimations {
                 .addEvents(
                         AnimationEvent.TimeStampedEvent.create(0.66F, ReusableEvents.WITHER_PARTICLES_SOUND, AnimationEvent.Side.CLIENT),
                         AnimationEvent.TimeStampedEvent.create(0.76F, ReusableEvents.WITHER_PARTICLES, AnimationEvent.Side.CLIENT),
-                        AnimationEvent.TimeStampedEvent.create(1.26F, ReusableEvents.WITHER_PARTICLES, AnimationEvent.Side.CLIENT)
+                        AnimationEvent.TimeStampedEvent.create(1.26F, ReusableEvents.WITHER_PARTICLES, AnimationEvent.Side.CLIENT),
+                        AnimationEvent.TimeStampedEvent.create(1.6F, ReusableEvents.WITHER_PARTICLES_TINY, AnimationEvent.Side.CLIENT)
                 )
                 .addState(EntityState.MOVEMENT_LOCKED, true);
 
@@ -424,7 +426,7 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, SoundEvents.AMETHYST_BLOCK_PLACE)
                 .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, EpicFightParticles.BLADE_RUSH_SKILL)
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_TICK, RapierMoveCoordFunctions.TRACE_LOC_TARGET)
-                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.0F, 1.2F))
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.1F, 1.2F))
                 .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addEvents(
@@ -469,6 +471,7 @@ public class RapierAnimations {
         private static final int FOLLOW_DURATION = 18;
         private static final int PARTICLE_COUNT_TINY = 12;
         private static final int FOLLOW_DURATION_TINY = 12;
+        private static final int SPAWN_ALWAYS = 1;
         private static final int SPAWN_INTERVAL = 2;
         private static int tickCounter = 1;
         private static final Map<Entity, Integer> activeParticles = new HashMap<>();
@@ -483,6 +486,7 @@ public class RapierAnimations {
             RandomSource random = entitypatch.getOriginal().getRandom();
             entity.playSound(SoundEvents.FOX_TELEPORT, 1F, 1.2F);
             scheduler.schedule(() -> {
+                spawnParticlesEnder(entity, random);
                 entity.level().addParticle(
                         EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
                         entity.getX(),
@@ -493,20 +497,17 @@ public class RapierAnimations {
                         0
                 );
             }, 52, TimeUnit.MILLISECONDS);
-            spawnParticlesEnder(entity, random);
-            scheduleParticleSpawn(entity, random, 180);
+            spawnParticlesEnderDelayed(entity, random);
         };
 
         //OCEAN
         private static final AnimationEvent.AnimationEventConsumer OCEAN_PARTICLES = (entitypatch, self, params) -> {
-            Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
                 spawnOceanParticlesFollowingPlayer(playerEntity);
             }
         };
         private static final AnimationEvent.AnimationEventConsumer OCEAN_PARTICLES_TINY = (entitypatch, self, params) -> {
-            Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
                 spawnOceanParticlesFollowingPlayer_Tiny(playerEntity);
@@ -517,36 +518,25 @@ public class RapierAnimations {
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
                 entity.playSound(RapierSounds.RAPIER_OCEAN_JUMP.get());
-                if (entity instanceof LivingEntity livingEntity) {
-                    float originalFallDistance = livingEntity.fallDistance;
-                    scheduler.schedule(() -> livingEntity.fallDistance = originalFallDistance, 200, TimeUnit.MILLISECONDS);
-                    livingEntity.fallDistance = 0;
-                }
             }
         };
 
         //WITHER
         private static final AnimationEvent.AnimationEventConsumer WITHER_PARTICLES = (entitypatch, self, params) -> {
-            Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
-                RandomSource random = entitypatch.getOriginal().getRandom();
                 spawnWitherParticlesFollowingPlayer(playerEntity);
             }
         };
         private static final AnimationEvent.AnimationEventConsumer WITHER_PARTICLES_TINY = (entitypatch, self, params) -> {
-            Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
-                RandomSource random = entitypatch.getOriginal().getRandom();
                 spawnWitherParticlesFollowingPlayer_Tiny(playerEntity);
             }
         };
         private static final AnimationEvent.AnimationEventConsumer WITHER_PARTICLES_BIG = (entitypatch, self, params) -> {
-            Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
-                RandomSource random = entitypatch.getOriginal().getRandom();
                 spawnWitherParticlesFollowingPlayer_Big(playerEntity);
             }
         };
@@ -554,17 +544,14 @@ public class RapierAnimations {
             Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
-                RandomSource random = entitypatch.getOriginal().getRandom();
                 entity.playSound(SoundEvents.WITHER_AMBIENT);
             }
         };
 
         //AMETHYST
         private static final AnimationEvent.AnimationEventConsumer AMETHYST_PARTICLES = (entitypatch, self, params) -> {
-            Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
-                RandomSource random = entitypatch.getOriginal().getRandom();
                 spawnAmethystParticlesFollowingPlayer(playerEntity);
             }
         };
@@ -572,26 +559,21 @@ public class RapierAnimations {
             Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
-                RandomSource random = entitypatch.getOriginal().getRandom();
                 spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
-                scheduler.schedule(() -> {
-                    entity.level().addParticle(
-                            EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
-                            entity.getX(),
-                            entity.getY(),
-                            entity.getZ(),
-                            Double.longBitsToDouble(entity.getId()),
-                            0,
-                            0
-                    );
-                }, 52, TimeUnit.MILLISECONDS);
+                scheduler.schedule(() -> entity.level().addParticle(
+                        EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
+                        entity.getX(),
+                        entity.getY(),
+                        entity.getZ(),
+                        Double.longBitsToDouble(entity.getId()),
+                        0,
+                        0
+                ), 52, TimeUnit.MILLISECONDS);
             }
         };
         private static final AnimationEvent.AnimationEventConsumer AMETHYST_PARTICLES_TINY = (entitypatch, self, params) -> {
-            Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
-                RandomSource random = entitypatch.getOriginal().getRandom();
                 spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
             }
         };
@@ -600,19 +582,18 @@ public class RapierAnimations {
         private static void spawnParticlesEnder(Entity entity, RandomSource random) {
             ClientLevel clientLevel = Minecraft.getInstance().level;
             if (clientLevel != null) {
-                //Particle Radius
                 double horizontalRadius = 1.2;
                 for (int i = 0; i < ENDER_PARTICLE_COUNT; i++) {
-                    double x = (random.nextDouble() - 0.35) * horizontalRadius;
-                    double y = entity.getY() + (random.nextDouble() - random.nextDouble()) * 1.5D;
-                    double z = (random.nextDouble() - 0.35) * horizontalRadius;
-                    //Particle speed, position, and type
+                    double xOffset = (random.nextDouble() - 0.4) * horizontalRadius;
+                    double yOffset = (random.nextDouble() - random.nextDouble()) * 1.4D;
+                    double zOffset = (random.nextDouble() - 0.4) * horizontalRadius;
+
                     clientLevel.addParticle(ParticleTypes.PORTAL,
-                            entity.getX() + x,
-                            y,
-                            entity.getZ() + z,
+                            entity.getX() + xOffset,
+                            entity.getY() + yOffset,
+                            entity.getZ() + zOffset,
                             0,
-                            0.3,
+                            0.8,
                             0
                     );
                 }
@@ -632,7 +613,7 @@ public class RapierAnimations {
                     if (ticksRemaining <= 0 || !entity.isAlive()) {
                         return true;
                     }
-                    if (tickCounter % 1 == 0) {
+                    if (tickCounter % SPAWN_INTERVAL == 0) {
                         double sphereRadius = 0.69;
                         double yStretchFactor = 1.42;
                         for (int i = 0; i < PARTICLE_COUNT; i++) {
@@ -673,8 +654,6 @@ public class RapierAnimations {
                     if (ticksRemaining <= 0 || !entity.isAlive()) {
                         return true;
                     }
-
-                    // Generate Particles
                     if (tickCounter % SPAWN_INTERVAL == 0) {
                         double horizontalRadius = 1.2;
                         for (int i = 0; i < PARTICLE_COUNT_TINY; i++) {
@@ -711,7 +690,7 @@ public class RapierAnimations {
                     if (ticksRemaining <= 0 || !entity.isAlive()) {
                         return true;
                     }
-                    if (tickCounter % 1 == 0) {
+                    if (tickCounter % SPAWN_INTERVAL == 0) {
                         double sphereRadius = 0.66;
                         for (int i = 0; i < PARTICLE_COUNT_TINY; i++) {
                             double theta = random.nextDouble() * 2 * Math.PI;
@@ -750,7 +729,7 @@ public class RapierAnimations {
                     if (ticksRemaining <= 0 || !entity.isAlive()) {
                         return true;
                     }
-                    if (tickCounter % 1 == 0) {
+                    if (tickCounter % SPAWN_ALWAYS == 0) {
                         double sphereRadius = 2;
                         for (int i = 0; i < PARTICLE_COUNT; i++) {
                             double theta = random.nextDouble() * 2 * Math.PI;
@@ -790,9 +769,7 @@ public class RapierAnimations {
                     if (ticksRemaining <= 0 || !entity.isAlive()) {
                         return true;
                     }
-
-                    // Generate Particles
-                    if (tickCounter % 1 == 0) {
+                    if (tickCounter % SPAWN_INTERVAL == 0) {
                         double horizontalRadius = 1.2;
                         for (int i = 0; i < PARTICLE_COUNT; i++) {
                             double hxOffset = (random.nextDouble() - 0.6) * horizontalRadius;
@@ -831,7 +808,7 @@ public class RapierAnimations {
                     if (ticksRemaining <= 0 || !entity.isAlive()) {
                         return true;
                     }
-                    if (tickCounter % 1 == 0) {
+                    if (tickCounter % SPAWN_INTERVAL == 0) {
                         double sphereRadius = 1;
                         double yStretchFactor = 1.2;
                         for (int i = 0; i < PARTICLE_COUNT; i++) {
@@ -859,8 +836,8 @@ public class RapierAnimations {
             }
         }
 
-        private static void scheduleParticleSpawn(Entity entity, RandomSource random, long delay) {
-            scheduler.schedule(() -> spawnParticlesEnder(entity, random), delay, TimeUnit.MILLISECONDS);
+        private static void spawnParticlesEnderDelayed(Entity entity, RandomSource random) {
+            scheduler.schedule(() -> spawnParticlesEnder(entity, random), 144, TimeUnit.MILLISECONDS);
         }
         public static void spawnOceanParticlesFollowingPlayer(Entity entity) {
             if (!activeParticles.containsKey(entity)) {

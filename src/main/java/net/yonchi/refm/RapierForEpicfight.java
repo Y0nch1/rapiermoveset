@@ -1,7 +1,5 @@
 package net.yonchi.refm;
 
-import com.mojang.logging.LogUtils;
-
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -17,18 +15,11 @@ import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
 import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.world.item.RapierAddonItems;
 
-import org.slf4j.Logger;
-
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import yesman.epicfight.compat.ICompatModule;
@@ -39,7 +30,6 @@ import yesman.epicfight.world.capabilities.item.WeaponCategory;
 public class RapierForEpicfight {
     public static RapierAnimations.IProxy proxy;
     public static final String MOD_ID = "refm";
-    public static final Logger LOGGER = LogUtils.getLogger();
 
     public RapierForEpicfight() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -55,7 +45,7 @@ public class RapierForEpicfight {
         bus.addListener(RapierAnimations::registerAnimations);
         bus.addListener(RapierSkills::registerRapierSkills);
         bus.addListener(RapierGuard::buildSkillEvent);
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {bus.addListener(RapierGuard::regIcon);});
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(RapierGuard::regIcon));
         bus.addListener(this::addCreative);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -67,33 +57,15 @@ public class RapierForEpicfight {
         if (ModList.get().isLoaded("irons_spellbooks")) {
             ICompatModule.loadCompatModule(AmethystRapier.class);
             bus.addListener(AmethystRapier::buildSkillEvent);
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {bus.addListener(AmethystRapier::regIcon);});
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(AmethystRapier::regIcon));
         }
         if (ModList.get().isLoaded("wom")) {
             ICompatModule.loadCompatModule(RapierGuardWoM.class);bus.addListener(RapierGuardWoM::buildSkillEvent);
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {bus.addListener(RapierGuardWoM::regIcon);});
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(RapierGuardWoM::regIcon));
         }
-    }
-
-    private void commonSetup(final FMLCommonSetupEvent event) {
-    }
-
-    private void clientSetup(Event event) {
     }
 
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-    }
-
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event) {
-
-    }
-    @Mod.EventBusSubscriber(modid = MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-    public static class ClientModEvents {
-        @SubscribeEvent
-        public static void onClientSetup(FMLClientSetupEvent event) {
-
-        }
     }
 }

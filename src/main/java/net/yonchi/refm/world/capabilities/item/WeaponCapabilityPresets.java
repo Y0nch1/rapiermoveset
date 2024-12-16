@@ -1,13 +1,10 @@
 package net.yonchi.refm.world.capabilities.item;
 
 
-import java.util.Map;
 import java.util.function.Function;
 
-import com.google.common.collect.Maps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -17,7 +14,6 @@ import net.yonchi.refm.gameasset.*;
 
 import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
 import yesman.epicfight.api.animation.LivingMotions;
-import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.item.CapabilityItem.Styles;
 import yesman.epicfight.world.capabilities.item.WeaponCapability;
@@ -137,17 +133,8 @@ public class WeaponCapabilityPresets {
         return builder;
     };
 
-    public WeaponCapabilityPresets() {
-    }
-
-    private static boolean CheckPlayer(LivingEntityPatch<?> playerPatch) {
-        return playerPatch.getOriginal().getType() != EntityType.PLAYER;
-    }
-
-    private static final Map<String, Function<Item, CapabilityItem.Builder>> PRESETS = Maps.newHashMap();
-
     @SubscribeEvent
-    public static void register(WeaponCapabilityPresetRegistryEvent event) {
+    public static void registerMovesets(WeaponCapabilityPresetRegistryEvent event) {
         event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"rapier"), RAPIER);
         event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"ender_rapier"), ENDER_RAPIER);
         event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"ocean_rapier"), OCEAN_RAPIER);
@@ -155,6 +142,5 @@ public class WeaponCapabilityPresets {
         event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"amethyst_rapier"), AMETHYST_RAPIER);
     }
 }
-
 
 //https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/world/capabilities/item/WeaponCapabilityPresets.java

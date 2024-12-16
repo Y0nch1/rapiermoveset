@@ -22,11 +22,9 @@ public class RapierSkillDataKeys {
     }
 
     static{
-        COMBO_COUNTER = DATA_KEYS.register("combo_counter", () -> {
-            return SkillDataKey.createIntKey(0, false, new Class[]{BasicAttack.class, DeadlyBackflipSkill.class, DeadlyBackflip_EnderSkill.class, DeadlyBackflipSkill_OceanSkill.class, DeadlyBackflipSkill_WitherSkill.class, DeadlyBackflipSkill_AmethystSkill.class});
-        });
-        LAST_HIT_COUNT = DATA_KEYS.register("last_hit_count", () -> {
-            return SkillDataKey.createIntKey(0, false, new Class[]{DeadlyBackflipSkill.class, DeadlyBackflip_EnderSkill.class, DeadlyBackflipSkill_OceanSkill.class, DeadlyBackflipSkill_WitherSkill.class, DeadlyBackflipSkill_AmethystSkill.class});
-        });
+        COMBO_COUNTER = DATA_KEYS.register("combo_counter", () ->
+                SkillDataKey.createIntKey(0, false, new Class[]{BasicAttack.class, DeadlyBackflipSkill.class, DeadlyBackflip_EnderSkill.class, DeadlyBackflipSkill_OceanSkill.class, DeadlyBackflipSkill_WitherSkill.class, DeadlyBackflipSkill_AmethystSkill.class}));
+        LAST_HIT_COUNT = DATA_KEYS.register("last_hit_count", () ->
+                SkillDataKey.createIntKey(0, false, new Class[]{DeadlyBackflipSkill.class, DeadlyBackflip_EnderSkill.class, DeadlyBackflipSkill_OceanSkill.class, DeadlyBackflipSkill_WitherSkill.class, DeadlyBackflipSkill_AmethystSkill.class}));
     }
 }

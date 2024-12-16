@@ -14,8 +14,8 @@ public class RapierTab {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, RapierForEpicfight.MOD_ID);
 
-    public static final RegistryObject<CreativeModeTab> RAPIERS_TAB = CREATIVE_MODE_TABS.register("rapiers_tab",
-            () -> CreativeModeTab.builder().icon(() -> new ItemStack(RapierAddonItems.IRON_RAPIER.get()))
+    public static final RegistryObject<CreativeModeTab> RAPIERS_TAB = CREATIVE_MODE_TABS.register("rapiers_tab", () -> CreativeModeTab.builder().icon(() ->
+                    new ItemStack(RapierAddonItems.IRON_RAPIER.get()))
                     .title(Component.translatable("creativetab.rapiers_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(RapierAddonItems.IRON_RAPIER.get());
@@ -29,7 +29,8 @@ public class RapierTab {
                         output.accept(RapierAddonItems.WITHER_UPGRADE.get());
                         output.accept(RapierAddonItems.OCEAN_UPGRADE.get());
                     })
-                    .build());
+                    .build()
+    );
 
     public static void register (IEventBus eventBus){
         CREATIVE_MODE_TABS.register(eventBus);
