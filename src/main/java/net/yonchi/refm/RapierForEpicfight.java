@@ -8,7 +8,8 @@ import net.yonchi.refm.gameasset.RapierSkills;
 import net.yonchi.refm.gameasset.RapierSounds;
 import net.yonchi.refm.skill.guard.RapierGuard;
 import net.yonchi.refm.skill.guard.RapierGuardWoM;
-import net.yonchi.refm.world.item.AmethystRapier;
+import net.yonchi.refm.skill.guard.AmethystGuard;
+import net.yonchi.refm.skill.guard.AmethystGuardWoM;
 import net.yonchi.refm.world.item.RapierTab;
 import net.yonchi.refm.skill.RapierSkillDataKeys;
 import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
@@ -55,16 +56,23 @@ public class RapierForEpicfight {
         }
 
         if (ModList.get().isLoaded("irons_spellbooks")) {
-            ICompatModule.loadCompatModule(AmethystRapier.class);
-            bus.addListener(AmethystRapier::buildSkillEvent);
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(AmethystRapier::regIcon));
+            ICompatModule.loadCompatModule(AmethystGuard.class);
+            bus.addListener(AmethystGuard::buildSkillEvent);
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(AmethystGuard::regIcon));
         }
         if (ModList.get().isLoaded("wom")) {
-            ICompatModule.loadCompatModule(RapierGuardWoM.class);bus.addListener(RapierGuardWoM::buildSkillEvent);
+            ICompatModule.loadCompatModule(RapierGuardWoM.class);
+            bus.addListener(RapierGuardWoM::buildSkillEvent);
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(RapierGuardWoM::regIcon));
         }
+        if (ModList.get().isLoaded("wom")) {
+            if (ModList.get().isLoaded("irons_spellbooks")) {
+                ICompatModule.loadCompatModule(AmethystGuardWoM.class);
+                bus.addListener(AmethystGuardWoM::buildSkillEvent);
+                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(AmethystGuardWoM::regIcon));
+            }
+        }
     }
-
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
     }

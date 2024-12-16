@@ -87,15 +87,17 @@ public class RapierAnimations {
         //Every animation defined with his own hitbox timers and Properties
         RAPIER_AIR_SLASH = new AirSlashAnimation(0.1F, 0.2F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_airslash", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.3F)
-                .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.NONE)
+                .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_JUMP.get())
                 .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, false);
         RAPIER_AIR_SLASH_ENDER = new AttackAnimation(0.18F, "biped/combat/rapier_airslash_ender", biped,
                 new AttackAnimation.Phase(0.0F, 0.2F, 0.44F, 0.75F, 0.85F, 0.8F, biped.toolR, null)
-                        .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT),
+                        .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
+                        .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER)),
                 new AttackAnimation.Phase(0.8F, 0.5F, 1.1F, 1.6F, 1.5F, biped.toolR, null)
-                        .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.LONG))
+                        .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.LONG)
+                        .addProperty(AnimationProperty.AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER)))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.3F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.6F))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_JUMP.get())

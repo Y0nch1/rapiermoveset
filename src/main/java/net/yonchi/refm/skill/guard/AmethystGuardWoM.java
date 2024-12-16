@@ -1,15 +1,13 @@
-package net.yonchi.refm.world.item;
+package net.yonchi.refm.skill.guard;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.RegisterEvent;
-
 import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
-
+import net.yonchi.refm.world.item.RapierAddonItems;
+import reascer.wom.gameasset.WOMSkills;
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.client.forgeevent.WeaponCategoryIconRegisterEvent;
 import yesman.epicfight.compat.ICompatModule;
@@ -25,8 +23,21 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
 
-public class AmethystRapier implements ICompatModule {
+public class AmethystGuardWoM implements ICompatModule {
     public static void registerGuard(Event event) {
+    }
+
+    @Override
+    public void onModEventBus(IEventBus iEventBus) {
+    }
+    @Override
+    public void onForgeEventBus(IEventBus iEventBus) {
+    }
+    @Override
+    public void onModEventBusClient(IEventBus iEventBus) {
+    }
+    @Override
+    public void onForgeEventBusClient(IEventBus iEventBus) {
     }
 
     public static void regIcon(WeaponCategoryIconRegisterEvent event) {
@@ -61,58 +72,37 @@ public class AmethystRapier implements ICompatModule {
         guardBreakMotions.put(RapierWeaponCategories.AMETHYST_RAPIER, (item, player) ->
                 Animations.BIPED_COMMON_NEUTRALIZED);
         advancedGuardMotions.put(RapierWeaponCategories.AMETHYST_RAPIER, (itemCap, playerpatch) ->
-                new StaticAnimation[]{RapierAnimations.RAPIER_GUARD_PARRY_AMETHYST});
+                RapierAnimations.RAPIER_AIR_SLASH_AMETHYST);
 
         Field temp;
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> target;
         temp = GuardSkill.class.getDeclaredField("guardMotions");
         temp.setAccessible(true);
-        target = (Map) temp.get(EpicFightSkills.GUARD);
+        target = (Map) temp.get(WOMSkills.COUNTER_ATTACK);
         for (WeaponCategory weaponCapability : guardMotions.keySet()) {
             target.put(weaponCapability, guardMotions.get(weaponCapability));
         }
-        target = (Map) temp.get(EpicFightSkills.PARRYING);
-        for (WeaponCategory weaponCapability : guardMotions.keySet()) {
-            target.put(weaponCapability, guardMotions.get(weaponCapability));
-        }
-        target = (Map) temp.get(EpicFightSkills.IMPACT_GUARD);
+        target = (Map) temp.get(WOMSkills.VENGEFUL_PARRY);
         for (WeaponCategory weaponCapability : guardMotions.keySet()) {
             target.put(weaponCapability, guardMotions.get(weaponCapability));
         }
 
         temp = GuardSkill.class.getDeclaredField("guardBreakMotions");
         temp.setAccessible(true);
-        target = (Map) temp.get(EpicFightSkills.GUARD);
+        target = (Map) temp.get(WOMSkills.COUNTER_ATTACK);
         for (WeaponCategory weaponCapability : guardBreakMotions.keySet()) {
             target.put(weaponCapability, guardBreakMotions.get(weaponCapability));
         }
-        target = (Map) temp.get(EpicFightSkills.PARRYING);
-        for (WeaponCategory weaponCapability : guardBreakMotions.keySet()) {
-            target.put(weaponCapability, guardBreakMotions.get(weaponCapability));
-        }
-        target = (Map) temp.get(EpicFightSkills.IMPACT_GUARD);
+        target = (Map) temp.get(WOMSkills.VENGEFUL_PARRY);
         for (WeaponCategory weaponCapability : guardBreakMotions.keySet()) {
             target.put(weaponCapability, guardBreakMotions.get(weaponCapability));
         }
 
         temp = GuardSkill.class.getDeclaredField("advancedGuardMotions");
         temp.setAccessible(true);
-        target = (Map) temp.get(EpicFightSkills.PARRYING);
+        target = (Map) temp.get(WOMSkills.COUNTER_ATTACK);
         for (WeaponCategory weaponCapability : advancedGuardMotions.keySet()) {
             target.put(weaponCapability, advancedGuardMotions.get(weaponCapability));
         }
-    }
-
-    @Override
-    public void onModEventBus(IEventBus iEventBus) {
-    }
-    @Override
-    public void onForgeEventBus(IEventBus iEventBus) {
-    }
-    @Override
-    public void onModEventBusClient(IEventBus iEventBus) {
-    }
-    @Override
-    public void onForgeEventBusClient(IEventBus iEventBus) {
     }
 }
