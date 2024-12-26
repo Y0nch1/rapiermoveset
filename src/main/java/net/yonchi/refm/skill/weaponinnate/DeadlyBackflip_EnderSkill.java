@@ -104,6 +104,7 @@ public class DeadlyBackflip_EnderSkill extends WeaponInnateSkill {
         List<Component> list = super.getTooltipOnItem(itemStack, cap, playerCap);
         this.generateTooltipforPhase(list, itemStack, cap, playerCap, (Map) this.properties.get(0), "Kick:");
         this.generateTooltipforPhase(list, itemStack, cap, playerCap, (Map) this.properties.get(1), "Dance:");
+        this.generateTooltipforPhase(list, itemStack, cap, playerCap, (Map) this.properties.get(2), "Ballete:");
         return list;
     }
 
@@ -112,7 +113,7 @@ public class DeadlyBackflip_EnderSkill extends WeaponInnateSkill {
         this.first.get().phases[0].addProperties(this.properties.get(0).entrySet());
         this.second.get().phases[0].addProperties(this.properties.get(1).entrySet());
         this.second.get().phases[1].addProperties(this.properties.get(1).entrySet());
-        this.second.get().phases[2].addProperties(this.properties.get(1).entrySet());
+        this.second.get().phases[2].addProperties(this.properties.get(2).entrySet());
 
         return this;
     }

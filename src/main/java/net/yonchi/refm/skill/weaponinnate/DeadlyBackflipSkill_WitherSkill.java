@@ -103,7 +103,8 @@ public class DeadlyBackflipSkill_WitherSkill extends WeaponInnateSkill {
     public List<Component> getTooltipOnItem(ItemStack itemStack, CapabilityItem cap, PlayerPatch<?> playerCap) {
         List<Component> list = super.getTooltipOnItem(itemStack, cap, playerCap);
         this.generateTooltipforPhase(list, itemStack, cap, playerCap, (Map) this.properties.get(0), "Kick:");
-        this.generateTooltipforPhase(list, itemStack, cap, playerCap, (Map) this.properties.get(1), "Rage:");
+        this.generateTooltipforPhase(list, itemStack, cap, playerCap, (Map) this.properties.get(1), "Rage Strikes:");
+        this.generateTooltipforPhase(list, itemStack, cap, playerCap, (Map) this.properties.get(2), "Wither Fury:");
         return list;
     }
 
@@ -111,6 +112,10 @@ public class DeadlyBackflipSkill_WitherSkill extends WeaponInnateSkill {
     public WeaponInnateSkill registerPropertiesToAnimation() {
         this.first.get().phases[0].addProperties(this.properties.get(0).entrySet());
         this.second.get().phases[0].addProperties(this.properties.get(1).entrySet());
+        this.second.get().phases[1].addProperties(this.properties.get(1).entrySet());
+        this.second.get().phases[2].addProperties(this.properties.get(1).entrySet());
+        this.second.get().phases[3].addProperties(this.properties.get(1).entrySet());
+        this.second.get().phases[4].addProperties(this.properties.get(2).entrySet());
 
         return this;
     }

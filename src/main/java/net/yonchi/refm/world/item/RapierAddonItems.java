@@ -24,10 +24,10 @@ public class RapierAddonItems {
             ITEMS.register("enderite_rapier", () -> new RapierItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).defaultDurability(2851),Tiers.NETHERITE));
     public static final RegistryObject<Item> WITHERITE_RAPIER =
             ITEMS.register("witherite_rapier", () -> new RapierItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).defaultDurability(2851),Tiers.NETHERITE));
+    public static final RegistryObject<Item> OCEANITE_RAPIER =
+            ITEMS.register("oceanite_rapier", () -> new RapierItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).defaultDurability(2851),Tiers.NETHERITE));
     public static final RegistryObject<Item> AMETHYST_RAPIER =
             ITEMS.register("amethyst_rapier_compat", () -> new RapierItem(new Item.Properties().rarity(Rarity.RARE).defaultDurability(2851),Tiers.STONE));
-    public static final RegistryObject<Item> OCEANITE_RAPIER =
-            ITEMS.register("oceanite_rapier", () -> new RapierItem(new Item.Properties().fireResistant().rarity(Rarity.RARE).defaultDurability(2851),Tiers.DIAMOND));
     public static final RegistryObject<Item> END_UPGRADE =
             ITEMS.register("end_upgrade", () -> new Item(new Item.Properties().fireResistant().rarity(Rarity.UNCOMMON).stacksTo(16)));
     public static final RegistryObject<Item> WITHER_UPGRADE =
