@@ -40,7 +40,7 @@ public class RapierSkills {
         deadlybackflip
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
-                .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(8))
+                .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(6))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(100))
@@ -58,7 +58,7 @@ public class RapierSkills {
         deadlybackflip_ender
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
-                .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(8))
+                .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(6))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(100))
@@ -80,7 +80,7 @@ public class RapierSkills {
         deadlybackflip_ocean
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
-                .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(8))
+                .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(6))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(100))
@@ -98,7 +98,7 @@ public class RapierSkills {
         deadlybackflip_wither
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
-                .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(8))
+                .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(6))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(100))
@@ -121,7 +121,7 @@ public class RapierSkills {
         deadlybackflip_amethyst
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.setter(1))
-                .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(8))
+                .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(6))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(1))
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.HOLD)
                 .addProperty(AnimationProperty.AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(100))

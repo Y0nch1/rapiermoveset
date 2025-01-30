@@ -1,5 +1,11 @@
 package net.yonchi.refm;
 
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.packs.PackType;
+import net.minecraft.server.packs.PathPackResources;
+import net.minecraft.server.packs.repository.Pack;
+import net.minecraft.server.packs.repository.PackSource;
+import net.minecraftforge.event.AddPackFindersEvent;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
@@ -26,6 +32,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import yesman.epicfight.compat.ICompatModule;
 import yesman.epicfight.world.capabilities.item.WeaponCategory;
 
+import java.nio.file.Path;
+
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(RapierForEpicfight.MOD_ID)
 public class RapierForEpicfight {
@@ -47,6 +55,7 @@ public class RapierForEpicfight {
         bus.addListener(RapierSkills::registerRapierSkills);
         bus.addListener(RapierGuard::buildSkillEvent);
         DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(RapierGuard::regIcon));
+        bus.addListener(this::addPackFindersEvent);
         bus.addListener(this::addCreative);
 
         if (FMLEnvironment.dist == Dist.CLIENT) {
@@ -75,5 +84,19 @@ public class RapierForEpicfight {
     }
     // Add the example block item to the building blocks tab
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+    }
+
+    public void addPackFindersEvent(AddPackFindersEvent event) {
+        if (event.getPackType() == PackType.CLIENT_RESOURCES) {
+            Path resourcePath = ModList.get().getModFileById(RapierForEpicfight.MOD_ID).getFile().findResource("packs/all_rapiers_3D");
+            PathPackResources pack = new PathPackResources(ModList.get().getModFileById(RapierForEpicfight.MOD_ID).getFile().getFileName() + ":" + resourcePath, resourcePath, false);
+            Pack.ResourcesSupplier resourcesSupplier = (string) -> pack;
+            Pack.Info info = Pack.readPackInfo("all_rapiers_3D", resourcesSupplier);
+
+            if (info != null) {
+                event.addRepositorySource((source) ->
+                        source.accept(Pack.create("all_rapiers_3D", Component.translatable("pack.all_rapiers_3D.title"), false, resourcesSupplier, info, PackType.CLIENT_RESOURCES, Pack.Position.TOP, false, PackSource.BUILT_IN)));
+            }
+        }
     }
 }

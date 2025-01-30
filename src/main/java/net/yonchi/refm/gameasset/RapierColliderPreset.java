@@ -23,7 +23,7 @@ public class RapierColliderPreset {
         return collider;
     }
 
-    public static final Collider RAPIER = registerCollider(new ResourceLocation(RapierForEpicfight.MOD_ID, "rapier"), new MultiOBBCollider(3, 0.5D, 0.5D, 1.12D, 0D, 0.1D, -1.0D));
+    public static final Collider RAPIER = registerCollider(new ResourceLocation(RapierForEpicfight.MOD_ID, "rapier"), new MultiOBBCollider(3, 0.52D, 0.52D, 1.16D, 0D, 0.1D, -1.0D));
     public static final Collider KICK = registerCollider(new ResourceLocation(RapierForEpicfight.MOD_ID, "kick"), new MultiOBBCollider(3, 0.7D, 0.7D, 0.6D, 0D, 0D, 0D));
     public static final Collider SCREAM = registerCollider(new ResourceLocation(RapierForEpicfight.MOD_ID, "scream"), new MultiOBBCollider(3, 6D, 3D, 6D, 0D, 3D, 0D));
 }
