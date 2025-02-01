@@ -52,6 +52,7 @@ public class WeaponCapabilityPresets {
                 .canBePlacedOffhand(true)
                 .newStyleCombo(Styles.OCHS, RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3_ENDER, RapierAnimations.RAPIER_DASH_ENDER, RapierAnimations.RAPIER_AIR_SLASH_ENDER)
                 .innateSkill(Styles.OCHS, (itemstack) -> RapierSkills.DEADLYBACKFLIP_ENDER)
+                .passiveSkill(RapierSkills.ENDER_PASSIVE)
                 .livingMotionModifier(Styles.OCHS, LivingMotions.IDLE, RapierAnimations.BIPED_HOLD_RAPIER)
                 .livingMotionModifier(Styles.OCHS, LivingMotions.WALK, RapierAnimations.BIPED_WALK_RAPIER)
                 .livingMotionModifier(Styles.OCHS, LivingMotions.CHASE, RapierAnimations.BIPED_WALK_RAPIER)

@@ -88,7 +88,7 @@ public class DeadlyBackflip_EnderSkill extends WeaponInnateSkill {
     @Override
     public void executeOnServer(ServerPlayerPatch executer, FriendlyByteBuf args) {
         executer.playAnimationSynchronized(this.first.get(), 0);
-        ((ServerPlayer)executer.getOriginal()).addEffect(new MobEffectInstance((MobEffect) EpicFightMobEffects.STUN_IMMUNITY.get(), 72, 0, true, false, false));
+        ((ServerPlayer)executer.getOriginal()).addEffect(new MobEffectInstance((MobEffect) EpicFightMobEffects.STUN_IMMUNITY.get(), 64, 0, true, false, false));
         LivingEntity target = (LivingEntity) executer.getTarget();
         if (target != null && target.isAlive()) {
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 12, 30));

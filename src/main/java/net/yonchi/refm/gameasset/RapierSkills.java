@@ -8,6 +8,7 @@ import net.minecraftforge.registries.RegisterEvent;
 
 import net.yonchi.refm.RapierForEpicfight;
 import net.yonchi.refm.skill.weaponinnate.*;
+import net.yonchi.refm.skill.weaponpassive.EnderRapierPassive;
 import net.yonchi.refm.skill.weaponpassive.OceanRapierPassive;
 import net.yonchi.refm.skill.weaponpassive.WitherRapierPassive;
 
@@ -29,8 +30,9 @@ public class RapierSkills {
     public static Skill DEADLYBACKFLIP_OCEAN;
     public static Skill DEADLYBACKFLIP_WITHER;
     public static Skill DEADLYBACKFLIP_AMETHYST;
-    public static Skill WITHER_PASSIVE;
+    public static Skill ENDER_PASSIVE;
     public static Skill OCEAN_PASSIVE;
+    public static Skill WITHER_PASSIVE;
 
     @SubscribeEvent
     public static void buildSkillEvent(SkillBuildEvent build) {
@@ -66,7 +68,7 @@ public class RapierSkills {
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(4))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.adder(-3))
-                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.BYPASS_DODGE, EpicFightDamageType.FINISHER))
+                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.FINISHER))
                 .newProperty()
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(1))
                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.adder(0))
@@ -135,8 +137,9 @@ public class RapierSkills {
                 .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE, EpicFightDamageType.FINISHER));
         DEADLYBACKFLIP_AMETHYST = deadlybackflip_amethyst;
 
-        WITHER_PASSIVE = modRegistry.build("wither_passive", WitherRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.ONE_SHOT));
+        ENDER_PASSIVE = modRegistry.build("ender_passive", EnderRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setResource(Skill.Resource.COOLDOWN).setActivateType(Skill.ActivateType.TOGGLE));
         OCEAN_PASSIVE = modRegistry.build("ocean_passive", OceanRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.DURATION_INFINITE));
+        WITHER_PASSIVE = modRegistry.build("wither_passive", WitherRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.ONE_SHOT));
     }
 
     public RapierSkills(){

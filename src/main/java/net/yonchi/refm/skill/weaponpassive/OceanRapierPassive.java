@@ -21,27 +21,37 @@ public class OceanRapierPassive extends PassiveSkill {
     @Override
     public void onInitiate(SkillContainer container) {
         super.onInitiate(container);
-        container.getExecuter().getEventListener().addEventListener(PlayerEventListener.EventType.DEALT_DAMAGE_EVENT_DAMAGE, EVENT_UUID, (event) -> {
+        container.getExecuter().getEventListener().addEventListener(PlayerEventListener.EventType.MOVEMENT_INPUT_EVENT, EVENT_UUID, (event) -> {
             LivingEntity target = event.getPlayerPatch().getOriginal();
-            if (target == null) target.getCommandSenderWorld();
-            if (event.getAttackDamage() < 1.5) {
-                return;
+            if (target == null) return;
+            if (target.isInWater()) {
+                int duration = 60;
+                int amplifier1 = 1;
+                int amplifier2 = 0;
+                MobEffectInstance dolphinEffect = new MobEffectInstance(MobEffects.DOLPHINS_GRACE, duration, amplifier1, true, false);
+                MobEffectInstance breathingEffect = new MobEffectInstance(MobEffects.CONDUIT_POWER, duration, amplifier2, true, false);
+                target.addEffect(dolphinEffect);
+                target.addEffect(breathingEffect);
+            } else {
+                target.removeEffect(MobEffects.DOLPHINS_GRACE);
+                target.removeEffect(MobEffects.CONDUIT_POWER);
             }
             if (!target.isInWater()) {
-                return;
+                target.removeEffect(MobEffects.DOLPHINS_GRACE);
+                target.removeEffect(MobEffects.CONDUIT_POWER);
             }
-            int duration = 146;
-            int amplifier = 0;
-            MobEffectInstance dolphinEffect = new MobEffectInstance(MobEffects.DOLPHINS_GRACE, duration, amplifier, true, false);
-            MobEffectInstance breathingEffect = new MobEffectInstance(MobEffects.WATER_BREATHING, duration, amplifier, true, false);
-            target.addEffect(dolphinEffect);
-            target.addEffect(breathingEffect);
         });
     }
 
     @Override
     public void onRemoved(SkillContainer container) {
         PlayerEventListener listener = container.getExecuter().getEventListener();
-        listener.removeListener(PlayerEventListener.EventType.ACTION_EVENT_CLIENT, EVENT_UUID);
+
+        LivingEntity target = container.getExecuter().getOriginal();
+        if (target != null) {
+            target.removeEffect(MobEffects.DOLPHINS_GRACE);
+            target.removeEffect(MobEffects.CONDUIT_POWER);
+        }
+        listener.removeListener(PlayerEventListener.EventType.MOVEMENT_INPUT_EVENT, EVENT_UUID);
     }
 }
