@@ -10,10 +10,16 @@ import java.util.concurrent.TimeUnit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
 import net.yonchi.refm.RapierForEpicfight;
@@ -33,8 +39,11 @@ import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.model.armature.HumanoidArmature;
 import yesman.epicfight.particle.EpicFightParticles;
+import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
+import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageType;
 import yesman.epicfight.world.damagesource.StunType;
+import yesman.epicfight.world.effect.EpicFightMobEffects;
 
 import javax.annotation.Nullable;
 
@@ -127,37 +136,41 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, false)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.09F, ReusableEvents.WITHER_PARTICLES_TINY, AnimationEvent.Side.CLIENT));
 
-        RAPIER_DASH = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash", biped, new AttackAnimation.Phase(0.0F, 0.42F, 0.69F, 0.8F, 1F, biped.toolR, null))
+        RAPIER_DASH = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash", biped, new AttackAnimation.Phase(0.0F, 0.42F, 0.69F, 0.8F, 1F, biped.toolR, RapierColliderPreset.RAPIER_DASH))
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_SWING.get())
                 .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(1))
+                .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(1))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true);
-        RAPIER_DASH_ENDER = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_ender", biped, new AttackAnimation.Phase(0.0F, 0.5F, 0.78F, 1F, 1F, biped.toolR, null))
+        RAPIER_DASH_ENDER = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_ender", biped, new AttackAnimation.Phase(0.0F, 0.5F, 0.78F, 1F, 1F, biped.toolR, RapierColliderPreset.RAPIER_DASH))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_SWING.get())
                 .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(1))
+                .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(1))
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_TICK, RapierMoveCoordFunctions.TRACE_LOC_TARGET)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.31F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT))
                 .addState(EntityState.MOVEMENT_LOCKED, true);
-        RAPIER_DASH_OCEAN = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_ocean", biped, new AttackAnimation.Phase(0.0F, 0.69F, 1.2F, 1.24F, 1.24F, biped.toolR, null))
+        RAPIER_DASH_OCEAN = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_ocean", biped, new AttackAnimation.Phase(0.0F, 0.62F, 1.12F, 1.24F, 1.24F, biped.toolR, RapierColliderPreset.RAPIER_DASH))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_STAB.get())
                 .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(1))
+                .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(2))
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.26F, ReusableEvents.OCEAN_PARTICLES, AnimationEvent.Side.CLIENT));
-        RAPIER_DASH_WITHER = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_wither", biped, new AttackAnimation.Phase(0.0F, 0.36F, 0.68F, 0.74F, 0.8F, biped.toolR, null))
+        RAPIER_DASH_WITHER = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_wither", biped, new AttackAnimation.Phase(0.0F, 0.36F, 0.66F, 0.74F, 0.8F, biped.toolR, RapierColliderPreset.RAPIER_DASH))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_HURT)
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_HIT.get())
                 .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(1))
+                .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(2))
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.15F, ReusableEvents.WITHER_PARTICLES_TINY, AnimationEvent.Side.CLIENT));
 
-        RAPIER_AUTO1 = new BasicAttackAnimation(0.12F, 0.3F, 0.5F, 0.8F, 0.5F, null, biped.toolR, "biped/combat/rapier_auto1", biped)
+        RAPIER_AUTO1 = new BasicAttackAnimation(0.12F, 0.3F, 0.5F, 0.72F, 0.52F, null, biped.toolR, "biped/combat/rapier_auto1", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true);
-        RAPIER_AUTO2 = new BasicAttackAnimation(0.12F,  0.3F, 0.4F, 0.5F, 0.56F, null, biped.toolR, "biped/combat/rapier_auto2", biped)
+        RAPIER_AUTO2 = new BasicAttackAnimation(0.12F,  0.3F, 0.38F, 0.48F, 0.54F, null, biped.toolR, "biped/combat/rapier_auto2", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true);
         RAPIER_AUTO3 = new BasicAttackAnimation(0.18F, "biped/combat/rapier_auto3", biped,
@@ -199,7 +212,6 @@ public class RapierAnimations {
                 .addEvents(
                         AnimationEvent.TimeStampedEvent.create(0.32F, ReusableEvents.WITHER_PARTICLES_TINY, AnimationEvent.Side.CLIENT),
                         AnimationEvent.TimeStampedEvent.create(0.56F, ReusableEvents.WITHER_PARTICLES_TINY, AnimationEvent.Side.CLIENT)
-
                 );
 
         RAPIER_GUARD = new StaticAnimation(true, "biped/skill/guard_rapier", biped);
@@ -290,8 +302,15 @@ public class RapierAnimations {
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2F)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addEvents(
+                        AnimationEvent.TimeStampedEvent.create(0.12F, (entitypatch, param2, param3) -> {
+                            ((ServerPlayer)entitypatch.getOriginal()).addEffect(new MobEffectInstance((MobEffect) EpicFightMobEffects.STUN_IMMUNITY.get(), 33, 0, true, false, false));
+                        }, AnimationEvent.Side.SERVER),
                         AnimationEvent.TimeStampedEvent.create(0.24F, ReusableEvents.WITHER_PARTICLES_BIG, AnimationEvent.Side.CLIENT),
-                        AnimationEvent.TimeStampedEvent.create(0.26F, ReusableEvents.WITHER_PARTICLES, AnimationEvent.Side.CLIENT)
+                        AnimationEvent.TimeStampedEvent.create(0.26F, ReusableEvents.WITHER_PARTICLES, AnimationEvent.Side.CLIENT),
+                        AnimationEvent.TimeStampedEvent.create(0.26F, (entitypatch, param2, param3) -> {
+                            ((ServerPlayer)entitypatch.getOriginal()).addEffect(new MobEffectInstance((MobEffect) MobEffects.DARKNESS, 48, 1, true, false, false));
+                            ((ServerPlayer)entitypatch.getOriginal()).addEffect(new MobEffectInstance((MobEffect) MobEffects.MOVEMENT_SLOWDOWN, 42, 2, true, false, false));
+                        }, AnimationEvent.Side.SERVER)
                 )
                 .addState(EntityState.MOVEMENT_LOCKED, true);
 
@@ -307,13 +326,24 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, EpicFightSounds.BLUNT_HIT.get())
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_BEGIN, RapierMoveCoordFunctions.TRACE_LOCROT_TARGET)
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_TICK, RapierMoveCoordFunctions.TRACE_LOCROT_TARGET)
-                .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false);
-        DEADLYBACKFLIP_SECOND = new AttackAnimation(0.1F, 0.15F, 1.36F, 1.82F, 1.80F, null, biped.toolR, "biped/skill/rapier_backflip_second", biped)
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.1F, 0.8F))
+                .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
+                .addEvents((AnimationEvent.TimePeriodEvent.create(0.0F, 0.32F, (entitypatch, self, params) -> {
+                    ((LivingEntity)entitypatch.getOriginal()).resetFallDistance();
+                    if (entitypatch.getOriginal() instanceof Player) {
+                        Player player = (Player)entitypatch.getOriginal();
+                        player.yCloak = 0.0;
+                        player.yCloakO = 0.0;
+                    }
+                }, AnimationEvent.Side.BOTH)));
+        DEADLYBACKFLIP_SECOND = new AttackAnimation(0.1F, 0.15F, 1.36F, 1.82F, 1.92F, null, biped.toolR, "biped/skill/rapier_backflip_second", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN)
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get())
                 .addProperty(AnimationProperty.AttackPhaseProperty.PARTICLE, EpicFightParticles.BLADE_RUSH_SKILL)
                 .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_TICK, MoveCoordFunctions.TRACE_LOC_TARGET)
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.0F, 0.5F))
+                .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addState(EntityState.MOVEMENT_LOCKED, true);
         DEADLYBACKFLIP_SECOND_ENDER = new BasicAttackAnimation(0.1F, "biped/skill/rapier_backflip_second_ender", biped,
@@ -334,14 +364,18 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addEvents(
-                        AnimationEvent.TimeStampedEvent.create(1.4F, (entitypatch, self, params) -> {
-                            ((LivingEntity)entitypatch.getOriginal()).resetFallDistance();
-                            ((LivingEntity)entitypatch.getOriginal()).fallDistance = 0;
-                        }, AnimationEvent.Side.SERVER),
                         AnimationEvent.TimeStampedEvent.create(0.44F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
                         AnimationEvent.TimeStampedEvent.create(0.92F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
                         AnimationEvent.TimeStampedEvent.create(1.28F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT)
                 )
+                .addEvents(AnimationEvent.TimePeriodEvent.create(0.4F, 2F, (entitypatch, self, params) -> {
+                    ((LivingEntity)entitypatch.getOriginal()).resetFallDistance();
+                    if (entitypatch.getOriginal() instanceof Player) {
+                        Player player = (Player)entitypatch.getOriginal();
+                        player.yCloak = 0.0;
+                        player.yCloakO = 0.0;
+                    }
+                }, AnimationEvent.Side.BOTH))
                 .addState(EntityState.MOVEMENT_LOCKED, true);
         DEADLYBACKFLIP_SECOND_OCEAN = new AttackAnimation(0.1F, 0.15F, 0.86F, 1.28F, 1.32F, null, biped.toolR, "biped/skill/rapier_backflip_second_ocean", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2F)
@@ -353,14 +387,18 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.ActionAnimationProperty.MOVE_VERTICAL, true)
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, false)
                 .addEvents(
-                        AnimationEvent.TimeStampedEvent.create(0.96F, (entitypatch, self, params) -> {
-                            ((LivingEntity)entitypatch.getOriginal()).resetFallDistance();
-                            ((LivingEntity)entitypatch.getOriginal()).fallDistance = 0;
-                        }, AnimationEvent.Side.SERVER),
                         AnimationEvent.TimeStampedEvent.create(0.24F, ReusableEvents.OCEAN_PARTICLES_SOUND, AnimationEvent.Side.CLIENT),
                         AnimationEvent.TimeStampedEvent.create(0.24F, ReusableEvents.OCEAN_PARTICLES, AnimationEvent.Side.CLIENT),
                         AnimationEvent.TimeStampedEvent.create(0.78F, ReusableEvents.OCEAN_PARTICLES_TINY, AnimationEvent.Side.CLIENT)
                 )
+                .addEvents(AnimationEvent.TimePeriodEvent.create(0.0F, 1.12F, (entitypatch, self, params) -> {
+                    ((LivingEntity)entitypatch.getOriginal()).resetFallDistance();
+                    if (entitypatch.getOriginal() instanceof Player) {
+                        Player player = (Player)entitypatch.getOriginal();
+                        player.yCloak = 0.0;
+                        player.yCloakO = 0.0;
+                    }
+                }, AnimationEvent.Side.BOTH))
                 .addState(EntityState.MOVEMENT_LOCKED, true);
         DEADLYBACKFLIP_SECOND_WITHER = new BasicAttackAnimation(0.1F, "biped/skill/rapier_backflip_second_wither", biped,
                 new AttackAnimation.Phase(0.0F, 0.2F, 1.86F, 2.10F, 2.12F, 2.12F, biped.toolR, null)

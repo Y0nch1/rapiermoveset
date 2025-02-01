@@ -2,11 +2,14 @@ package net.yonchi.refm.skill.weaponinnate;
 
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import net.yonchi.refm.gameasset.RapierAnimations;
@@ -19,6 +22,7 @@ import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
 import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
+import yesman.epicfight.world.effect.EpicFightMobEffects;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType;
 
 import java.util.List;
@@ -61,37 +65,30 @@ public class DeadlyBackflipSkill_OceanSkill extends WeaponInnateSkill {
     public boolean checkExecuteCondition(PlayerPatch<?> executer) {
         Entity target = executer.getTarget();
         if (target != null && target.isAlive()) {
-            //Check distance able to do the attack
+            // Check distance
             double distance = executer.getOriginal().distanceTo(target);
             double minDistance = 1.2;
             double maxDistance = 8.0;
 
-            //Grades for innate to be able depending on the head of the player
+            // Obtain hitbox for accuracy
+            AABB targetBox = target.getBoundingBox();
+            Vec3 targetPos = new Vec3(
+                    (targetBox.minX + targetBox.maxX) / 2.0,
+                    (targetBox.minY + targetBox.maxY) / 2.0,
+                    (targetBox.minZ + targetBox.maxZ) / 2.0
+            );
             Vec3 playerPos = executer.getOriginal().position();
-            Vec3 targetPos = target.position();
-            Vec3 directionToTarget = targetPos.subtract(playerPos).normalize();
-            Vec3 playerLook = executer.getOriginal().getLookAngle().normalize();
-
-            double angle = Math.acos(playerLook.dot(directionToTarget));
-            double angleInDegrees = Math.toDegrees(angle);
-            double angleThreshold = 92.0;
-
-            //DEBUG distance and angle
-            //System.out.println("Distance to target: " + distance);
-            //System.out.println("Angle to target: " + angleInDegrees + " degrees");
-
-            //Check distance and angle of the player
-            if (distance >= minDistance && distance <= maxDistance && angleInDegrees <= angleThreshold) {
-                return true;
-            }
+            // DEBUG
+            // System.out.println("Distance to target: " + distance);
+            return (distance >= minDistance && distance <= maxDistance);
         }
         return false;
     }
 
-
     @Override
     public void executeOnServer(ServerPlayerPatch executer, FriendlyByteBuf args) {
         executer.playAnimationSynchronized(this.first.get(), 0);
+        ((ServerPlayer)executer.getOriginal()).addEffect(new MobEffectInstance((MobEffect) EpicFightMobEffects.STUN_IMMUNITY.get(), 40, 0, true, false, false));
         LivingEntity target = (LivingEntity) executer.getTarget();
         if (target != null && target.isAlive()) {
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 36, 50));
