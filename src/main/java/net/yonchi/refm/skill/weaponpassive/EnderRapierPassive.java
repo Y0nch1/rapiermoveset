@@ -20,6 +20,8 @@ import java.util.Random;
 
 public class EnderRapierPassive extends PassiveSkill {
     private static final UUID EVENT_UUID = UUID.fromString("06542d5a-7b38-4db8-9959-fa6a4f6cbbc0");
+    private long lastTeleportTime = 0;
+    private static final long COOLDOWN_TIME = 3600;
 
     public EnderRapierPassive(Builder<? extends Skill> builder) {
         super(builder);
@@ -31,8 +33,14 @@ public class EnderRapierPassive extends PassiveSkill {
         container.getExecuter().getEventListener().addEventListener(PlayerEventListener.EventType.PROJECTILE_HIT_EVENT, EVENT_UUID, (event) -> {
             LivingEntity target = event.getPlayerPatch().getOriginal();
             if (target == null || !target.isAlive()) return;
-            event.setCanceled(true);
-            teleportToSafeLocation(target);
+
+            long currentTime = System.currentTimeMillis();
+            if (currentTime - lastTeleportTime < COOLDOWN_TIME) {
+                event.setCanceled(false);
+            } else {
+                event.setCanceled(true);
+                teleportToSafeLocation(target);
+            }
         });
     }
 
@@ -43,8 +51,10 @@ public class EnderRapierPassive extends PassiveSkill {
     }
 
     private void teleportToSafeLocation(LivingEntity entity) {
+        lastTeleportTime = System.currentTimeMillis();
+
         Random random = new Random();
-        int attempts = 16;
+        int attempts = 24;
 
         for (int i = 0; i < attempts; i++) {
             float yaw = entity.getYHeadRot();
