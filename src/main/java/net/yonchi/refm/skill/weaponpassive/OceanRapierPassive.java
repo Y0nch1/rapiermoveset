@@ -1,9 +1,11 @@
 package net.yonchi.refm.skill.weaponpassive;
 
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 
+import net.minecraft.world.phys.Vec3;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.skill.SkillContainer;
 import yesman.epicfight.skill.passive.PassiveSkill;
@@ -32,6 +34,22 @@ public class OceanRapierPassive extends PassiveSkill {
                 MobEffectInstance breathingEffect = new MobEffectInstance(MobEffects.CONDUIT_POWER, duration, amplifier2, true, false);
                 target.addEffect(dolphinEffect);
                 target.addEffect(breathingEffect);
+                    if (target.isSprinting()) {
+                        Vec3 velocity = target.getDeltaMovement();
+                        double speed = Math.sqrt(velocity.x * velocity.x + velocity.z * velocity.z);
+                        double speedThreshold = 0.299;
+                        if (speed > speedThreshold) {
+                            double hipY = target.getEyeY() - 0.16;
+                            int numParticles = 5;
+                            double radius = 0.2;
+                            for (int i = 0; i < numParticles; i++) {
+                                double angle = (Math.PI * 2 * i) / numParticles;
+                                double particleX = target.getX() + (Math.cos(angle) * radius);
+                                double particleZ = target.getZ() + (Math.sin(angle) * radius);
+                                target.level().addParticle(ParticleTypes.BUBBLE, particleX, hipY, particleZ, 0, 0.1, 0);
+                            }
+                        }
+                    }
             } else {
                 target.removeEffect(MobEffects.DOLPHINS_GRACE);
                 target.removeEffect(MobEffects.CONDUIT_POWER);

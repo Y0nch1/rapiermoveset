@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.RandomSource;
@@ -39,8 +38,6 @@ import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.model.armature.HumanoidArmature;
 import yesman.epicfight.particle.EpicFightParticles;
-import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
-import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.damagesource.EpicFightDamageType;
 import yesman.epicfight.world.damagesource.StunType;
 import yesman.epicfight.world.effect.EpicFightMobEffects;
@@ -74,6 +71,7 @@ public class RapierAnimations {
     public static StaticAnimation BIPED_SNEAK_RAPIER;
     public static StaticAnimation BIPED_WALK_RAPIER;
     public static StaticAnimation BIPED_RUN_RAPIER;
+    public static StaticAnimation BIPED_SWIM_RAPIER;
     public static StaticAnimation DEADLYBACKFLIP_FIRST;
     public static StaticAnimation DEADLYBACKFLIP_SECOND;
     public static StaticAnimation DEADLYBACKFLIP_SECOND_ENDER;
@@ -318,6 +316,7 @@ public class RapierAnimations {
         BIPED_SNEAK_RAPIER = new StaticAnimation(true, "biped/living/sneak_rapier", biped);
         BIPED_WALK_RAPIER = new MovementAnimation(true, "biped/living/walk_rapier", biped);
         BIPED_RUN_RAPIER = new MovementAnimation(true, "biped/living/run_rapier", biped);
+        BIPED_SWIM_RAPIER = new MovementAnimation(0.5F,true, "biped/living/swim_rapier", biped);
 
         DEADLYBACKFLIP_FIRST = new AttackAnimation(0.1F, 0.2F, 0.0F, 2.8F, 3F, RapierColliderPreset.KICK, biped.thighL, "biped/skill/rapier_backflip_first", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.9F)
