@@ -1,14 +1,24 @@
 package net.yonchi.refm.skill.weaponpassive;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.Particle;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-
 import net.minecraft.world.phys.Vec3;
+
+import yesman.epicfight.api.animation.Joint;
+import yesman.epicfight.api.utils.math.OpenMatrix4f;
+import yesman.epicfight.api.utils.math.Vec3f;
+import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.skill.SkillContainer;
 import yesman.epicfight.skill.passive.PassiveSkill;
+import yesman.epicfight.world.capabilities.EpicFightCapabilities;
+import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener;
 
 import java.util.UUID;
@@ -36,17 +46,34 @@ public class OceanRapierPassive extends PassiveSkill {
                 target.addEffect(breathingEffect);
                     if (target.isSprinting()) {
                         Vec3 velocity = target.getDeltaMovement();
-                        double speed = Math.sqrt(velocity.x * velocity.x + velocity.z * velocity.z);
-                        double speedThreshold = 0.299;
+                        double speed = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y + velocity.z * velocity.z);
+                        double speedThreshold = 0.286;
                         if (speed > speedThreshold) {
-                            double hipY = target.getEyeY() - 0.16;
-                            int numParticles = 5;
-                            double radius = 0.2;
+                            int numParticles = 2;
                             for (int i = 0; i < numParticles; i++) {
-                                double angle = (Math.PI * 2 * i) / numParticles;
-                                double particleX = target.getX() + (Math.cos(angle) * radius);
-                                double particleZ = target.getZ() + (Math.sin(angle) * radius);
-                                target.level().addParticle(ParticleTypes.BUBBLE, particleX, hipY, particleZ, 0, 0.1, 0);
+                                float x_L = -0.08F;
+                                float x_R = 0.08F;
+                                float dynamicY = getDynamicYRotation(target.getXRot());
+                                float dynamicX = getDynamicXOffset(target.getXRot());
+                                Vec3 pos_L = getJointWithTranslation(Minecraft.getInstance().player, target, new Vec3f(x_L, dynamicY, dynamicX), Armatures.BIPED.legL);
+                                Vec3 pos_R = getJointWithTranslation(Minecraft.getInstance().player, target, new Vec3f(x_R, dynamicY, dynamicX), Armatures.BIPED.legR);
+
+                                if (pos_L != null) {
+                                    Particle particle = Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.BUBBLE, pos_L.x, pos_L.y, pos_L.z,
+                                            target.getDeltaMovement().x, target.getDeltaMovement().y, target.getDeltaMovement().z);
+                                    if (particle != null) {
+                                        particle.scale(0.92f);
+                                        particle.setLifetime(12);
+                                    }
+                                }
+                                if (pos_R != null) {
+                                    Particle particle = Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.BUBBLE, pos_R.x, pos_R.y, pos_R.z,
+                                            target.getDeltaMovement().x, target.getDeltaMovement().y, target.getDeltaMovement().z);
+                                    if (particle != null) {
+                                        particle.scale(0.92f);
+                                        particle.setLifetime(12);
+                                    }
+                                }
                             }
                         }
                     }
@@ -71,5 +98,47 @@ public class OceanRapierPassive extends PassiveSkill {
             target.removeEffect(MobEffects.CONDUIT_POWER);
         }
         listener.removeListener(PlayerEventListener.EventType.MOVEMENT_INPUT_EVENT, EVENT_UUID);
+    }
+
+    public static Vec3 getJointWithTranslation(LocalPlayer renderer, Entity ent, Vec3f translation, Joint joint) {
+        if (renderer != null && ent != null && translation != null) {
+            if (renderer.level().isClientSide) {
+                LivingEntityPatch entitypatch = EpicFightCapabilities.getEntityPatch(ent, LivingEntityPatch.class);
+                if (entitypatch != null) {
+                    float interpolation = 0.0F;
+                    OpenMatrix4f transformMatrix;
+                    transformMatrix = entitypatch.getArmature().getBindedTransformFor(entitypatch.getAnimator().getPose(interpolation), joint);
+                    transformMatrix.translate(translation);
+                    OpenMatrix4f.mul((new OpenMatrix4f()).rotate(-((float) Math.toRadians((double) (((LivingEntity) entitypatch.getOriginal()).yBodyRotO + 180.0F))), new Vec3f(0.0F, 1.0F, 0.0F)), transformMatrix, transformMatrix);
+                    return new Vec3(
+                            (double) transformMatrix.m30 + (entitypatch.getOriginal()).getX(),
+                            (double) transformMatrix.m31 + ((entitypatch.getOriginal()).getY() + (ent.getBbHeight() / 1.8) - 1),
+                            (double) transformMatrix.m32 + (entitypatch.getOriginal()).getZ()
+                    );
+                }
+            }
+        }
+        return null;
+    }
+
+    public static float getDynamicXOffset(float pitch) {
+        float lookingUp = 0.2F;
+        float lookingDown = -1.12F;
+        float lookingStraight = -0.72F;
+        if (pitch <= 0) {
+            return lookingUp + (pitch + 90) / 90 * (-0.92F);
+        } else {
+            return lookingStraight + (pitch / 90) * (lookingDown + 0.72F);
+        }
+    }
+    public static float getDynamicYRotation(float pitch) {
+        float lookingUp = 0.1F;
+        float lookingDown = -0.52F;
+        float lookingStraight = 0.52F;
+        if (pitch <= 0) {
+            return lookingUp + (pitch + 90) / 90 * (0.42F);
+        } else {
+            return lookingStraight + (pitch / 90) * (lookingDown - 0.52F);
+        }
     }
 }
