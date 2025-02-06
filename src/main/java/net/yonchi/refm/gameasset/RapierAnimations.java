@@ -1,8 +1,6 @@
 package net.yonchi.refm.gameasset;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -71,6 +69,7 @@ public class RapierAnimations {
     public static StaticAnimation BIPED_SNEAK_RAPIER;
     public static StaticAnimation BIPED_WALK_RAPIER;
     public static StaticAnimation BIPED_RUN_RAPIER;
+    public static StaticAnimation BIPED_RUN_RAPIER_WITHER;
     public static StaticAnimation BIPED_SWIM_RAPIER;
     public static StaticAnimation DEADLYBACKFLIP_FIRST;
     public static StaticAnimation DEADLYBACKFLIP_SECOND;
@@ -93,6 +92,13 @@ public class RapierAnimations {
         HumanoidArmature biped = Armatures.BIPED;
 
         //Every animation defined with his own hitbox timers and Properties
+        BIPED_HOLD_RAPIER = new StaticAnimation(true, "biped/living/hold_rapier", biped);
+        BIPED_SNEAK_RAPIER = new StaticAnimation(true, "biped/living/sneak_rapier", biped);
+        BIPED_WALK_RAPIER = new MovementAnimation(true, "biped/living/walk_rapier", biped);
+        BIPED_RUN_RAPIER = new MovementAnimation(true, "biped/living/run_rapier", biped);
+        BIPED_RUN_RAPIER_WITHER = new MovementAnimation(0.26F,true, "biped/living/run_rapier_wither", biped);
+        BIPED_SWIM_RAPIER = new MovementAnimation(0.5F,true, "biped/living/swim_rapier", biped);
+
         RAPIER_AIR_SLASH = new AirSlashAnimation(0.1F, 0.2F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_airslash", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.3F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
@@ -139,7 +145,8 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(1))
                 .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(1))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
-                .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true);
+                .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true)
+                .addProperty(AnimationProperty.StaticAnimationProperty.FIXED_HEAD_ROTATION, true);
         RAPIER_DASH_ENDER = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_ender", biped, new AttackAnimation.Phase(0.0F, 0.5F, 0.78F, 1F, 1F, biped.toolR, RapierColliderPreset.RAPIER_DASH))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_SWING.get())
@@ -156,14 +163,20 @@ public class RapierAnimations {
                 .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(2))
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true)
                 .addEvents(AnimationEvent.TimeStampedEvent.create(0.26F, ReusableEvents.OCEAN_PARTICLES, AnimationEvent.Side.CLIENT));
-        RAPIER_DASH_WITHER = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_wither", biped, new AttackAnimation.Phase(0.0F, 0.36F, 0.66F, 0.74F, 0.8F, biped.toolR, RapierColliderPreset.RAPIER_DASH))
+        RAPIER_DASH_WITHER = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_wither", biped, new AttackAnimation.Phase(0.0F, 0.56F, 0.72F, 0.96F, 1F, biped.toolR, null))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_HURT)
                 .addProperty(AnimationProperty.AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_HIT.get())
                 .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(1))
                 .addProperty(AnimationProperty.AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(2))
+                .addProperty(AnimationProperty.ActionAnimationProperty.COORD_SET_BEGIN, RapierMoveCoordFunctions.TRACE_LOCROT_TARGET)
+                .addProperty(AnimationProperty.ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.15F, 0.22F))
                 .addProperty(AnimationProperty.ActionAnimationProperty.CANCELABLE_MOVE, true)
-                .addEvents(AnimationEvent.TimeStampedEvent.create(0.15F, ReusableEvents.WITHER_PARTICLES_TINY, AnimationEvent.Side.CLIENT));
+                .addEvents(
+                        AnimationEvent.TimeStampedEvent.create(0.09F, ReusableEvents.WITHER_PARTICLES_TINY, AnimationEvent.Side.CLIENT),
+                        AnimationEvent.TimeStampedEvent.create(0.18F, ReusableEvents.WITHER_PARTICLES_INSTANT, AnimationEvent.Side.CLIENT),
+                        AnimationEvent.TimeStampedEvent.create(0.36F, ReusableEvents.WITHER_PARTICLES_INSTANT, AnimationEvent.Side.CLIENT)
+                );
 
         RAPIER_AUTO1 = new BasicAttackAnimation(0.12F, 0.3F, 0.5F, 0.72F, 0.52F, null, biped.toolR, "biped/combat/rapier_auto1", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F)
@@ -311,12 +324,6 @@ public class RapierAnimations {
                         }, AnimationEvent.Side.SERVER)
                 )
                 .addState(EntityState.MOVEMENT_LOCKED, true);
-
-        BIPED_HOLD_RAPIER = new StaticAnimation(true, "biped/living/hold_rapier", biped);
-        BIPED_SNEAK_RAPIER = new StaticAnimation(true, "biped/living/sneak_rapier", biped);
-        BIPED_WALK_RAPIER = new MovementAnimation(true, "biped/living/walk_rapier", biped);
-        BIPED_RUN_RAPIER = new MovementAnimation(true, "biped/living/run_rapier", biped);
-        BIPED_SWIM_RAPIER = new MovementAnimation(0.5F,true, "biped/living/swim_rapier", biped);
 
         DEADLYBACKFLIP_FIRST = new AttackAnimation(0.1F, 0.2F, 0.0F, 2.8F, 3F, RapierColliderPreset.KICK, biped.thighL, "biped/skill/rapier_backflip_first", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.9F)
@@ -589,6 +596,14 @@ public class RapierAnimations {
                 spawnWitherParticlesFollowingPlayer_Big(playerEntity);
             }
         };
+        private static final AnimationEvent.AnimationEventConsumer WITHER_PARTICLES_INSTANT = (entitypatch, self, params) -> {
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            Entity entity = entitypatch.getOriginal();
+            RandomSource random = entitypatch.getOriginal().getRandom();
+            if (playerEntity != null) {
+                spawnParticlesWitherInstant(entity, random);
+            }
+        };
         private static final AnimationEvent.AnimationEventConsumer WITHER_PARTICLES_SOUND = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
@@ -841,6 +856,31 @@ public class RapierAnimations {
                     entry.setValue(ticksRemaining - 1);
                     return false;
                 });
+            }
+        }
+        private static void spawnParticlesWitherInstant(Entity entity, RandomSource random) {
+            ClientLevel clientLevel = Minecraft.getInstance().level;
+            if (clientLevel != null) {
+                double sphereRadius = 0.66;
+                for (int i = 0; i < 18; i++) {
+                    double theta = random.nextDouble() * 2 * Math.PI;
+                    double phi = Math.acos(2 * random.nextDouble() - 1);
+                    double xOffset = sphereRadius * Math.sin(phi) * Math.cos(theta);
+                    double yOffset = sphereRadius * Math.sin(phi) * Math.sin(theta);
+                    double zOffset = sphereRadius * Math.cos(phi);
+                    double vxOffset = xOffset * 0.2;
+                    double vyOffset = yOffset * 0.2;
+                    double vzOffset = zOffset * 0.2;
+
+                    clientLevel.addParticle(ParticleTypes.LARGE_SMOKE,
+                            entity.getX() + xOffset,
+                            entity.getY() + yOffset + 0.6,
+                            entity.getZ() + zOffset,
+                            vxOffset,
+                            vyOffset,
+                            vzOffset
+                    );
+                }
             }
         }
 
