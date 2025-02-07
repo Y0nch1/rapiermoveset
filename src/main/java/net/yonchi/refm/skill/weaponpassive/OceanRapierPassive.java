@@ -30,18 +30,18 @@ public class OceanRapierPassive extends PassiveSkill {
     public void onInitiate(SkillContainer container) {
         super.onInitiate(container);
         container.getExecuter().getEventListener().addEventListener(PlayerEventListener.EventType.MOVEMENT_INPUT_EVENT, EVENT_UUID, (event) -> {
-            LivingEntity target = event.getPlayerPatch().getOriginal();
-            if (target == null) return;
-            if (target.isInWater()) {
-                int duration = 60;
+            LivingEntity player = event.getPlayerPatch().getOriginal();
+            if (player == null) return;
+            if (player.isInWater()) {
+                int duration = 5;
                 int amplifier1 = 1;
                 int amplifier2 = 0;
                 MobEffectInstance dolphinEffect = new MobEffectInstance(MobEffects.DOLPHINS_GRACE, duration, amplifier1, true, false);
                 MobEffectInstance breathingEffect = new MobEffectInstance(MobEffects.CONDUIT_POWER, duration, amplifier2, true, false);
-                target.addEffect(dolphinEffect);
-                target.addEffect(breathingEffect);
-                    if (target.isSprinting()) {
-                        Vec3 velocity = target.getDeltaMovement();
+                player.addEffect(dolphinEffect);
+                player.addEffect(breathingEffect);
+                    if (player.isSprinting()) {
+                        Vec3 velocity = player.getDeltaMovement();
                         double speed = Math.sqrt(velocity.x * velocity.x + velocity.y * velocity.y + velocity.z * velocity.z);
                         double speedThreshold = 0.286;
                         if (speed > speedThreshold) {
@@ -49,14 +49,14 @@ public class OceanRapierPassive extends PassiveSkill {
                             for (int i = 0; i < numParticles; i++) {
                                 float x_L = -0.08F;
                                 float x_R = 0.08F;
-                                float dynamicY = getDynamicYRotation(target.getXRot());
-                                float dynamicX = getDynamicXOffset(target.getXRot());
-                                Vec3 pos_L = getJointWithTranslation(Minecraft.getInstance().player, target, new Vec3f(x_L, dynamicY, dynamicX), Armatures.BIPED.legL);
-                                Vec3 pos_R = getJointWithTranslation(Minecraft.getInstance().player, target, new Vec3f(x_R, dynamicY, dynamicX), Armatures.BIPED.legR);
+                                float dynamicY = getDynamicYRotation(player.getXRot());
+                                float dynamicX = getDynamicXOffset(player.getXRot());
+                                Vec3 pos_L = getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(x_L, dynamicY, dynamicX), Armatures.BIPED.legL);
+                                Vec3 pos_R = getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(x_R, dynamicY, dynamicX), Armatures.BIPED.legR);
 
                                 if (pos_L != null) {
                                     Particle particle = Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.BUBBLE, pos_L.x, pos_L.y, pos_L.z,
-                                            target.getDeltaMovement().x, target.getDeltaMovement().y, target.getDeltaMovement().z);
+                                            player.getDeltaMovement().x, player.getDeltaMovement().y, player.getDeltaMovement().z);
                                     if (particle != null) {
                                         particle.scale(0.92f);
                                         particle.setLifetime(12);
@@ -64,7 +64,7 @@ public class OceanRapierPassive extends PassiveSkill {
                                 }
                                 if (pos_R != null) {
                                     Particle particle = Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.BUBBLE, pos_R.x, pos_R.y, pos_R.z,
-                                            target.getDeltaMovement().x, target.getDeltaMovement().y, target.getDeltaMovement().z);
+                                            player.getDeltaMovement().x, player.getDeltaMovement().y, player.getDeltaMovement().z);
                                     if (particle != null) {
                                         particle.scale(0.92f);
                                         particle.setLifetime(12);
@@ -74,12 +74,22 @@ public class OceanRapierPassive extends PassiveSkill {
                         }
                     }
             } else {
-                target.removeEffect(MobEffects.DOLPHINS_GRACE);
-                target.removeEffect(MobEffects.CONDUIT_POWER);
+                if (player.hasEffect(MobEffects.DOLPHINS_GRACE)) {
+                    MobEffectInstance effect = player.getEffect(MobEffects.DOLPHINS_GRACE);
+                    if (effect != null && effect.getDuration() < 10) {
+                        player.removeEffect(MobEffects.DOLPHINS_GRACE);
+                        player.removeEffect(MobEffects.CONDUIT_POWER);
+                    }
+                }
             }
-            if (!target.isInWater()) {
-                target.removeEffect(MobEffects.DOLPHINS_GRACE);
-                target.removeEffect(MobEffects.CONDUIT_POWER);
+            if (!player.isInWater()) {
+                if (player.hasEffect(MobEffects.DOLPHINS_GRACE)) {
+                    MobEffectInstance effect = player.getEffect(MobEffects.DOLPHINS_GRACE);
+                    if (effect != null && effect.getDuration() < 10) {
+                        player.removeEffect(MobEffects.DOLPHINS_GRACE);
+                        player.removeEffect(MobEffects.CONDUIT_POWER);
+                    }
+                }
             }
         });
     }
@@ -87,10 +97,13 @@ public class OceanRapierPassive extends PassiveSkill {
     @Override
     public void onRemoved(SkillContainer container) {
         PlayerEventListener listener = container.getExecuter().getEventListener();
-        LivingEntity target = container.getExecuter().getOriginal();
-        if (target != null) {
-            target.removeEffect(MobEffects.DOLPHINS_GRACE);
-            target.removeEffect(MobEffects.CONDUIT_POWER);
+        LivingEntity player = container.getExecuter().getOriginal();
+        if (player != null && player.hasEffect(MobEffects.DOLPHINS_GRACE)) {
+            MobEffectInstance effect = player.getEffect(MobEffects.DOLPHINS_GRACE);
+            if (effect != null && effect.getDuration() < 10) {
+                player.removeEffect(MobEffects.DOLPHINS_GRACE);
+                player.removeEffect(MobEffects.CONDUIT_POWER);
+            }
         }
         listener.removeListener(PlayerEventListener.EventType.MOVEMENT_INPUT_EVENT, EVENT_UUID);
     }
