@@ -10,6 +10,8 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
+import net.yonchi.refm.api.animation.configs.RapierStaminaConfig;
+import net.yonchi.refm.api.animation.configs.RapierStaminaPresets;
 import net.yonchi.refm.gameasset.RapierSkills;
 import net.yonchi.refm.gameasset.RapierSounds;
 import net.yonchi.refm.skill.guard.RapierGuard;
@@ -64,6 +66,10 @@ public class RapierForEpicfight {
             proxy = new RapierAnimations.ServerProxy();
         }
 
+        if (ModList.get().isLoaded("efstaminainteractions")) {
+            ICompatModule.loadCompatModule(RapierStaminaConfig.class);
+            bus.addListener(RapierStaminaConfig::registerStamina);
+        }
         if (ModList.get().isLoaded("irons_spellbooks")) {
             ICompatModule.loadCompatModule(AmethystGuard.class);
             bus.addListener(AmethystGuard::buildSkillEvent);
