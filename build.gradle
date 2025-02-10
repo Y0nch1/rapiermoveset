@@ -139,7 +139,7 @@ dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
     implementation fg.deobf("curse.maven:epic-fight-mod-405076:6145747")
     implementation fg.deobf("curse.maven:wom-918614:5889471")
-    implementation fg.deobf("curse.maven:epic-fight-stamina-interactions-1124842:6165613")
+    implementation fg.deobf("curse.maven:epic-fight-stamina-interactions-1124842:6176718")
     //implementation fg.deobf("curse.maven:ironspells-855414:5934925")
     //implementation fg.deobf("curse.maven:epic-fight-stamina-interactions-1124842:6165613")
     //implementation fg.deobf("curse.maven:battlearts-933502:5978639")

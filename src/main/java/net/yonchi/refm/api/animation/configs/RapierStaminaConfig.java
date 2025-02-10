@@ -14,7 +14,7 @@ import com.tatunement.efstaminainteractions.EpicFightStaminaInteractionsMod;
 import com.tatunement.efstaminainteractions.events.RegisterWeaponStaminaCostEvent;
 import com.tatunement.efstaminainteractions.registries.WeaponStaminaCostRegistry;
 
-@Mod.EventBusSubscriber(modid = EpicFightStaminaInteractionsMod.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = EpicFightStaminaInteractionsMod.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class RapierStaminaConfig implements ICompatModule {
 
     @SubscribeEvent
@@ -30,7 +30,6 @@ public class RapierStaminaConfig implements ICompatModule {
             WeaponStaminaCostRegistry.addWeaponStamina((WeaponCategory) category[0], (float) category[1]);
         }
     }
-
     public static void registerStamina(RegisterEvent bus) {
     }
 
