@@ -62,25 +62,18 @@ public class DeadlyBackflipSkill_AmethystSkill extends WeaponInnateSkill {
     @Override
     public boolean checkExecuteCondition(PlayerPatch<?> executer) {
         Entity target = executer.getTarget();
-        if (target != null && target.isAlive()) {
-            // Check distance
-            double distance = executer.getOriginal().distanceTo(target);
-            double minDistance = 1.2;
-            double maxDistance = 8.0;
-
-            // Obtain hitbox for accuracy
-            AABB targetBox = target.getBoundingBox();
-            Vec3 targetPos = new Vec3(
-                    (targetBox.minX + targetBox.maxX) / 2.0,
-                    (targetBox.minY + targetBox.maxY) / 2.0,
-                    (targetBox.minZ + targetBox.maxZ) / 2.0
-            );
-            Vec3 playerPos = executer.getOriginal().position();
-            // DEBUG
-            // System.out.println("Distance to target: " + distance);
-            return (distance >= minDistance && distance <= maxDistance);
+        if (target == null || !target.isAlive()) {
+            return false;
         }
-        return false;
+        Vec3 targetPos = target.position();
+        Vec3 playerPos = executer.getOriginal().position();
+        Vec3 predictedTargetPos = targetPos.add(target.getDeltaMovement());
+
+        double distance = playerPos.distanceTo(predictedTargetPos);
+        double minDistance = 1.5;
+        double maxDistance = 8.0;
+
+        return distance >= minDistance && distance <= maxDistance;
     }
 
     @Override

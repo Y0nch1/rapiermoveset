@@ -10,8 +10,6 @@ import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
-import net.yonchi.refm.api.animation.configs.RapierStaminaConfig;
-import net.yonchi.refm.api.animation.configs.RapierStaminaPresets;
 import net.yonchi.refm.gameasset.RapierSkills;
 import net.yonchi.refm.gameasset.RapierSounds;
 import net.yonchi.refm.skill.guard.RapierGuard;
@@ -21,6 +19,7 @@ import net.yonchi.refm.skill.guard.AmethystGuardWoM;
 import net.yonchi.refm.world.item.RapierTab;
 import net.yonchi.refm.skill.RapierSkillDataKeys;
 import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
+import net.yonchi.refm.api.animation.configs.RapierStaminaConfig;
 import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.world.item.RapierAddonItems;
 
