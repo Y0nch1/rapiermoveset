@@ -1,8 +1,8 @@
 {
 	"trail_effects": [
 		{
-			"start_time": 0.48,
-			"end_time": 0.24,
+			"start_time": 0.32,
+			"end_time": 0.18,
 			"joint": "Tool_R",
 			"item_skin_hand": "main_hand"
 		}

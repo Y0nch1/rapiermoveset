@@ -202,7 +202,7 @@ public class RapierAnimations {
                             }
                         }
                     }
-                }, AnimationEvent.Side.BOTH))
+                }, AnimationEvent.Side.CLIENT))
                 .addProperty(AnimationProperty.StaticAnimationProperty.FIXED_HEAD_ROTATION, false);;
         RAPIER_DASH_WITHER = new DashAttackAnimation(0.15F, "biped/combat/rapier_dash_wither", biped, new AttackAnimation.Phase(0.0F, 0.56F, 0.72F, 0.96F, 1F, biped.toolR, null))
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
@@ -619,12 +619,6 @@ public class RapierAnimations {
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
                 spawnOceanParticlesFollowingPlayer_Tiny(playerEntity);
-            }
-        };
-        private static final AnimationEvent.AnimationEventConsumer OCEAN_PARTICLES_BUBBLE = (entitypatch, self, params) -> {
-            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
-            if (playerEntity != null) {
-                spawnWitherParticlesFollowingPlayer_Tiny(playerEntity);
             }
         };
         private static final AnimationEvent.AnimationEventConsumer OCEAN_PARTICLES_SOUND = (entitypatch, self, params) -> {
