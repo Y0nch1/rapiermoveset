@@ -104,7 +104,7 @@ public class RapierAnimations {
         BIPED_RUN_RAPIER_WITHER = new MovementAnimation(0.26F,true, "biped/living/run_rapier_wither", biped);
         BIPED_SWIM_RAPIER = new MovementAnimation(0.5F,true, "biped/living/swim_rapier", biped);
 
-        RAPIER_AIR_SLASH = new AirSlashAnimation(0.1F, 0.2F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_airslash", biped)
+        RAPIER_AIR_SLASH = new AirSlashAnimation(0.12F, 0.2F, 0.5F, 0.5F, null, biped.toolR, "biped/combat/rapier_airslash", biped)
                 .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.3F)
                 .addProperty(AnimationProperty.AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
                 .addProperty(AnimationProperty.AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(4))
