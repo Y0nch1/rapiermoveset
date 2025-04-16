@@ -65,7 +65,7 @@ description='''${mod_description}'''
 [[dependencies.refm]]
     modId="epicfight"
     mandatory=true
-    versionRange="[20.9.0,)"
+    versionRange="[20.10.0,)"
     ordering="AFTER"
     side="BOTH"
 

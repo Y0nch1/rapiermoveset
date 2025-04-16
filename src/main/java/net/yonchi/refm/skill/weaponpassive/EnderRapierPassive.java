@@ -10,7 +10,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 
-import yesman.epicfight.skill.Skill;
+import yesman.epicfight.skill.SkillBuilder;
 import yesman.epicfight.skill.SkillContainer;
 import yesman.epicfight.skill.passive.PassiveSkill;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener;
@@ -23,14 +23,14 @@ public class EnderRapierPassive extends PassiveSkill {
     private long lastTeleportTime = 0;
     private static final long COOLDOWN_TIME = 3600;
 
-    public EnderRapierPassive(Builder<? extends Skill> builder) {
+    public EnderRapierPassive(SkillBuilder<? extends PassiveSkill> builder) {
         super(builder);
     }
 
     @Override
     public void onInitiate(SkillContainer container) {
         super.onInitiate(container);
-        container.getExecuter().getEventListener().addEventListener(PlayerEventListener.EventType.PROJECTILE_HIT_EVENT, EVENT_UUID, (event) -> {
+        container.getExecutor().getEventListener().addEventListener(PlayerEventListener.EventType.PROJECTILE_HIT_EVENT, EVENT_UUID, (event) -> {
             LivingEntity target = event.getPlayerPatch().getOriginal();
             if (target == null || !target.isAlive()) return;
 
@@ -46,7 +46,7 @@ public class EnderRapierPassive extends PassiveSkill {
 
     @Override
     public void onRemoved(SkillContainer container) {
-        PlayerEventListener listener = container.getExecuter().getEventListener();
+        PlayerEventListener listener = container.getExecutor().getEventListener();
         listener.removeListener(PlayerEventListener.EventType.PROJECTILE_HIT_EVENT, EVENT_UUID);
     }
 

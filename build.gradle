@@ -7,7 +7,7 @@ plugins {
     id 'org.spongepowered.mixin' version '0.7.+' //Yesman added
 }
 
-version = '0.2.15-1.20.1'
+version = '0.3.0-1.20.1'
 group = 'net.yonchi.modid'
 archivesBaseName = 'refm'
 
@@ -118,6 +118,9 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
+    flatDir {
+        dirs '../!LIBRERIAS'
+    }
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
     google()
@@ -137,9 +140,11 @@ dependencies {
     // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    implementation fg.deobf("curse.maven:epic-fight-mod-405076:6145747")
-    implementation fg.deobf("curse.maven:wom-918614:5889471")
-    implementation fg.deobf("curse.maven:epic-fight-stamina-interactions-1124842:6176718")
+    //implementation fg.deobf("curse.maven:epic-fight-mod-405076:6145747")
+    implementation fg.deobf("epicfight:EpicFight:20.10.1")
+    //implementation fg.deobf("curse.maven:wom-918614:5889471")
+    //implementation fg.deobf("curse.maven:epic-fight-stamina-interactions-1124842:6176718")
+    //implementation fg.deobf("curse.maven:parcool-482378:6189397")
     //implementation fg.deobf("curse.maven:ironspells-855414:5934925")
     //implementation fg.deobf("curse.maven:epic-fight-stamina-interactions-1124842:6165613")
     //implementation fg.deobf("curse.maven:battlearts-933502:5978639")

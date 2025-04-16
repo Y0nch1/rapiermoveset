@@ -1,5 +1,6 @@
 package net.yonchi.refm.skill.guard;
 
+import com.google.common.collect.Maps;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -9,7 +10,6 @@ import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
 
 import net.yonchi.refm.world.item.RapierAddonItems;
-import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.client.forgeevent.WeaponCategoryIconRegisterEvent;
 import yesman.epicfight.compat.ICompatModule;
 import yesman.epicfight.gameasset.Animations;
@@ -20,7 +20,7 @@ import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.item.WeaponCategory;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
@@ -35,12 +35,11 @@ public class AmethystGuard implements ICompatModule {
     public static boolean regGuarded = false;
 
     public static void buildSkillEvent(RegisterEvent event) {
-        if (EpicFightSkills.GUARD == null) {
+        if (EpicFightSkills.GUARD == null || EpicFightSkills.IMPACT_GUARD == null || EpicFightSkills.PARRYING == null) {
             return;
         }
-        if (regGuarded) {
-            return;
-        }
+        if (regGuarded) return;
+
         try {
             regGuard();
         } catch (Exception e) {
@@ -49,21 +48,19 @@ public class AmethystGuard implements ICompatModule {
         regGuarded = true;
     }
 
-    public static void regGuard() throws NoSuchFieldException, IllegalAccessException {
-        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardMotions = new HashMap<>();
-        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardBreakMotions = new HashMap<>();
-        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> advancedGuardMotions = new HashMap<>();
+    public static void regGuard() throws ReflectiveOperationException {
+        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardMotions = Maps.newHashMap();
+        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardBreakMotions = Maps.newHashMap();
+        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> advancedGuardMotions = Maps.newHashMap();
 
         //Amethyst
-        guardMotions.put(RapierWeaponCategories.AMETHYST_RAPIER, (item, player) ->
-                RapierAnimations.RAPIER_GUARD_HIT);
-        guardBreakMotions.put(RapierWeaponCategories.AMETHYST_RAPIER, (item, player) ->
-                Animations.BIPED_COMMON_NEUTRALIZED);
-        advancedGuardMotions.put(RapierWeaponCategories.AMETHYST_RAPIER, (itemCap, playerpatch) ->
-                new StaticAnimation[]{RapierAnimations.RAPIER_GUARD_PARRY_AMETHYST});
+        guardMotions.put(RapierWeaponCategories.AMETHYST_RAPIER, (item, player) -> RapierAnimations.RAPIER_GUARD_HIT);
+        guardBreakMotions.put(RapierWeaponCategories.AMETHYST_RAPIER, (item, player) -> Animations.BIPED_COMMON_NEUTRALIZED);
+        advancedGuardMotions.put(RapierWeaponCategories.AMETHYST_RAPIER, (item, player) -> List.of(RapierAnimations.RAPIER_GUARD_PARRY_AMETHYST));
 
         Field temp;
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> target;
+
         temp = GuardSkill.class.getDeclaredField("guardMotions");
         temp.setAccessible(true);
         target = (Map) temp.get(EpicFightSkills.GUARD);

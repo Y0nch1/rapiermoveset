@@ -9,18 +9,16 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 
 import net.yonchi.refm.gameasset.RapierAnimations;
 
-import yesman.epicfight.api.animation.AnimationProvider;
 import yesman.epicfight.api.animation.types.AttackAnimation;
-import yesman.epicfight.skill.Skill;
+import yesman.epicfight.api.asset.AssetAccessor;
+import yesman.epicfight.skill.SkillBuilder;
 import yesman.epicfight.skill.SkillContainer;
 import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
-import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.effect.EpicFightMobEffects;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType;
@@ -31,25 +29,25 @@ import java.util.UUID;
 
 public class DeadlyBackflipSkill_OceanSkill extends WeaponInnateSkill {
     private static final UUID EVENT_UUID = UUID.fromString("1f6aea85-2194-4761-af8e-1a5c99c4f789");
-    private final AnimationProvider<AttackAnimation> first;
-    private final AnimationProvider<AttackAnimation> second;
+    public final AssetAccessor<? extends AttackAnimation> first;
+    public final AssetAccessor<? extends AttackAnimation> second;
 
-    public DeadlyBackflipSkill_OceanSkill(Builder<? extends Skill> builder) {
+    public DeadlyBackflipSkill_OceanSkill(SkillBuilder<? extends WeaponInnateSkill> builder) {
         super(builder);
-        this.first = () -> (AttackAnimation)RapierAnimations.DEADLYBACKFLIP_FIRST;
-        this.second = () -> (AttackAnimation)RapierAnimations.DEADLYBACKFLIP_SECOND_OCEAN;
+        this.first = RapierAnimations.DEADLYBACKFLIP_FIRST;
+        this.second = RapierAnimations.DEADLYBACKFLIP_SECOND_OCEAN;
     }
 
     @Override
     public void onInitiate(SkillContainer container) {
         super.onInitiate(container);
-        container.getExecuter().getEventListener().addEventListener(EventType.ATTACK_ANIMATION_END_EVENT, EVENT_UUID, (event) -> {
+        container.getExecutor().getEventListener().addEventListener(EventType.ATTACK_ANIMATION_END_EVENT, EVENT_UUID, (event) -> {
             if (RapierAnimations.DEADLYBACKFLIP_FIRST.equals(event.getAnimation())) {
                 List<LivingEntity> hurtEntities = event.getPlayerPatch().getCurrenltyHurtEntities();
 
                 if (!hurtEntities.isEmpty() && hurtEntities.get(0).isAlive()) {
                     event.getPlayerPatch().getServerAnimator().getPlayerFor(null).reset();
-                    event.getPlayerPatch().playAnimationSynchronized(this.second.get(), 0);
+                    event.getPlayerPatch().reserveAnimation(this.second);
                     event.getPlayerPatch().getCurrenltyHurtEntities().clear();
                 }
             }
@@ -58,35 +56,35 @@ public class DeadlyBackflipSkill_OceanSkill extends WeaponInnateSkill {
 
     @Override
     public void onRemoved(SkillContainer container) {
-        container.getExecuter().getEventListener().removeListener(EventType.ATTACK_ANIMATION_END_EVENT, EVENT_UUID);
+        container.getExecutor().getEventListener().removeListener(EventType.ATTACK_ANIMATION_END_EVENT, EVENT_UUID);
     }
 
     @Override
-    public boolean checkExecuteCondition(PlayerPatch<?> executer) {
-        Entity target = executer.getTarget();
+    public boolean checkExecuteCondition(SkillContainer container) {
+        Entity target = container.getExecutor().getTarget();
         if (target == null || !target.isAlive()) {
             return false;
         }
         Vec3 targetPos = target.position();
-        Vec3 playerPos = executer.getOriginal().position();
+        Vec3 playerPos = container.getExecutor().getOriginal().position();
         Vec3 predictedTargetPos = targetPos.add(target.getDeltaMovement());
 
         double distance = playerPos.distanceTo(predictedTargetPos);
         double minDistance = 1.5;
-        double maxDistance = 8.0;
+        double maxDistance = 7.0;
 
         return distance >= minDistance && distance <= maxDistance;
     }
 
     @Override
-    public void executeOnServer(ServerPlayerPatch executer, FriendlyByteBuf args) {
-        executer.playAnimationSynchronized(this.first.get(), 0);
-        ((ServerPlayer)executer.getOriginal()).addEffect(new MobEffectInstance((MobEffect) EpicFightMobEffects.STUN_IMMUNITY.get(), 40, 0, true, false, false));
-        LivingEntity target = (LivingEntity) executer.getTarget();
+    public void executeOnServer(SkillContainer container, FriendlyByteBuf args) {
+        container.getExecutor().playAnimationSynchronized(this.first, 0);
+        ((ServerPlayer)container.getExecutor().getOriginal()).addEffect(new MobEffectInstance((MobEffect) EpicFightMobEffects.STUN_IMMUNITY.get(), 40, 0, true, false, false));
+        LivingEntity target = (LivingEntity) container.getExecutor().getTarget();
         if (target != null && target.isAlive()) {
             target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 36, 50));
         }
-        super.executeOnServer(executer, args);
+        super.executeOnServer(container, args);
     }
 
     @Override

@@ -1,8 +1,10 @@
 package net.yonchi.refm.world.capabilities.item;
 
 
+import java.util.Map;
 import java.util.function.Function;
 
+import com.google.common.collect.Maps;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
@@ -136,12 +138,11 @@ public class WeaponCapabilityPresets {
 
     @SubscribeEvent
     public static void registerMovesets(WeaponCapabilityPresetRegistryEvent event) {
-        event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"rapier"), RAPIER);
-        event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"ender_rapier"), ENDER_RAPIER);
-        event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"ocean_rapier"), OCEAN_RAPIER);
-        event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"wither_rapier"), WITHER_RAPIER);
-        event.getTypeEntry().put(new ResourceLocation(RapierForEpicfight.MOD_ID,"amethyst_rapier"), AMETHYST_RAPIER);
+        event.getTypeEntry().put(ResourceLocation.fromNamespaceAndPath(RapierForEpicfight.MOD_ID,"rapier"), RAPIER);
+        event.getTypeEntry().put(ResourceLocation.fromNamespaceAndPath(RapierForEpicfight.MOD_ID,"ender_rapier"), ENDER_RAPIER);
+        event.getTypeEntry().put(ResourceLocation.fromNamespaceAndPath(RapierForEpicfight.MOD_ID,"ocean_rapier"), OCEAN_RAPIER);
+        event.getTypeEntry().put(ResourceLocation.fromNamespaceAndPath(RapierForEpicfight.MOD_ID,"wither_rapier"), WITHER_RAPIER);
+        event.getTypeEntry().put(ResourceLocation.fromNamespaceAndPath(RapierForEpicfight.MOD_ID,"amethyst_rapier"), AMETHYST_RAPIER);
     }
 }
-
 //https://github.com/Yesssssman/epicfightmod/blob/1.20.1/src/main/java/yesman/epicfight/world/capabilities/item/WeaponCapabilityPresets.java

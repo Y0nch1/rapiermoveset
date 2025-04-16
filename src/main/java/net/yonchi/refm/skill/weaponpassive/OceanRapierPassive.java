@@ -10,9 +10,10 @@ import net.minecraft.world.phys.Vec3;
 
 import yesman.epicfight.api.utils.math.Vec3f;
 import yesman.epicfight.gameasset.Armatures;
-import yesman.epicfight.skill.Skill;
+import yesman.epicfight.skill.SkillBuilder;
 import yesman.epicfight.skill.SkillContainer;
 import yesman.epicfight.skill.passive.PassiveSkill;
+import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener;
 
 import java.util.UUID;
@@ -22,14 +23,14 @@ import static net.yonchi.refm.api.animation.JointTrack.getJointWithTranslation;
 public class OceanRapierPassive extends PassiveSkill {
     private static final UUID EVENT_UUID = UUID.fromString("09a20178-a51c-4062-80f4-1618e30672fc");
 
-    public OceanRapierPassive(Builder<? extends Skill> builder) {
+    public OceanRapierPassive(SkillBuilder<? extends PassiveSkill> builder) {
         super(builder);
     }
 
     @Override
     public void onInitiate(SkillContainer container) {
         super.onInitiate(container);
-        container.getExecuter().getEventListener().addEventListener(PlayerEventListener.EventType.MOVEMENT_INPUT_EVENT, EVENT_UUID, (event) -> {
+        container.getExecutor().getEventListener().addEventListener(PlayerEventListener.EventType.MOVEMENT_INPUT_EVENT, EVENT_UUID, (event) -> {
             LivingEntity player = event.getPlayerPatch().getOriginal();
             if (player == null) return;
             if (player.isInWater()) {
@@ -51,8 +52,8 @@ public class OceanRapierPassive extends PassiveSkill {
                                 float x_R = 0.08F;
                                 float dynamicY = getDynamicYRotation(player.getXRot());
                                 float dynamicX = getDynamicXOffset(player.getXRot());
-                                Vec3 pos_L = getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(x_L, dynamicY, dynamicX), Armatures.BIPED.legL);
-                                Vec3 pos_R = getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(x_R, dynamicY, dynamicX), Armatures.BIPED.legR);
+                                Vec3 pos_L = getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(x_L, dynamicY, dynamicX), Armatures.BIPED.get().legL);
+                                Vec3 pos_R = getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(x_R, dynamicY, dynamicX), Armatures.BIPED.get().legR);
 
                                 if (pos_L != null) {
                                     Particle particle = Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.BUBBLE, pos_L.x, pos_L.y, pos_L.z,
@@ -96,8 +97,8 @@ public class OceanRapierPassive extends PassiveSkill {
 
     @Override
     public void onRemoved(SkillContainer container) {
-        PlayerEventListener listener = container.getExecuter().getEventListener();
-        LivingEntity player = container.getExecuter().getOriginal();
+        PlayerEventListener listener = container.getExecutor().getEventListener();
+        LivingEntity player = container.getExecutor().getOriginal();
         if (player != null && player.hasEffect(MobEffects.DOLPHINS_GRACE)) {
             MobEffectInstance effect = player.getEffect(MobEffects.DOLPHINS_GRACE);
             if (effect != null && effect.getDuration() < 10) {

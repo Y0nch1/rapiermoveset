@@ -25,7 +25,7 @@ public class RapierSounds {
     }
 
     private static RegistryObject<SoundEvent> registerRapierSound(String name) {
-        ResourceLocation refms = new ResourceLocation(RapierForEpicfight.MOD_ID, name);
+        ResourceLocation refms = ResourceLocation.fromNamespaceAndPath(RapierForEpicfight.MOD_ID, name);
         return SOUNDS.register(name, () -> SoundEvent.createVariableRangeEvent(refms));
     }
 }

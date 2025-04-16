@@ -17,6 +17,7 @@ import yesman.epicfight.api.animation.property.AnimationProperty.AttackPhaseProp
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
 import yesman.epicfight.api.utils.math.ValueModifier;
 import yesman.epicfight.skill.SkillCategories;
+import yesman.epicfight.skill.passive.PassiveSkill;
 import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.world.damagesource.EpicFightDamageType;
@@ -137,9 +138,9 @@ public class RapierSkills {
                 .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.WEAPON_INNATE, EpicFightDamageType.GUARD_PUNCTURE, EpicFightDamageType.FINISHER));
         DEADLYBACKFLIP_AMETHYST = deadlybackflip_amethyst;
 
-        ENDER_PASSIVE = modRegistry.build("ender_passive", EnderRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setResource(Skill.Resource.STAMINA).setActivateType(Skill.ActivateType.TOGGLE));
-        OCEAN_PASSIVE = modRegistry.build("ocean_passive", OceanRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.DURATION_INFINITE));
-        WITHER_PASSIVE = modRegistry.build("wither_passive", WitherRapierPassive::new, Skill.createBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.ONE_SHOT));
+        ENDER_PASSIVE = modRegistry.build("ender_passive", EnderRapierPassive::new, PassiveSkill.createPassiveBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setResource(Skill.Resource.STAMINA).setActivateType(Skill.ActivateType.TOGGLE));
+        OCEAN_PASSIVE = modRegistry.build("ocean_passive", OceanRapierPassive::new, PassiveSkill.createPassiveBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.DURATION_INFINITE));
+        WITHER_PASSIVE = modRegistry.build("wither_passive", WitherRapierPassive::new, PassiveSkill.createPassiveBuilder().setCategory(SkillCategories.WEAPON_PASSIVE).setActivateType(Skill.ActivateType.ONE_SHOT));
     }
 
     public RapierSkills(){

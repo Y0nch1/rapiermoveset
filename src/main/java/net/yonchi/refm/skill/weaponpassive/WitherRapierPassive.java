@@ -16,9 +16,10 @@ import net.minecraft.world.phys.Vec3;
 
 import yesman.epicfight.api.utils.math.Vec3f;
 import yesman.epicfight.gameasset.Armatures;
-import yesman.epicfight.skill.Skill;
+import yesman.epicfight.skill.SkillBuilder;
 import yesman.epicfight.skill.SkillContainer;
 import yesman.epicfight.skill.passive.PassiveSkill;
+import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener;
 
 import static net.yonchi.refm.api.animation.JointTrack.getJointWithTranslation;
@@ -26,7 +27,7 @@ import static net.yonchi.refm.api.animation.JointTrack.getJointWithTranslation;
 public class WitherRapierPassive extends PassiveSkill {
     private static final UUID EVENT_UUID = UUID.fromString("f068901b-b297-4194-9c94-970c8a7030e4");
 
-    public WitherRapierPassive(Builder<? extends Skill> builder) {
+    public WitherRapierPassive(SkillBuilder<? extends PassiveSkill> builder) {
         super(builder);
     }
 
@@ -34,7 +35,7 @@ public class WitherRapierPassive extends PassiveSkill {
     public void onInitiate(SkillContainer container) {
         super.onInitiate(container);
 
-        container.getExecuter().getEventListener().addEventListener(PlayerEventListener.EventType.DEALT_DAMAGE_EVENT_DAMAGE, EVENT_UUID, (event) -> {
+        container.getExecutor().getEventListener().addEventListener(PlayerEventListener.EventType.DEALT_DAMAGE_EVENT_DAMAGE, EVENT_UUID, (event) -> {
             LivingEntity target = event.getTarget();
             if (event.getAttackDamage() < 1.5) {
                 return;
@@ -46,7 +47,7 @@ public class WitherRapierPassive extends PassiveSkill {
             target.addEffect(witherEffect);
         });
 
-        container.getExecuter().getEventListener().addEventListener(PlayerEventListener.EventType.MOVEMENT_INPUT_EVENT, EVENT_UUID, (event) -> {
+        container.getExecutor().getEventListener().addEventListener(PlayerEventListener.EventType.MOVEMENT_INPUT_EVENT, EVENT_UUID, (event) -> {
             LivingEntity player = event.getPlayerPatch().getOriginal();
             RandomSource random = RandomSource.create();
             if (player == null) return;
@@ -58,16 +59,16 @@ public class WitherRapierPassive extends PassiveSkill {
                     double xOffset = (random.nextDouble() - 0.3) * 0.3;
                     double yOffset = (random.nextDouble() - random.nextDouble()) * 0.3D;
                     double zOffset = (random.nextDouble() - 0.3) * 0.3;
-                    Vec3 basePos = getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(0F, -1F, -0.3F), Armatures.BIPED.rootJoint);
+                    Vec3 basePos = getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(0F, -1F, -0.3F), Armatures.BIPED.get().rootJoint);
                     List<Vec3> positions = new ArrayList<>();
-                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(L, 0F, 0.6F), Armatures.BIPED.head));
-                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(R, 0F, 0.6F), Armatures.BIPED.head));
-                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(L, 0.06F, 0.1F), Armatures.BIPED.chest));
-                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(R, 0.06F, 0.1F), Armatures.BIPED.chest));
-                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(0F, 0.6F, 0F), Armatures.BIPED.armL));
-                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(0F, 0.6F, 0F), Armatures.BIPED.armR));
-                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(0F, 0.2F, 0.2F), Armatures.BIPED.thighL));
-                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(0F, 0.2F, 0.2F), Armatures.BIPED.thighR));
+                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(L, 0F, 0.6F), Armatures.BIPED.get().head));
+                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(R, 0F, 0.6F), Armatures.BIPED.get().head));
+                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(L, 0.06F, 0.1F), Armatures.BIPED.get().chest));
+                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(R, 0.06F, 0.1F), Armatures.BIPED.get().chest));
+                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(0F, 0.6F, 0F), Armatures.BIPED.get().armL));
+                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(0F, 0.6F, 0F), Armatures.BIPED.get().armR));
+                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(0F, 0.2F, 0.2F), Armatures.BIPED.get().thighL));
+                    positions.add(getJointWithTranslation(Minecraft.getInstance().player, player, new Vec3f(0F, 0.2F, 0.2F), Armatures.BIPED.get().thighR));
                     for (Vec3 pos : positions) {
                         if (pos != null) {
                             Vec3 ovalPos = pos.add(xOffset, yOffset, zOffset);
@@ -106,14 +107,14 @@ public class WitherRapierPassive extends PassiveSkill {
     @Override
     public void onRemoved(SkillContainer container) {
         super.onRemoved(container);
-        LivingEntity player = container.getExecuter().getOriginal();
+        LivingEntity player = container.getExecutor().getOriginal();
         if (player != null && player.hasEffect(MobEffects.SLOW_FALLING)) {
             MobEffectInstance effect = player.getEffect(MobEffects.SLOW_FALLING);
             if (effect != null && effect.getDuration() < 10) {
                 player.removeEffect(MobEffects.SLOW_FALLING);
             }
         }
-        container.getExecuter().getEventListener().removeListener(PlayerEventListener.EventType.DEALT_DAMAGE_EVENT_DAMAGE, EVENT_UUID);
-        container.getExecuter().getEventListener().removeListener(PlayerEventListener.EventType.MOVEMENT_INPUT_EVENT, EVENT_UUID);
+        container.getExecutor().getEventListener().removeListener(PlayerEventListener.EventType.DEALT_DAMAGE_EVENT_DAMAGE, EVENT_UUID);
+        container.getExecutor().getEventListener().removeListener(PlayerEventListener.EventType.MOVEMENT_INPUT_EVENT, EVENT_UUID);
     }
 }

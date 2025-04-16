@@ -9,7 +9,7 @@ import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
 import net.yonchi.refm.world.item.RapierAddonItems;
 
-import reascer.wom.gameasset.WOMSkills;
+//import reascer.wom.gameasset.WOMSkills;
 
 import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.client.forgeevent.WeaponCategoryIconRegisterEvent;
@@ -42,7 +42,7 @@ public class RapierGuardWoM implements ICompatModule {
     @Override
     public void onForgeEventBusClient(IEventBus iEventBus) {
     }
-
+/*
     public static void regIcon(WeaponCategoryIconRegisterEvent event) {
         event.registerCategory(RapierWeaponCategories.RAPIER, new ItemStack(RapierAddonItems.IRON_RAPIER.get()));
         event.registerCategory(RapierWeaponCategories.ENDER_RAPIER, new ItemStack(RapierAddonItems.ENDERITE_RAPIER.get()));
@@ -131,5 +131,5 @@ public class RapierGuardWoM implements ICompatModule {
         for (WeaponCategory weaponCapability : advancedGuardMotions.keySet()) {
             target.put(weaponCapability, advancedGuardMotions.get(weaponCapability));
         }
-    }
+    }*/
 }

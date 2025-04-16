@@ -41,8 +41,8 @@ public class RapierForEpicfight {
     public static RapierAnimations.IProxy proxy;
     public static final String MOD_ID = "refm";
 
-    public RapierForEpicfight() {
-        IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
+    public RapierForEpicfight(FMLJavaModLoadingContext context) {
+        final IEventBus bus = context.getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
 
         WeaponCategory.ENUM_MANAGER.registerEnumCls(MOD_ID, RapierWeaponCategories.class);
@@ -66,24 +66,24 @@ public class RapierForEpicfight {
         }
 
         if (ModList.get().isLoaded("efstaminainteractions")) {
-            ICompatModule.loadCompatModule(RapierStaminaConfig.class);
+            ICompatModule.loadCompatModule(context, RapierStaminaConfig.class);
             bus.addListener(RapierStaminaConfig::registerStamina);
         }
         if (ModList.get().isLoaded("irons_spellbooks")) {
-            ICompatModule.loadCompatModule(AmethystGuard.class);
+            ICompatModule.loadCompatModule(context, AmethystGuard.class);
             bus.addListener(AmethystGuard::buildSkillEvent);
             DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(AmethystGuard::regIcon));
         }
         if (ModList.get().isLoaded("wom")) {
-            ICompatModule.loadCompatModule(RapierGuardWoM.class);
-            bus.addListener(RapierGuardWoM::buildSkillEvent);
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(RapierGuardWoM::regIcon));
+            ICompatModule.loadCompatModule(context, RapierGuardWoM.class);
+            //bus.addListener(RapierGuardWoM::buildSkillEvent);
+            //DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(RapierGuardWoM::regIcon));
         }
         if (ModList.get().isLoaded("wom")) {
             if (ModList.get().isLoaded("irons_spellbooks")) {
-                ICompatModule.loadCompatModule(AmethystGuardWoM.class);
-                bus.addListener(AmethystGuardWoM::buildSkillEvent);
-                DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(AmethystGuardWoM::regIcon));
+                ICompatModule.loadCompatModule(context, AmethystGuardWoM.class);
+                //bus.addListener(AmethystGuardWoM::buildSkillEvent);
+                //DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(AmethystGuardWoM::regIcon));
             }
         }
     }

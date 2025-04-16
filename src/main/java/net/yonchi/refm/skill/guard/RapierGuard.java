@@ -1,8 +1,8 @@
 package net.yonchi.refm.skill.guard;
 
+import com.google.common.collect.Maps;
+
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.registries.RegisterEvent;
 
@@ -10,7 +10,6 @@ import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
 import net.yonchi.refm.world.item.RapierAddonItems;
 
-import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.client.forgeevent.WeaponCategoryIconRegisterEvent;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.gameasset.EpicFightSkills;
@@ -20,7 +19,7 @@ import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.item.WeaponCategory;
 
 import java.lang.reflect.Field;
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 
@@ -38,12 +37,11 @@ public class RapierGuard {
     public static boolean regGuarded = false;
 
     public static void buildSkillEvent(RegisterEvent event) {
-        if (EpicFightSkills.GUARD == null) {
+        if (EpicFightSkills.GUARD == null || EpicFightSkills.IMPACT_GUARD == null || EpicFightSkills.PARRYING == null) {
             return;
         }
-        if (regGuarded) {
-            return;
-        }
+        if (regGuarded) return;
+
         try {
             regGuard();
         } catch (Exception e) {
@@ -52,42 +50,31 @@ public class RapierGuard {
         regGuarded = true;
     }
 
-    public static void regGuard() throws NoSuchFieldException, IllegalAccessException {
-        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardMotions = new HashMap<>();
-        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardBreakMotions = new HashMap<>();
-        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> advancedGuardMotions = new HashMap<>();
+    public static void regGuard() throws ReflectiveOperationException {
+        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardMotions = Maps.newHashMap();
+        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> guardBreakMotions = Maps.newHashMap();
+        Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> advancedGuardMotions = Maps.newHashMap();
 
         //Normal
-        guardMotions.put(RapierWeaponCategories.RAPIER, (item, player) ->
-                RapierAnimations.RAPIER_GUARD_HIT);
-        guardBreakMotions.put(RapierWeaponCategories.RAPIER, (item, player) ->
-                Animations.BIPED_COMMON_NEUTRALIZED);
-        advancedGuardMotions.put(RapierWeaponCategories.RAPIER, (itemCap, playerpatch) ->
-                new StaticAnimation[]{RapierAnimations.RAPIER_GUARD_PARRY});
+        guardMotions.put(RapierWeaponCategories.RAPIER, (item, player) -> RapierAnimations.RAPIER_GUARD_HIT);
+        guardBreakMotions.put(RapierWeaponCategories.RAPIER, (item, player) -> Animations.BIPED_COMMON_NEUTRALIZED);
+        advancedGuardMotions.put(RapierWeaponCategories.RAPIER, (item, player) -> List.of(RapierAnimations.RAPIER_GUARD_PARRY));
         //Ender
-        guardMotions.put(RapierWeaponCategories.ENDER_RAPIER, (item, player) ->
-                RapierAnimations.RAPIER_GUARD_HIT);
-        guardBreakMotions.put(RapierWeaponCategories.ENDER_RAPIER, (item, player) ->
-                Animations.BIPED_COMMON_NEUTRALIZED);
-        advancedGuardMotions.put(RapierWeaponCategories.ENDER_RAPIER, (itemCap, playerpatch) ->
-                new StaticAnimation[]{RapierAnimations.RAPIER_GUARD_PARRY_ENDER});
+        guardMotions.put(RapierWeaponCategories.ENDER_RAPIER, (item, player) -> RapierAnimations.RAPIER_GUARD_HIT);
+        guardBreakMotions.put(RapierWeaponCategories.ENDER_RAPIER, (item, player) -> Animations.BIPED_COMMON_NEUTRALIZED);
+        advancedGuardMotions.put(RapierWeaponCategories.ENDER_RAPIER, (item, player) -> List.of(RapierAnimations.RAPIER_GUARD_PARRY_ENDER));
         //Ocean
-        guardMotions.put(RapierWeaponCategories.OCEAN_RAPIER, (item, player) ->
-                RapierAnimations.RAPIER_GUARD_HIT);
-        guardBreakMotions.put(RapierWeaponCategories.OCEAN_RAPIER, (item, player) ->
-                Animations.BIPED_COMMON_NEUTRALIZED);
-        advancedGuardMotions.put(RapierWeaponCategories.OCEAN_RAPIER, (itemCap, playerpatch) ->
-                new StaticAnimation[]{RapierAnimations.RAPIER_GUARD_PARRY_OCEAN});
+        guardMotions.put(RapierWeaponCategories.OCEAN_RAPIER, (item, player) -> RapierAnimations.RAPIER_GUARD_HIT);
+        guardBreakMotions.put(RapierWeaponCategories.OCEAN_RAPIER, (item, player) -> Animations.BIPED_COMMON_NEUTRALIZED);
+        advancedGuardMotions.put(RapierWeaponCategories.OCEAN_RAPIER, (item, player) -> List.of(RapierAnimations.RAPIER_GUARD_PARRY_OCEAN));
         //Wither
-        guardMotions.put(RapierWeaponCategories.WITHER_RAPIER, (item, player) ->
-                RapierAnimations.RAPIER_GUARD_HIT);
-        guardBreakMotions.put(RapierWeaponCategories.WITHER_RAPIER, (item, player) ->
-                Animations.BIPED_COMMON_NEUTRALIZED);
-        advancedGuardMotions.put(RapierWeaponCategories.WITHER_RAPIER, (itemCap, playerpatch) ->
-                new StaticAnimation[]{RapierAnimations.RAPIER_GUARD_PARRY_WITHER});
+        guardMotions.put(RapierWeaponCategories.WITHER_RAPIER, (item, player) -> RapierAnimations.RAPIER_GUARD_HIT);
+        guardBreakMotions.put(RapierWeaponCategories.WITHER_RAPIER, (item, player) -> Animations.BIPED_COMMON_NEUTRALIZED);
+        advancedGuardMotions.put(RapierWeaponCategories.WITHER_RAPIER, (item, player) -> List.of(RapierAnimations.RAPIER_GUARD_PARRY_WITHER));
 
         Field temp;
         Map<WeaponCategory, BiFunction<CapabilityItem, PlayerPatch<?>, ?>> target;
+
         temp = GuardSkill.class.getDeclaredField("guardMotions");
         temp.setAccessible(true);
         target = (Map) temp.get(EpicFightSkills.GUARD);
