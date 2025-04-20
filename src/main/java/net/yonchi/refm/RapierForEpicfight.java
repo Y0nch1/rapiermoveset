@@ -6,8 +6,15 @@ import net.minecraft.server.packs.PathPackResources;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraftforge.event.AddPackFindersEvent;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import net.yonchi.refm.gameasset.RapierSounds;
 import net.yonchi.refm.skill.guard.AmethystCompatSkills;
@@ -20,13 +27,6 @@ import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
 import net.yonchi.refm.api.animation.configs.RapierStaminaConfig;
 import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.world.item.RapierAddonItems;
-
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
 import yesman.epicfight.compat.ICompatModule;
 import yesman.epicfight.world.capabilities.item.WeaponCategory;
@@ -52,6 +52,7 @@ public class RapierForEpicfight {
         bus.addListener(RapierAnimations::registerAnimations);
         bus.addListener(net.yonchi.refm.gameasset.RapierSkills::registerRapierSkills);
         bus.addListener(RapierCompatSkills::forceGuard);
+        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(RapierCompatSkills::onIconCreate));
         bus.addListener(this::addPackFindersEvent);
         bus.addListener(this::addCreative);
 
@@ -68,6 +69,7 @@ public class RapierForEpicfight {
         if (ModList.get().isLoaded("irons_spellbooks")) {
             ICompatModule.loadCompatModule(eventBus, AmethystCompatSkills.class);
             bus.addListener(AmethystCompatSkills::forceGuard);
+            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(AmethystCompatSkills::onIconCreate));
         }
         if (ModList.get().isLoaded("wom")) {
             ICompatModule.loadCompatModule(eventBus, RapierGuardWoM.class);

@@ -2,6 +2,8 @@ package net.yonchi.refm.skill.guard;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 
@@ -109,6 +111,7 @@ public class RapierCompatSkills {
     }
 
     @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
     public static void onIconCreate(WeaponCategoryIconRegisterEvent icon){
         icon.registerCategory(RapierWeaponCategories.RAPIER, new ItemStack(RapierAddonItems.IRON_RAPIER.get()));
         icon.registerCategory(RapierWeaponCategories.ENDER_RAPIER, new ItemStack(RapierAddonItems.ENDERITE_RAPIER.get()));
