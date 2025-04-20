@@ -6,10 +6,6 @@
 		{
 			"livingmotion":"IDLE",
 			"type":"none"
-		},
-		{
-			"livingmotion":"ALL",
-			"type":"root_upper_joints"
 		}
 	]
 }

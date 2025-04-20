@@ -6,15 +6,13 @@ import net.minecraft.server.packs.PathPackResources;
 import net.minecraft.server.packs.repository.Pack;
 import net.minecraft.server.packs.repository.PackSource;
 import net.minecraftforge.event.AddPackFindersEvent;
-import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 
-import net.yonchi.refm.gameasset.RapierSkills;
 import net.yonchi.refm.gameasset.RapierSounds;
-import net.yonchi.refm.skill.guard.RapierGuard;
+import net.yonchi.refm.skill.guard.AmethystCompatSkills;
+import net.yonchi.refm.skill.guard.RapierCompatSkills;
 import net.yonchi.refm.skill.guard.RapierGuardWoM;
-import net.yonchi.refm.skill.guard.AmethystGuard;
 import net.yonchi.refm.skill.guard.AmethystGuardWoM;
 import net.yonchi.refm.world.item.RapierTab;
 import net.yonchi.refm.skill.RapierSkillDataKeys;
@@ -41,21 +39,19 @@ public class RapierForEpicfight {
     public static RapierAnimations.IProxy proxy;
     public static final String MOD_ID = "refm";
 
-    public RapierForEpicfight(FMLJavaModLoadingContext context) {
-        final IEventBus bus = context.getModEventBus();
+    public RapierForEpicfight(FMLJavaModLoadingContext eventBus) {
+        final IEventBus bus = eventBus.getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
 
         WeaponCategory.ENUM_MANAGER.registerEnumCls(MOD_ID, RapierWeaponCategories.class);
         RapierTab.register(bus);
-
         RapierAddonItems.ITEMS.register(bus);
         RapierSounds.SOUNDS.register(bus);
-
         RapierSkillDataKeys.DATA_KEYS.register(bus);
+
         bus.addListener(RapierAnimations::registerAnimations);
-        bus.addListener(RapierSkills::registerRapierSkills);
-        bus.addListener(RapierGuard::buildSkillEvent);
-        DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(RapierGuard::regIcon));
+        bus.addListener(net.yonchi.refm.gameasset.RapierSkills::registerRapierSkills);
+        bus.addListener(RapierCompatSkills::forceGuard);
         bus.addListener(this::addPackFindersEvent);
         bus.addListener(this::addCreative);
 
@@ -66,22 +62,21 @@ public class RapierForEpicfight {
         }
 
         if (ModList.get().isLoaded("efstaminainteractions")) {
-            ICompatModule.loadCompatModule(context, RapierStaminaConfig.class);
+            ICompatModule.loadCompatModule(eventBus, RapierStaminaConfig.class);
             bus.addListener(RapierStaminaConfig::registerStamina);
         }
         if (ModList.get().isLoaded("irons_spellbooks")) {
-            ICompatModule.loadCompatModule(context, AmethystGuard.class);
-            bus.addListener(AmethystGuard::buildSkillEvent);
-            DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(AmethystGuard::regIcon));
+            ICompatModule.loadCompatModule(eventBus, AmethystCompatSkills.class);
+            bus.addListener(AmethystCompatSkills::forceGuard);
         }
         if (ModList.get().isLoaded("wom")) {
-            ICompatModule.loadCompatModule(context, RapierGuardWoM.class);
+            ICompatModule.loadCompatModule(eventBus, RapierGuardWoM.class);
             //bus.addListener(RapierGuardWoM::buildSkillEvent);
             //DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(RapierGuardWoM::regIcon));
         }
         if (ModList.get().isLoaded("wom")) {
             if (ModList.get().isLoaded("irons_spellbooks")) {
-                ICompatModule.loadCompatModule(context, AmethystGuardWoM.class);
+                ICompatModule.loadCompatModule(eventBus, AmethystGuardWoM.class);
                 //bus.addListener(AmethystGuardWoM::buildSkillEvent);
                 //DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> bus.addListener(AmethystGuardWoM::regIcon));
             }

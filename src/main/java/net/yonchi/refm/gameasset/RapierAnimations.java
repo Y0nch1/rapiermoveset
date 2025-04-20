@@ -25,6 +25,7 @@ import net.yonchi.refm.RapierForEpicfight;
 
 import yesman.epicfight.api.animation.AnimationClip;
 import yesman.epicfight.api.animation.AnimationManager;
+import yesman.epicfight.api.animation.AnimationManager.AnimationRegistryEvent;
 import yesman.epicfight.api.animation.AnimationManager.AnimationAccessor;
 import yesman.epicfight.api.animation.property.AnimationEvent;
 import yesman.epicfight.api.animation.property.AnimationProperty.*;
@@ -101,7 +102,7 @@ public class RapierAnimations {
     public static AnimationAccessor<AttackAnimation> DEADLYBACKFLIP_SECOND_AMETHYST;
 
     @SubscribeEvent
-    public static void registerAnimations(AnimationManager.AnimationRegistryEvent event) {
+    public static void registerAnimations(AnimationRegistryEvent event) {
         event.newBuilder(RapierForEpicfight.MOD_ID, RapierAnimations::build);
     }
 
@@ -309,7 +310,6 @@ public class RapierAnimations {
                         .addState(EntityState.MOVEMENT_LOCKED, true));
         RAPIER_GUARD_PARRY_ENDER = builder.nextAccessor("biped/skill/guard_rapier_parry_ender", (accessor) ->
                 new BasicAttackAnimation(0.12F, 0.56F, 0.76F, 0.78F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
-
                         .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.setter(3.8F))
                         .addProperty(AttackPhaseProperty.ARMOR_NEGATION_MODIFIER, ValueModifier.setter(99))
                         .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.setter(3))
@@ -417,8 +417,10 @@ public class RapierAnimations {
                         .addProperty(AttackPhaseProperty.SWING_SOUND, EpicFightSounds.WHOOSH_BIG.get())
                         .addProperty(AttackPhaseProperty.HIT_SOUND, EpicFightSounds.BLUNT_HIT.get())
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.4F)
-                        .addProperty(ActionAnimationProperty.COORD_SET_TICK, MoveCoordFunctions.TRACE_TARGET_LOCATION_ROTATION)
-                        .addProperty(ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.1F, 0.8F))
+                        .addProperty(ActionAnimationProperty.DEST_LOCATION_PROVIDER, MoveCoordFunctions.ATTACK_TARGET_LOCATION)
+                        .addProperty(ActionAnimationProperty.COORD_SET_BEGIN, MoveCoordFunctions.TRACE_ORIGIN_AS_DESTINATION)
+                        .addProperty(ActionAnimationProperty.COORD_SET_TICK, MoveCoordFunctions.TRACE_TARGET_DISTANCE)
+                        .addProperty(ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.08F, 0.8F))
                         .addProperty(ActionAnimationProperty.CANCELABLE_MOVE, false)
                         .addEvents(
                                 AnimationEvent.InPeriodEvent.create(0.0F, 0.32F, (entitypatch, self, params) -> {
@@ -430,6 +432,8 @@ public class RapierAnimations {
                                     }
                                 }, AnimationEvent.Side.BOTH)
                         )
+                        .addState(EntityState.LOCKON_ROTATE, true)
+                        .addState(EntityState.MOVEMENT_LOCKED, true)
         );
         DEADLYBACKFLIP_SECOND = builder.nextAccessor("biped/skill/rapier_backflip_second", (accessor) ->
                 new AttackAnimation(0.1F, 0.15F, 1.36F, 1.82F, 1.92F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
