@@ -138,7 +138,9 @@ public class RapierAnimations {
                         .addProperty(ActionAnimationProperty.MOVE_VERTICAL, true)
                         .addEvents(
                                 AnimationEvent.InTimeEvent.create(0.24F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
-                                AnimationEvent.InTimeEvent.create(0.66F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT)
+                                AnimationEvent.InTimeEvent.create(0.27F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.66F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.69F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT)
                         )
         );
         RAPIER_AIR_SLASH_OCEAN = builder.nextAccessor("biped/combat/rapier_airslash_ocean", (accessor) ->
@@ -166,7 +168,7 @@ public class RapierAnimations {
                 .addProperty(AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_SWING.get())
                 .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(1))
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(1))
-                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
+                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.1F)
                 .addProperty(ActionAnimationProperty.CANCELABLE_MOVE, true)
                 .addProperty(ActionAnimationProperty.AFFECT_SPEED, true)
                 .addProperty(StaticAnimationProperty.FIXED_HEAD_ROTATION, false));
@@ -180,7 +182,10 @@ public class RapierAnimations {
                 .addProperty(AttackAnimationProperty.FIXED_MOVE_DISTANCE, true)
                 .addProperty(ActionAnimationProperty.COORD_SET_BEGIN, MoveCoordFunctions.TRACE_TARGET_DISTANCE)
                 .addProperty(ActionAnimationProperty.CANCELABLE_MOVE, true)
-                .addEvents(AnimationEvent.InTimeEvent.create(0.31F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT))
+                .addEvents(
+                        AnimationEvent.InTimeEvent.create(0.33F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                        AnimationEvent.InTimeEvent.create(0.36F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT)
+                )
                 .addState(EntityState.MOVEMENT_LOCKED, true));
         RAPIER_DASH_OCEAN = builder.nextAccessor("biped/combat/rapier_dash_ocean", (accessor) ->
                 new DashAttackAnimation(0.15F, accessor, Armatures.BIPED, new AttackAnimation.Phase(0.0F, 0.2F, 0.78F, 1.2F, 1.2F, Armatures.BIPED.get().toolR, RapierColliderPreset.RAPIER_DASH))
@@ -188,7 +193,7 @@ public class RapierAnimations {
                 .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(1))
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(4))
                 .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.LONG)
-                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
+                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.3F)
                 .addProperty(AttackAnimationProperty.FIXED_MOVE_DISTANCE, true)
                 .addProperty(ActionAnimationProperty.AFFECT_SPEED, true)
                 .addProperty(ActionAnimationProperty.CANCELABLE_MOVE, true)
@@ -230,7 +235,7 @@ public class RapierAnimations {
                 .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(1))
                 .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.adder(2))
                 .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.LONG)
-                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
+                .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.4F)
                 .addProperty(ActionAnimationProperty.COORD_SET_BEGIN, MoveCoordFunctions.TRACE_TARGET_LOCATION_ROTATION)
                 .addProperty(ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.15F, 0.22F))
                 .addProperty(ActionAnimationProperty.AFFECT_SPEED, true)
@@ -267,7 +272,9 @@ public class RapierAnimations {
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.1F)
                         .addEvents(
                                 AnimationEvent.InTimeEvent.create(0.08F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
-                                AnimationEvent.InTimeEvent.create(0.36F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT)
+                                AnimationEvent.InTimeEvent.create(0.11F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.36F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.39F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT)
                         ));
         RAPIER_AUTO3_OCEAN = builder.nextAccessor("biped/combat/rapier_auto3_ocean", (accessor) ->
                 new BasicAttackAnimation(0.18F, accessor, Armatures.BIPED,
@@ -319,7 +326,10 @@ public class RapierAnimations {
                         .addProperty(AttackAnimationProperty.FIXED_MOVE_DISTANCE, true)
                         .addProperty(ActionAnimationProperty.CANCELABLE_MOVE, false)
                         .addProperty(ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.2F, 1F))
-                        .addEvents(AnimationEvent.InTimeEvent.create(0.28F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT))
+                        .addEvents(
+                                AnimationEvent.InTimeEvent.create(0.28F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.31F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT)
+                        )
                         .addState(EntityState.TURNING_LOCKED, true)
                         .addState(EntityState.MOVEMENT_LOCKED, true)
         );
@@ -468,9 +478,13 @@ public class RapierAnimations {
                         .addProperty(ActionAnimationProperty.CANCELABLE_MOVE, false)
                         .addEvents(
                                 AnimationEvent.InTimeEvent.create(0.44F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.47F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT),
                                 AnimationEvent.InTimeEvent.create(1.24F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(1.27F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT),
                                 AnimationEvent.InTimeEvent.create(1.66F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(1.69F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT),
                                 AnimationEvent.InTimeEvent.create(2.16F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(2.19F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT),
                                 AnimationEvent.InPeriodEvent.create(0.4F, 2F, (entitypatch, self, params) -> {
                                     ((LivingEntity) entitypatch.getOriginal()).resetFallDistance();
                                     if (entitypatch.getOriginal() instanceof Player) {
@@ -592,7 +606,8 @@ public class RapierAnimations {
         );
         DEADLYBACKFLIP_SECOND_AMETHYST = builder.nextAccessor("biped/skill/rapier_backflip_second_amethyst", (accessor) ->
                 new AttackAnimation(0.1F, 0.15F, 0.86F, 1.28F, 1.32F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
-                        .addProperty(AttackPhaseProperty.HIT_SOUND, SoundEvents.AMETHYST_BLOCK_PLACE)
+                        .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN)
+                        .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_OCEAN_WAVE.get())
                         .addProperty(AttackPhaseProperty.PARTICLE, EpicFightParticles.BLADE_RUSH_SKILL)
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2F)
                         .addProperty(AttackAnimationProperty.FIXED_MOVE_DISTANCE, true)
@@ -669,17 +684,20 @@ public class RapierAnimations {
             entity.playSound(SoundEvents.FOX_TELEPORT, 1F, 1.2F);
             scheduler.schedule(() -> {
                 spawnParticlesEnder(entity, random);
-                entity.level().addParticle(
-                        EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
-                        entity.getX(),
-                        entity.getY(),
-                        entity.getZ(),
-                        Double.longBitsToDouble(entity.getId()),
-                        0,
-                        0
-                );
-            }, 52, TimeUnit.MILLISECONDS);
+            }, 48, TimeUnit.MILLISECONDS);
             spawnParticlesEnderDelayed(entity, random);
+        };
+        private static final AnimationEvent.E0 ENDER_IMAGE = (entitypatch, self, params) -> {
+            Entity entity = entitypatch.getOriginal();
+            entity.level().addParticle(
+                    EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
+                    entity.getX(),
+                    entity.getY(),
+                    entity.getZ(),
+                    Double.longBitsToDouble(entity.getId()),
+                    0,
+                    0
+            );
         };
 
         //OCEAN
