@@ -572,7 +572,10 @@ public class RapierAnimations {
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.2F)
                         .addProperty(ActionAnimationProperty.COORD_SET_TICK, MoveCoordFunctions.TRACE_TARGET_LOCATION_ROTATION)
                         .addProperty(ActionAnimationProperty.CANCELABLE_MOVE, true)
-                        .addEvents(AnimationEvent.InTimeEvent.create(0.25F, ReusableEvents.AMETHYST_IMAGE_PARTICLES_TINY, AnimationEvent.Side.CLIENT))
+                        .addEvents(
+                                AnimationEvent.InTimeEvent.create(0.24F, ReusableEvents.AMETHYST_PARTICLES_TINY, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.26F, ReusableEvents.AMETHYST_IMAGE_PARTICLES_TINY, AnimationEvent.Side.CLIENT)
+                        )
                         .addState(EntityState.MOVEMENT_LOCKED, true)
         );
         RAPIER_AUTO2_AMETHYST = builder.nextAccessor("biped/combat/rapier_auto2_amethyst", (accessor) ->
@@ -600,7 +603,9 @@ public class RapierAnimations {
                 )
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.1F)
                         .addEvents(
-                                AnimationEvent.InTimeEvent.create(0.075F, ReusableEvents.AMETHYST_IMAGE_PARTICLES_TINY, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.075F, ReusableEvents.AMETHYST_PARTICLES_TINY, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.085F, ReusableEvents.AMETHYST_IMAGE_PARTICLES_TINY, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.33F, ReusableEvents.AMETHYST_PARTICLES_TINY, AnimationEvent.Side.CLIENT),
                                 AnimationEvent.InTimeEvent.create(0.36F, ReusableEvents.AMETHYST_IMAGE_PARTICLES_TINY, AnimationEvent.Side.CLIENT)
                         )
         );
@@ -640,7 +645,10 @@ public class RapierAnimations {
                         .addProperty(AttackAnimationProperty.FIXED_MOVE_DISTANCE, true)
                         .addState(EntityState.MOVEMENT_LOCKED, true)
                         .addState(EntityState.TURNING_LOCKED, true)
-                        .addEvents(AnimationEvent.InTimeEvent.create(0.28F, ReusableEvents.AMETHYST_IMAGE_PARTICLES_TINY, AnimationEvent.Side.CLIENT))
+                        .addEvents(
+                                AnimationEvent.InTimeEvent.create(0.28F, ReusableEvents.AMETHYST_PARTICLES_TINY, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.31F, ReusableEvents.AMETHYST_IMAGE_PARTICLES_TINY, AnimationEvent.Side.CLIENT)
+                        )
         );
     }
 
@@ -767,8 +775,7 @@ public class RapierAnimations {
             Entity entity = entitypatch.getOriginal();
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
-                spawnAmethystParticlesFollowingPlayer_Tiny(playerEntity);
-                scheduler.schedule(() -> entity.level().addParticle(
+                entity.level().addParticle(
                         EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
                         entity.getX(),
                         entity.getY(),
@@ -776,7 +783,7 @@ public class RapierAnimations {
                         Double.longBitsToDouble(entity.getId()),
                         0,
                         0
-                ), 52, TimeUnit.MILLISECONDS);
+                );
             }
         };
         private static final AnimationEvent.E0 AMETHYST_PARTICLES_TINY = (entitypatch, self, params) -> {

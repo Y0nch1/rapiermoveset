@@ -19,7 +19,6 @@ import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.skill.SkillBuilder;
 import yesman.epicfight.skill.SkillContainer;
 import yesman.epicfight.skill.passive.PassiveSkill;
-import yesman.epicfight.skill.weaponinnate.WeaponInnateSkill;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener;
 
 import static net.yonchi.refm.api.animation.JointTrack.getJointWithTranslation;
