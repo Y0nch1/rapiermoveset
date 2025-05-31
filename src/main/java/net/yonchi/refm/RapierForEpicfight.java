@@ -40,7 +40,7 @@ public class RapierForEpicfight {
     public static final String MOD_ID = "refm";
 
     public RapierForEpicfight(FMLJavaModLoadingContext eventBus) {
-        final IEventBus bus = eventBus.getModEventBus();
+        IEventBus bus = eventBus.getModEventBus();
         MinecraftForge.EVENT_BUS.register(this);
 
         WeaponCategory.ENUM_MANAGER.registerEnumCls(MOD_ID, RapierWeaponCategories.class);
