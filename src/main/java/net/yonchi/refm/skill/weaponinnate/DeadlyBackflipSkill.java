@@ -10,10 +10,8 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.phys.Vec3;
 
 import net.yonchi.refm.gameasset.RapierAnimations;
 
@@ -31,11 +29,13 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
         private static final UUID EVENT_UUID = UUID.fromString("1f6aea85-2194-4761-af8e-1a5c99c4f414");
         public final AssetAccessor<? extends AttackAnimation> first;
         public final AssetAccessor<? extends AttackAnimation> second;
+        public final AssetAccessor<? extends AttackAnimation> fail;
 
         public DeadlyBackflipSkill(SkillBuilder<? extends WeaponInnateSkill> builder) {
             super(builder);
             this.first = RapierAnimations.DEADLYBACKFLIP_FIRST;
             this.second = RapierAnimations.DEADLYBACKFLIP_SECOND;
+            this.fail = RapierAnimations.DEADLYBACKFLIP_FAIL;
         }
 
         @Override
@@ -49,6 +49,10 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
                         event.getPlayerPatch().getServerAnimator().getPlayerFor(null).reset();
                         event.getPlayerPatch().reserveAnimation(this.second);
                         event.getPlayerPatch().getCurrenltyHurtEntities().clear();
+                    } else {
+                        event.getPlayerPatch().getServerAnimator().getPlayerFor(null).reset();
+                        event.getPlayerPatch().reserveAnimation(this.fail);
+                        event.getPlayerPatch().getCurrenltyHurtEntities().clear();
                     }
                 }
             });
@@ -60,23 +64,6 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
         }
 
         @Override
-        public boolean checkExecuteCondition(SkillContainer container) {
-            Entity target = container.getExecutor().getTarget();
-            if (target == null || !target.isAlive()) {
-                return false;
-            }
-            Vec3 targetPos = target.position();
-            Vec3 playerPos = container.getExecutor().getOriginal().position();
-            Vec3 predictedTargetPos = targetPos.add(target.getDeltaMovement());
-
-            double distance = playerPos.distanceTo(predictedTargetPos);
-            double minDistance = 1.5;
-            double maxDistance = 7.0;
-
-            return distance >= minDistance && distance <= maxDistance;
-        }
-
-        @Override
         public void executeOnServer(SkillContainer container, FriendlyByteBuf args) {
             container.getExecutor().playAnimationSynchronized(this.first, 0);
             LivingEntity target = (LivingEntity) container.getExecutor().getTarget();
@@ -84,7 +71,6 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
             if (target != null && target.isAlive()) {
                 target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 36, 50));
             }
-            super.executeOnServer(container, args);
         }
 
         @Override

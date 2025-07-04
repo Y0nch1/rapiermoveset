@@ -90,6 +90,7 @@ public class RapierAnimations {
     public static AnimationAccessor<MovementAnimation> BIPED_SWIM_RAPIER;
 
     public static AnimationAccessor<AttackAnimation> DEADLYBACKFLIP_FIRST;
+    public static AnimationAccessor<AttackAnimation> DEADLYBACKFLIP_FAIL;
     public static AnimationAccessor<AttackAnimation> DEADLYBACKFLIP_SECOND;
     public static AnimationAccessor<AttackAnimation> DEADLYBACKFLIP_SECOND_ENDER;
     public static AnimationAccessor<AttackAnimation> DEADLYBACKFLIP_SECOND_OCEAN;
@@ -421,12 +422,18 @@ public class RapierAnimations {
                         .addState(EntityState.MOVEMENT_LOCKED, true)
         );
 
+        DEADLYBACKFLIP_FAIL = builder.nextAccessor("biped/skill/rapier_backflip_fail", (accessor) ->
+                new AttackAnimation(0F, 0F, 0F, 0F, 0.32F, null, Armatures.BIPED.get().thighL, accessor, Armatures.BIPED)
+                        .addProperty(AttackPhaseProperty.SWING_SOUND, SoundEvents.EMPTY)
+                        .addProperty(AttackPhaseProperty.HIT_SOUND, SoundEvents.EMPTY)
+                        .addProperty(ActionAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0F, 0.2F))
+                        .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.6F));
         DEADLYBACKFLIP_FIRST = builder.nextAccessor("biped/skill/rapier_backflip_first", (accessor) ->
-                new AttackAnimation(0.1F, 0.2F, 0.25F, 2.8F, 3F, RapierColliderPreset.KICK, Armatures.BIPED.get().thighL, accessor, Armatures.BIPED)
+                new AttackAnimation(0.1F, 0.2F, 0.32F, 0.84F, 0.96F, RapierColliderPreset.KICK, Armatures.BIPED.get().thighL, accessor, Armatures.BIPED)
                         .addProperty(AttackPhaseProperty.HIT_PRIORITY, HitEntityList.Priority.TARGET)
                         .addProperty(AttackPhaseProperty.SWING_SOUND, EpicFightSounds.WHOOSH_BIG.get())
                         .addProperty(AttackPhaseProperty.HIT_SOUND, EpicFightSounds.BLUNT_HIT.get())
-                        .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.4F)
+                        .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.6F)
                         .addProperty(ActionAnimationProperty.DEST_LOCATION_PROVIDER, MoveCoordFunctions.ATTACK_TARGET_LOCATION)
                         .addProperty(ActionAnimationProperty.COORD_SET_BEGIN, MoveCoordFunctions.TRACE_ORIGIN_AS_DESTINATION)
                         .addProperty(ActionAnimationProperty.COORD_SET_TICK, MoveCoordFunctions.TRACE_TARGET_DISTANCE)
@@ -446,7 +453,7 @@ public class RapierAnimations {
                         .addState(EntityState.MOVEMENT_LOCKED, true)
         );
         DEADLYBACKFLIP_SECOND = builder.nextAccessor("biped/skill/rapier_backflip_second", (accessor) ->
-                new AttackAnimation(0.1F, 0.15F, 1.36F, 1.82F, 1.92F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
+                new AttackAnimation(0.2F, 0.2F, 1.36F, 1.82F, 1.92F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
                         .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN)
                         .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_SKILL.get())
                         .addProperty(AttackPhaseProperty.PARTICLE, EpicFightParticles.BLADE_RUSH_SKILL)
@@ -458,7 +465,7 @@ public class RapierAnimations {
                         .addState(EntityState.MOVEMENT_LOCKED, true)
         );
         DEADLYBACKFLIP_SECOND_ENDER = builder.nextAccessor("biped/skill/rapier_backflip_second_ender", (accessor) ->
-                new AttackAnimation(0.1F, accessor, Armatures.BIPED,
+                new AttackAnimation(0.2F, accessor, Armatures.BIPED,
                         new AttackAnimation.Phase(0.0F, 0.2F, 1.06F, 1.32F, 1.4F, 1.4F, Armatures.BIPED.get().toolR, null)
                                 .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.FALL)
                                 .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_HIT.get()),
@@ -497,7 +504,7 @@ public class RapierAnimations {
                         .addState(EntityState.MOVEMENT_LOCKED, true)
         );
         DEADLYBACKFLIP_SECOND_OCEAN = builder.nextAccessor("biped/skill/rapier_backflip_second_ocean", (accessor) ->
-                new AttackAnimation(0.1F, 0.15F, 0.86F, 1.28F, 1.32F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
+                new AttackAnimation(0.2F, 0.2F, 0.86F, 1.28F, 1.32F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
                         .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN)
                         .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_OCEAN_WAVE.get())
                         .addProperty(AttackPhaseProperty.PARTICLE, EpicFightParticles.BLADE_RUSH_SKILL)
@@ -523,7 +530,7 @@ public class RapierAnimations {
                         .addState(EntityState.MOVEMENT_LOCKED, true)
         );
         DEADLYBACKFLIP_SECOND_WITHER = builder.nextAccessor("biped/skill/rapier_backflip_second_wither", (accessor) ->
-                new AttackAnimation(0.1F, accessor, Armatures.BIPED,
+                new AttackAnimation(0.2F, accessor, Armatures.BIPED,
                         new AttackAnimation.Phase(0.0F, 0.2F, 1.86F, 2.10F, 2.12F, 2.12F, Armatures.BIPED.get().toolR, null)
                                 .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.NONE)
                                 .addProperty(AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_HURT)
@@ -610,7 +617,7 @@ public class RapierAnimations {
                         )
         );
         DEADLYBACKFLIP_SECOND_AMETHYST = builder.nextAccessor("biped/skill/rapier_backflip_second_amethyst", (accessor) ->
-                new AttackAnimation(0.1F, 0.15F, 0.86F, 1.28F, 1.32F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
+                new AttackAnimation(0.2F, 0.2F, 0.86F, 1.28F, 1.32F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
                         .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.KNOCKDOWN)
                         .addProperty(AttackPhaseProperty.HIT_SOUND, RapierSounds.RAPIER_OCEAN_WAVE.get())
                         .addProperty(AttackPhaseProperty.PARTICLE, EpicFightParticles.BLADE_RUSH_SKILL)
