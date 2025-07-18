@@ -69,6 +69,9 @@ public class RapierAnimations {
     public static AnimationAccessor<DashAttackAnimation> RAPIER_DASH_WITHER;
     public static AnimationAccessor<BasicAttackAnimation> RAPIER_AUTO1;
     public static AnimationAccessor<BasicAttackAnimation> RAPIER_AUTO2;
+    public static AnimationAccessor<BasicAttackAnimation> RAPIER_AUTO2_ENDER;
+    public static AnimationAccessor<BasicAttackAnimation> RAPIER_AUTO2_OCEAN;
+    public static AnimationAccessor<BasicAttackAnimation> RAPIER_AUTO2_WITHER;
     public static AnimationAccessor<BasicAttackAnimation> RAPIER_AUTO3;
     public static AnimationAccessor<BasicAttackAnimation> RAPIER_AUTO3_ENDER;
     public static AnimationAccessor<BasicAttackAnimation> RAPIER_AUTO3_OCEAN;
@@ -255,6 +258,37 @@ public class RapierAnimations {
                 new BasicAttackAnimation(0.12F, 0.3F, 0.38F, 0.48F, 0.54F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F)
                         .addProperty(ActionAnimationProperty.CANCELABLE_MOVE, true));
+        RAPIER_AUTO2_ENDER = builder.nextAccessor("biped/combat/rapier_auto2_ender", (accessor) ->
+                new BasicAttackAnimation(0.18F, accessor, Armatures.BIPED,
+                        new AttackAnimation.Phase(0.0F, 0.3F, 0.38F, 0.56F, 0.6F, 0.6F, Armatures.BIPED.get().toolR, null)
+                                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.5F))
+                                .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.NONE),
+                        new AttackAnimation.Phase(0.6F, 0.6F, 0.72F, 0.92F, 0.95F, 1F, Armatures.BIPED.get().toolR, null)
+                                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.6F)))
+                        .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.9F)
+                        .addProperty(AttackAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.12F, 0.48F))
+                        .addEvents(
+                                AnimationEvent.InTimeEvent.create(0.12F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.15F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.50F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.52F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT)
+                        ));
+        RAPIER_AUTO2_OCEAN = builder.nextAccessor("biped/combat/rapier_auto2_ocean", (accessor) ->
+                new BasicAttackAnimation(0.18F, accessor, Armatures.BIPED,
+                        new AttackAnimation.Phase(0.0F, 0.3F, 0.28F, 0.54F, 0.6F, 0.6F, Armatures.BIPED.get().toolR, null)
+                                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.5F))
+                                .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.NONE),
+                        new AttackAnimation.Phase(0.6F, 0.6F, 0.68F, 0.82F, 0.82F, 0.86F, Armatures.BIPED.get().toolR, null)
+                                .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.6F)))
+                        .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.9F)
+                        .addEvents(AnimationEvent.InPeriodEvent.create(0.2F, 0.86F, ReusableEvents.OCEAN_PARTICLES_WEAPON, AnimationEvent.Side.CLIENT)));
+        RAPIER_AUTO2_WITHER = builder.nextAccessor("biped/combat/rapier_auto2_wither", (accessor) ->
+                new BasicAttackAnimation(0.12F, 0.3F, 0.46F, 0.66F, 0.66F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
+                        .addProperty(AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_SHOOT)
+                        .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(1.2F))
+                        .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.9F)
+                        .addProperty(ActionAnimationProperty.CANCELABLE_MOVE, true)
+                        .addEvents(AnimationEvent.InTimeEvent.create(0.42F, ReusableEvents.WITHER_PARTICLES_TINY, AnimationEvent.Side.CLIENT)));
         RAPIER_AUTO3 = builder.nextAccessor("biped/combat/rapier_auto3", (accessor) ->
                 new BasicAttackAnimation(0.18F, accessor, Armatures.BIPED,
                         new AttackAnimation.Phase(0.0F, 0.3F, 0.25F, 0.42F, 0.5F, 0.5F, Armatures.BIPED.get().toolR, null)
@@ -285,9 +319,7 @@ public class RapierAnimations {
                         new AttackAnimation.Phase(0.6F, 0.6F, 0.86F, 1.1F, 1.1F, 1.1F, Armatures.BIPED.get().toolR, null)
                                 .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.75F)))
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.1F)
-                        .addEvents(
-                                AnimationEvent.InTimeEvent.create(0.46F, ReusableEvents.OCEAN_PARTICLES, AnimationEvent.Side.CLIENT)
-                        ));
+                        .addEvents(AnimationEvent.InPeriodEvent.create(0.24F, 1.2F, ReusableEvents.OCEAN_PARTICLES_WEAPON, AnimationEvent.Side.CLIENT)));
         RAPIER_AUTO3_WITHER = builder.nextAccessor("biped/combat/rapier_auto3_wither", (accessor) ->
                 new BasicAttackAnimation(0.18F, accessor, Armatures.BIPED,
                         new AttackAnimation.Phase(0.0F, 0.3F, 0.33F, 0.46F, 0.48F, 0.5F, Armatures.BIPED.get().toolR, null)
@@ -362,9 +394,10 @@ public class RapierAnimations {
                                 .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.LONG)
                                 .addProperty(AttackPhaseProperty.PARTICLE, EpicFightParticles.EVISCERATE)
                 )
-                        .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.56F)
+                        .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.8F)
                         .addProperty(ActionAnimationProperty.CANCELABLE_MOVE, false)
                         .addEvents(AnimationEvent.InTimeEvent.create(0.32F, ReusableEvents.OCEAN_PARTICLES_TINY, AnimationEvent.Side.CLIENT))
+                        .addEvents(AnimationEvent.InPeriodEvent.create(0.26F, 1.36F, ReusableEvents.OCEAN_PARTICLES_WEAPON, AnimationEvent.Side.CLIENT))
                         .addState(EntityState.MOVEMENT_LOCKED, true)
         );
         RAPIER_GUARD_PARRY_WITHER = builder.nextAccessor("biped/skill/guard_rapier_parry_wither", (accessor) ->
@@ -726,6 +759,39 @@ public class RapierAnimations {
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
                 spawnOceanParticlesFollowingPlayer_Tiny(playerEntity);
+            }
+        };
+        private static final AnimationEvent.E0 OCEAN_PARTICLES_WEAPON = (entitypatch, self, params) -> {
+            Entity entity = entitypatch.getOriginal();
+            Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
+            if (playerEntity != null) {
+                int numParticles = 5;
+                for (int i = 0; i < numParticles; i++) {
+                    Vec3 wep = getJointWithTranslation(Minecraft.getInstance().player, entity, new Vec3f(0F, 0F, -0.6F), Armatures.BIPED.get().toolR);
+                    if (wep != null) {
+                        Vec3 direction = playerEntity.getLookAngle().normalize();
+                        double t = (double)i / numParticles;
+                        Vec3 point = wep.add(direction.scale(t * 2));
+                        Particle particle1 = Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.BUBBLE,
+                                point.x, point.y, point.z,
+                                0,
+                                0,
+                                0
+                        );
+                        Particle particle2 = Minecraft.getInstance().particleEngine.createParticle(ParticleTypes.BUBBLE_POP,
+                                point.x, point.y, point.z,
+                                0,
+                                0,
+                                0
+                        );
+                        if (particle1 != null & particle2 != null) {
+                            particle1.scale(0.86F);
+                            particle1.setLifetime(12);
+                            particle2.scale(0.86F);
+                            particle2.setLifetime(8);
+                        }
+                    }
+                }
             }
         };
         private static final AnimationEvent.E0 OCEAN_PARTICLES_SOUND = (entitypatch, self, params) -> {
