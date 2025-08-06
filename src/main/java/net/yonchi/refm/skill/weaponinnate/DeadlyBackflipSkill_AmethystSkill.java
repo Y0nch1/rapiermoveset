@@ -43,16 +43,16 @@ public class DeadlyBackflipSkill_AmethystSkill extends WeaponInnateSkill {
         super.onInitiate(container);
         container.getExecutor().getEventListener().addEventListener(EventType.ATTACK_ANIMATION_END_EVENT, EVENT_UUID, (event) -> {
             if (RapierAnimations.DEADLYBACKFLIP_FIRST.equals(event.getAnimation())) {
-                List<LivingEntity> hurtEntities = event.getPlayerPatch().getCurrenltyHurtEntities();
+                List<LivingEntity> hurtEntities = event.getPlayerPatch().getCurrentlyActuallyHitEntities();
 
                 if (!hurtEntities.isEmpty() && hurtEntities.get(0).isAlive()) {
                     event.getPlayerPatch().getServerAnimator().getPlayerFor(null).reset();
                     event.getPlayerPatch().reserveAnimation(this.second);
-                    event.getPlayerPatch().getCurrenltyHurtEntities().clear();
+                    event.getPlayerPatch().getCurrentlyActuallyHitEntities().clear();
                 } else {
                     event.getPlayerPatch().getServerAnimator().getPlayerFor(null).reset();
                     event.getPlayerPatch().reserveAnimation(this.fail);
-                    event.getPlayerPatch().getCurrenltyHurtEntities().clear();
+                    event.getPlayerPatch().getCurrentlyActuallyHitEntities().clear();
                 }
             }
         });

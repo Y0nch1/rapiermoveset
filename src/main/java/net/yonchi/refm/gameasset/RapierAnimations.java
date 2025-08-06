@@ -39,7 +39,9 @@ import yesman.epicfight.api.utils.math.Vec3f;
 import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.gameasset.EpicFightSounds;
 import yesman.epicfight.particle.EpicFightParticles;
-import yesman.epicfight.world.damagesource.EpicFightDamageType;
+import yesman.epicfight.world.damagesource.EpicFightDamageSources;
+import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
+import yesman.epicfight.world.damagesource.EpicFightDamageTypes;
 import yesman.epicfight.world.damagesource.StunType;
 import yesman.epicfight.world.effect.EpicFightMobEffects;
 
@@ -123,7 +125,7 @@ public class RapierAnimations {
                 new AirSlashAnimation(0.12F, 0.2F, 0.5F, 0.5F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
                         .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
                         .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(4))
-                        .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER))
+                        .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageTypeTags.FINISHER))
                         .addProperty(AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_JUMP.get())
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.3F)
                         .addProperty(ActionAnimationProperty.MOVE_VERTICAL, false));
@@ -131,10 +133,10 @@ public class RapierAnimations {
                 new AirSlashAnimation(0.18F, accessor, Armatures.BIPED,
                         new AttackAnimation.Phase(0.0F, 0.2F, 0.44F, 0.64F, 0.78F, 0.78F, Armatures.BIPED.get().toolR, null)
                                 .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
-                                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER)),
+                                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageTypeTags.FINISHER)),
                         new AttackAnimation.Phase(0.78F, 0.2F, 0.78F, 1.1F, 1.6F, 1.5F, Armatures.BIPED.get().toolR, null)
                                 .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.LONG)
-                                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER)))
+                                .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageTypeTags.FINISHER)))
                         .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(0.6F))
                         .addProperty(AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_JUMP.get())
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.3F)
@@ -151,7 +153,7 @@ public class RapierAnimations {
                 new AirSlashAnimation(0.12F, 0.38F, 0.56F, 0.56F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
                         .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
                         .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(4))
-                        .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER))
+                        .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageTypeTags.FINISHER))
                         .addProperty(AttackPhaseProperty.SWING_SOUND, RapierSounds.RAPIER_JUMP.get())
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.3F)
                         .addProperty(ActionAnimationProperty.MOVE_VERTICAL, false)
@@ -161,7 +163,7 @@ public class RapierAnimations {
                 new AirSlashAnimation(0.12F, 0.3F, 0.49F, 0.51F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
                         .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
                         .addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.adder(4))
-                        .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER))
+                        .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageTypeTags.FINISHER))
                         .addProperty(AttackPhaseProperty.SWING_SOUND, SoundEvents.WITHER_SHOOT)
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.8F)
                         .addProperty(ActionAnimationProperty.MOVE_VERTICAL, false)
@@ -268,8 +270,8 @@ public class RapierAnimations {
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 1.9F)
                         .addProperty(AttackAnimationProperty.NO_GRAVITY_TIME, TimePairList.create(0.12F, 0.48F))
                         .addEvents(
-                                AnimationEvent.InTimeEvent.create(0.12F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
-                                AnimationEvent.InTimeEvent.create(0.15F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.6F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
+                                AnimationEvent.InTimeEvent.create(0.08F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT),
                                 AnimationEvent.InTimeEvent.create(0.50F, ReusableEvents.ENDER_PARTICLES, AnimationEvent.Side.CLIENT),
                                 AnimationEvent.InTimeEvent.create(0.52F, ReusableEvents.ENDER_IMAGE, AnimationEvent.Side.CLIENT)
                         ));
@@ -599,7 +601,7 @@ public class RapierAnimations {
         RAPIER_AIR_SLASH_AMETHYST = builder.nextAccessor("biped/combat/rapier_airslash_amethyst", (accessor) ->
                 new AirSlashAnimation(0.1F, 0.38F, 0.56F, 0.56F, null, Armatures.BIPED.get().toolR, accessor, Armatures.BIPED)
                         .addProperty(AttackPhaseProperty.STUN_TYPE, StunType.SHORT)
-                        .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageType.FINISHER))
+                        .addProperty(AttackPhaseProperty.SOURCE_TAG, Set.of(EpicFightDamageTypeTags.FINISHER))
                         .addProperty(AttackPhaseProperty.SWING_SOUND, SoundEvents.AMETHYST_BLOCK_FALL)
                         .addProperty(AttackAnimationProperty.BASIS_ATTACK_SPEED, 2.3F)
                         .addProperty(ActionAnimationProperty.MOVE_VERTICAL, false)
@@ -730,15 +732,12 @@ public class RapierAnimations {
             Entity entity = entitypatch.getOriginal();
             RandomSource random = entitypatch.getOriginal().getRandom();
             entity.playSound(SoundEvents.FOX_TELEPORT, 1F, 1.2F);
-            scheduler.schedule(() -> {
-                spawnParticlesEnder(entity, random);
-            }, 48, TimeUnit.MILLISECONDS);
-            spawnParticlesEnderDelayed(entity, random);
+            spawnParticlesEnder(entity, random);
         };
         private static final AnimationEvent.E0 ENDER_IMAGE = (entitypatch, self, params) -> {
             Entity entity = entitypatch.getOriginal();
             entity.level().addParticle(
-                    EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
+                    EpicFightParticles.WHITE_AFTERIMAGE.get(),
                     entity.getX(),
                     entity.getY(),
                     entity.getZ(),
@@ -849,7 +848,7 @@ public class RapierAnimations {
             Entity playerEntity = RapierForEpicfight.proxy.getClientPlayer();
             if (playerEntity != null) {
                 entity.level().addParticle(
-                        EpicFightParticles.ENTITY_AFTER_IMAGE.get(),
+                        EpicFightParticles.WHITE_AFTERIMAGE.get(),
                         entity.getX(),
                         entity.getY(),
                         entity.getZ(),
