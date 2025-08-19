@@ -19,7 +19,7 @@ public class JointTrack {
                 if (entitypatch != null) {
                     float interpolation = 0.0F;
                     OpenMatrix4f transformMatrix;
-                    transformMatrix = entitypatch.getArmature().getBindedTransformFor(entitypatch.getAnimator().getPose(interpolation), joint);
+                    transformMatrix = entitypatch.getArmature().getBoundTransformFor(entitypatch.getAnimator().getPose(interpolation), joint);
                     transformMatrix.translate(translation);
                     OpenMatrix4f.mul((new OpenMatrix4f()).rotate(-((float) Math.toRadians((double) (((LivingEntity) entitypatch.getOriginal()).yBodyRotO + 180.0F))), new Vec3f(0.0F, 1.0F, 0.0F)), transformMatrix, transformMatrix);
                     return new Vec3(
