@@ -7,7 +7,7 @@ import net.neoforged.fml.ModList;
 
 import net.yonchi.refm.gameasset.RapierAnimations;
 import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
-import net.yonchi.refm.world.item.RapierAddonItems;
+import net.yonchi.refm.registry.entries.RapierAddonItems;
 
 import yesman.epicfight.main.EpicFightSharedConstants;
 import yesman.epicfight.registry.entries.EpicFightSkills;
@@ -24,81 +24,6 @@ import io.redspace.ironsspellbooks.registries.ItemRegistry;
 import java.util.List;
 
 public class RapierCompatSkills {
-    public static void onGuardSkillCreation(SkillBuilderModificationEvent event) {
-        if (event.getRegistryName().equals(EpicFightSkills.GUARD.getId())) {
-            if ((event.getSkillBuilder() instanceof GuardSkill.Builder builder)) {
-                builder.addGuardMotion(RapierWeaponCategories.RAPIER, (item, player) -> {
-                    return RapierAnimations.RAPIER_GUARD_HIT;
-                }).addGuardMotion(RapierWeaponCategories.ENDER_RAPIER, (item, player) -> {
-                    return RapierAnimations.RAPIER_GUARD_HIT;
-                }).addGuardMotion(RapierWeaponCategories.OCEAN_RAPIER, (item, player) -> {
-                    return RapierAnimations.RAPIER_GUARD_HIT;
-                }).addGuardMotion(RapierWeaponCategories.WITHER_RAPIER, (item, player) -> {
-                    return RapierAnimations.RAPIER_GUARD_HIT;
-                }).addGuardBreakMotion(RapierWeaponCategories.RAPIER, (item, player) -> {
-                    return Animations.BIPED_COMMON_NEUTRALIZED;
-                }).addGuardBreakMotion(RapierWeaponCategories.ENDER_RAPIER, (item, player) -> {
-                    return Animations.BIPED_COMMON_NEUTRALIZED;
-                }).addGuardBreakMotion(RapierWeaponCategories.OCEAN_RAPIER, (item, player) -> {
-                    return Animations.BIPED_COMMON_NEUTRALIZED;
-                }).addGuardBreakMotion(RapierWeaponCategories.WITHER_RAPIER, (item, player) -> {
-                    return Animations.BIPED_COMMON_NEUTRALIZED;
-                });
-                System.out.println("[RapierCompatSkills] Guard animations has been implemented");
-                if (EpicFightSharedConstants.isPhysicalClient() && ModList.get().isLoaded("irons_spellbooks")) {
-                    builder.addGuardMotion(RapierWeaponCategories.AMETHYST_RAPIER, (item, player) -> {
-                        return RapierAnimations.RAPIER_GUARD_HIT;
-                    }).addGuardBreakMotion(RapierWeaponCategories.AMETHYST_RAPIER, (item, player) -> {
-                        return Animations.BIPED_COMMON_NEUTRALIZED;
-                    });
-                    System.out.println("[RapierCompatSkills] Amethyst Guard animations has been implemented");
-                }
-            }
-        }
-    }
-
-    public static void onParrySkillCreation(SkillBuilderModificationEvent event) {
-        if (event.getRegistryName().equals(EpicFightSkills.PARRYING.getId())) {
-            if ((event.getSkillBuilder() instanceof GuardSkill.Builder builder)) {
-                builder.addGuardMotion(RapierWeaponCategories.RAPIER, (item, player) -> {
-                    return RapierAnimations.RAPIER_GUARD_HIT;
-                }).addGuardMotion(RapierWeaponCategories.ENDER_RAPIER, (item, player) -> {
-                    return RapierAnimations.RAPIER_GUARD_HIT;
-                }).addGuardMotion(RapierWeaponCategories.OCEAN_RAPIER, (item, player) -> {
-                    return RapierAnimations.RAPIER_GUARD_HIT;
-                }).addGuardMotion(RapierWeaponCategories.WITHER_RAPIER, (item, player) -> {
-                    return RapierAnimations.RAPIER_GUARD_HIT;
-                }).addGuardBreakMotion(RapierWeaponCategories.RAPIER, (item, player) -> {
-                    return Animations.BIPED_COMMON_NEUTRALIZED;
-                }).addGuardBreakMotion(RapierWeaponCategories.ENDER_RAPIER, (item, player) -> {
-                    return Animations.BIPED_COMMON_NEUTRALIZED;
-                }).addGuardBreakMotion(RapierWeaponCategories.OCEAN_RAPIER, (item, player) -> {
-                    return Animations.BIPED_COMMON_NEUTRALIZED;
-                }).addGuardBreakMotion(RapierWeaponCategories.WITHER_RAPIER, (item, player) -> {
-                    return Animations.BIPED_COMMON_NEUTRALIZED;
-                }).addAdvancedGuardMotion(RapierWeaponCategories.RAPIER, (item, player) -> {
-                    return List.of(RapierAnimations.RAPIER_GUARD_DEFLECT1, RapierAnimations.RAPIER_GUARD_DEFLECT2);
-                }).addAdvancedGuardMotion(RapierWeaponCategories.ENDER_RAPIER, (item, player) -> {
-                    return List.of(RapierAnimations.RAPIER_GUARD_DEFLECT1, RapierAnimations.RAPIER_GUARD_DEFLECT2);
-                }).addAdvancedGuardMotion(RapierWeaponCategories.OCEAN_RAPIER, (item, player) -> {
-                    return List.of(RapierAnimations.RAPIER_GUARD_DEFLECT1, RapierAnimations.RAPIER_GUARD_DEFLECT2);
-                }).addAdvancedGuardMotion(RapierWeaponCategories.WITHER_RAPIER, (item, player) -> {
-                    return List.of(RapierAnimations.RAPIER_GUARD_DEFLECT1, RapierAnimations.RAPIER_GUARD_DEFLECT2);
-                });
-                System.out.println("[RapierCompatSkills] Parrying animations has been implemented");
-                if (EpicFightSharedConstants.isPhysicalClient() && ModList.get().isLoaded("irons_spellbooks")) {
-                    builder.addGuardMotion(RapierWeaponCategories.AMETHYST_RAPIER, (item, player) -> {
-                        return RapierAnimations.RAPIER_GUARD_HIT;
-                    }).addGuardBreakMotion(RapierWeaponCategories.AMETHYST_RAPIER, (item, player) -> {
-                        return Animations.BIPED_COMMON_NEUTRALIZED;
-                    }).addAdvancedGuardMotion(RapierWeaponCategories.AMETHYST_RAPIER, (item, player) -> {
-                        return List.of(RapierAnimations.RAPIER_GUARD_DEFLECT1, RapierAnimations.RAPIER_GUARD_DEFLECT2);
-                    });
-                    System.out.println("[RapierCompatSkills] Amethyst Parry animations has been implemented");
-                }
-            }
-        }
-    }
 
     public static void onEmergencyEscapeSkillCreation(SkillBuilderModificationEvent event) {
         if (event.getRegistryName().equals(EpicFightSkills.EMERGENCY_ESCAPE.getId())) {

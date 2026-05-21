@@ -1,4 +1,4 @@
-package net.yonchi.refm.gameasset;
+package net.yonchi.refm.registry.entries;
 
 import java.util.Set;
 
@@ -22,7 +22,7 @@ import yesman.epicfight.world.damagesource.EpicFightDamageTypeTags;
 import yesman.epicfight.world.damagesource.ExtraDamageInstance;
 import yesman.epicfight.world.damagesource.StunType;
 
-public class RapierSkills {
+public final class RapierSkills {
     private RapierSkills() {}
 
     public static final DeferredRegister<Skill> REGISTRY = DeferredRegister.create(EpicFightRegistries.Keys.SKILL, RapierForEpicfight.MOD_ID);

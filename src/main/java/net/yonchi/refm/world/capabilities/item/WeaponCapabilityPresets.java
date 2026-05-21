@@ -7,6 +7,8 @@ import net.minecraft.world.item.Item;
 import net.yonchi.refm.RapierForEpicfight;
 import net.yonchi.refm.gameasset.*;
 
+import net.yonchi.refm.registry.entries.RapierSkills;
+import net.yonchi.refm.registry.entries.RapierSounds;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.event.types.registry.WeaponCapabilityPresetRegistryEvent;
 import yesman.epicfight.world.capabilities.item.WeaponCapability;
@@ -137,4 +139,3 @@ public class WeaponCapabilityPresets {
             event.getTypeEntry().put(ResourceLocation.fromNamespaceAndPath(RapierForEpicfight.MOD_ID, "amethyst_rapier"), AMETHYST_RAPIER);
     }
 }
-//https://github.com/Epic-Fight/epicfight/blob/1.21.1/src/main/java/yesman/epicfight/world/capabilities/item/WeaponCapabilityPresets.java

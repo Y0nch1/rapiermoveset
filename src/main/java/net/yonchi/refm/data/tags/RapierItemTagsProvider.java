@@ -8,7 +8,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.level.block.Block;
 
 import net.yonchi.refm.RapierForEpicfight;
-import net.yonchi.refm.world.item.RapierAddonItems;
+import net.yonchi.refm.registry.entries.RapierAddonItems;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -20,7 +20,7 @@ public class RapierItemTagsProvider extends ItemTagsProvider {
         this.tag(ItemTags.SWORDS)
                 .add(
                         RapierAddonItems.IRON_RAPIER.get(),
-                        RapierAddonItems.GOLD_RAPIER.get(),
+                        RapierAddonItems.GOLDEN_RAPIER.get(),
                         RapierAddonItems.DIAMOND_RAPIER.get(),
                         RapierAddonItems.NETHERITE_RAPIER.get(),
                         RapierAddonItems.ENDERITE_RAPIER.get(),

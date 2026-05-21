@@ -1,4 +1,4 @@
-package net.yonchi.refm.world.item;
+package net.yonchi.refm.registry.entries;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -11,16 +11,18 @@ import net.yonchi.refm.RapierForEpicfight;
 
 import java.util.function.Supplier;
 
-public class RapierTab {
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
+public final class RapierModCreativeTabs {
+
+    private RapierModCreativeTabs() {}
+    public static final DeferredRegister<CreativeModeTab> REGISTRY =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, RapierForEpicfight.MOD_ID);
 
-    public static final Supplier<CreativeModeTab> RAPIERS_TAB = CREATIVE_MODE_TABS.register("rapiers_tab", () -> CreativeModeTab.builder().icon(() ->
+    public static final Supplier<CreativeModeTab> RAPIERS_TAB = REGISTRY.register("rapiers_tab", () -> CreativeModeTab.builder().icon(() ->
                     new ItemStack(RapierAddonItems.IRON_RAPIER.get()))
                     .title(Component.translatable("creativetab.rapiers_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
                         output.accept(RapierAddonItems.IRON_RAPIER.get());
-                        output.accept(RapierAddonItems.GOLD_RAPIER.get());
+                        output.accept(RapierAddonItems.GOLDEN_RAPIER.get());
                         output.accept(RapierAddonItems.DIAMOND_RAPIER.get());
                         output.accept(RapierAddonItems.NETHERITE_RAPIER.get());
                         output.accept(RapierAddonItems.ENDERITE_RAPIER.get());
@@ -34,6 +36,6 @@ public class RapierTab {
     );
 
     public static void register (IEventBus eventBus){
-        CREATIVE_MODE_TABS.register(eventBus);
+        REGISTRY.register(eventBus);
     }
 }

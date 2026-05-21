@@ -6,7 +6,7 @@
     "epicfight.weapon_category.amethyst_rapier": "Amethyst Rapier",
 
     "item.refm.iron_rapier": "Iron Rapier",
-    "item.refm.gold_rapier": "Gold Rapier",
+    "item.refm.golden_rapier": "Golden Rapier",
     "item.refm.diamond_rapier": "Diamond Rapier",
     "item.refm.netherite_rapier": "Netherite Rapier",
     "item.refm.enderite_rapier": "Enderite Rapier",
@@ -30,5 +30,6 @@
     "skill.refm.deadlybackflip_wither": "The Wither Rage",
     "skill.refm.deadlybackflip_wither.tooltip": "Rush in to your enemy kicking him and smelling his death wishes.\nAfter listening to your victim, you will please his wishes in the most demonic and brutal way.",
     "skill.refm.deadlybackflip_amethyst": "Amethyst Crystal Crush",
-    "skill.refm.deadlybackflip_amethyst.tooltip": "Rush in to your enemy kicking him going high with magic.\nAfter that you will rush with the ancient mana collected inside the amethyst to behind your enemies armor."
+    "skill.refm.deadlybackflip_amethyst.tooltip": "Rush in to your enemy kicking him going high with magic.\nAfter that you will rush with the ancient mana collected inside the amethyst to behind your enemies armor.",
+    "pack.forixaim_rapiers.title": "Battle Arts - Rapiers"
 }

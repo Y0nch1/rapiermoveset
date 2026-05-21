@@ -22,6 +22,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 
 import net.yonchi.refm.RapierForEpicfight;
 
+import net.yonchi.refm.registry.entries.RapierSounds;
 import yesman.epicfight.api.animation.AnimationClip;
 import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.AnimationManager.AnimationRegistryEvent;
