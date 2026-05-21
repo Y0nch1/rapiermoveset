@@ -1,0 +1,3 @@
+- Merged push request from Forixiam in github (all changes to him)
+- Added excap compability
+- Added unique revelation animations

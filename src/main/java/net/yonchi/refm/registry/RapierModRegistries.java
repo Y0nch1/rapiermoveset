@@ -1,6 +1,7 @@
 package net.yonchi.refm.registry;
 
 import net.neoforged.neoforge.registries.DeferredRegister;
+
 import net.yonchi.refm.registry.entries.*;
 
 import java.util.List;

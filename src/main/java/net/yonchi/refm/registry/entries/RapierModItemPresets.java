@@ -3,6 +3,7 @@ package net.yonchi.refm.registry.entries;
 import net.yonchi.refm.RapierForEpicfight;
 import net.yonchi.refm.gameasset.RapierColliderPreset;
 import net.yonchi.refm.world.capabilities.item.RapierWeaponCategories;
+
 import yesman.epicfight.api.ex_cap.provider.ProviderConditional;
 import yesman.epicfight.registry.deferred.ItemPresetRegister;
 import yesman.epicfight.registry.deferred.holders.DeferredWeapon;

@@ -1,13 +1,11 @@
 package net.yonchi.refm.world.capabilities.item;
 
 import com.google.common.collect.ImmutableList;
-import net.minecraft.world.item.Item;
 
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.item.WeaponCategory;
 
 import java.util.List;
-import java.util.function.Function;
 
 public enum RapierWeaponCategories implements WeaponCategory {
     RAPIER(CapabilityItem.WeaponCategories.LONGSWORD),
