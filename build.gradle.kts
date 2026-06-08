@@ -154,9 +154,9 @@ publishMods {
 
     curseforge {
 
-        projectId.set("your id")
-        projectSlug.set("your slug")
-        accessToken.set(providers.environmentVariable("CURSEFORGE_TOKEN"))
+        projectId.set("1036425")
+        projectSlug.set("epic-fight-mod-rapier-moveset-addon")
+        accessToken.set(providers.environmentVariable(""))
         minecraftVersions.add(minecraft_version)
 
         javaVersions.add(JavaVersion.VERSION_21)
@@ -166,8 +166,8 @@ publishMods {
     }
 
     modrinth {
-        projectId.set("your id")
-        accessToken.set(providers.environmentVariable("MODRINTH_TOKEN"))
+        projectId.set("ivpOJhFM")
+        accessToken.set(providers.environmentVariable(""))
         minecraftVersions.add(minecraft_version)
         requires("epic-fight")
     }

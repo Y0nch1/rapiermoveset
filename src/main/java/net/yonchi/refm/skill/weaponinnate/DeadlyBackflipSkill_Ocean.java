@@ -42,7 +42,7 @@ public class DeadlyBackflipSkill_Ocean extends WeaponInnateSkill {
         List<LivingEntity> hurtEntities = container.getExecutor().getCurrentlyActuallyHitEntities();
         SkillContainer innateSkill = container.getExecutor().getSkill(SkillSlots.WEAPON_INNATE);
         eventListener.registerEvent(EpicFightEventHooks.Animation.END, (event) -> {
-            if (this.first.equals(event.getAnimation())) {
+            if (this.first.equals(event.getAnimation()) && !this.fail.equals(event.getAnimation())) {
                 if (!hurtEntities.isEmpty() && hurtEntities.getFirst().isAlive()) {
                     container.getExecutor().reserveAnimation(this.second);
                     container.getExecutor().getServerAnimator().getPlayerFor(null).reset();

@@ -15,6 +15,7 @@ public final class RapierModMovesets
     public static final MovesetRegister REGISTRY = MovesetRegister.create(RapierForEpicfight.MOD_ID);
     public static final DeferredMoveset RAPIER = REGISTRY.registerMoveset("rapier", () -> Moveset.builder()
             .addComboAttacks( RapierAnimations.RAPIER_AUTO1, RapierAnimations.RAPIER_AUTO2, RapierAnimations.RAPIER_AUTO3, RapierAnimations.RAPIER_DASH, RapierAnimations.RAPIER_AIR_SLASH)
+            .revelationAttack(RapierAnimations.RAPIER_GUARD_PARRY)
             .addInnateSkill((itemStack, patch) -> RapierSkills.DEADLYBACKFLIP.get())
             .addLivingMotionsRecursive(RapierAnimations.BIPED_HOLD_RAPIER, LivingMotions.IDLE, LivingMotions.JUMP, LivingMotions.SWIM)
             .addLivingMotionsRecursive(RapierAnimations.BIPED_WALK_RAPIER, LivingMotions.WALK, LivingMotions.CHASE)
